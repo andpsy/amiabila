@@ -1,0 +1,17 @@
+<div fxLayout = "column" *ngIf="Zona12.VinovatSelectat" class="zona-title" style="margin-top:10px; justify-content: center; align-items: : center;">
+	<mat-checkbox [(ngModel)]="Aditionale.PagubitDecontareDirecta" name="PagubitDecontareDirecta" #PagubitDecontareDirecta='ngModel' fxLayout="row wrap">Pagubitul are Decontare directa si doreste sa o foloseasca</mat-checkbox>
+
+	<mat-checkbox [(ngModel)]="Aditionale.VinovatCasco" name="VinovatCasco" #VinovatCasco='ngModel' fxLayout="row wrap">Vinovatul are CASCO si doreste sa o foloseasca</mat-checkbox>
+  <mat-form-field fxFlex>
+    <mat-label>DENUMIRE:</mat-label>
+    <input type="text" [disabled]="!Aditionale.VinovatCasco"
+           matInput (ngModel)="Aditionale.VinovatSocietateCasco" [value]="Aditionale.VinovatSocietateCasco" name='VinovatSocietateCasco' #VinovatSocietateCasco='ngModel' (ngModelChange)="filterSocietati($event)"
+           [matAutocomplete]="societati">
+    <mat-autocomplete #societati="matAutocomplete">
+      <mat-option *ngFor="let societate of SocietatiCasco.Societati" [value]="societate.Denumire">
+        {{societate.Denumire}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+</div>

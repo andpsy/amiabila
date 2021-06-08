@@ -1,0 +1,63 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
+		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+			Rubrica 12 - IMPREJURARI
+		</span>
+		<table fxFlexFill>
+			<tr>
+				<th>A</th>
+				<th>Marcati cu X fiecare casuta utila pentru explicarea desenului</th>
+				<th>B</th>
+			</tr>
+			<tr>
+				<td colspan="3" style="text-align: center; font-size: x-small;">
+					* la punctul 1 si 2 taiati situatia care nu corespunde
+				</td>
+			</tr>
+			<tr *ngFor="let imprejurare of Zona12.Imprejurari.Imprejurari; let i = index">
+				<td style="text-align: left; font-size: small; white-space: nowrap; ">
+					<mat-checkbox [(ngModel)]="imprejurare.VehiculA" name="VehiculA" #VehiculA='ngModel' (ngModelChange)="refreshCasute()"></mat-checkbox>
+					<span>{{i+1}}</span>
+				</td>
+				<td style="text-align: center; font-size: small;">
+					<span *ngIf="imprejurare.Denumire.length == 1">{{imprejurare.Denumire[0]}}</span>
+					<mat-radio-group *ngIf="imprejurare.Denumire.length > 1" fxLayout="row wrap" fxLayout.lt-sm="column" style="justify-content: center;" [disabled]="!(imprejurare.VehiculA || imprejurare.VehiculB)" name="SubDenumire" #SubDenumire="ngModel" [(ngModel)]="imprejurare.DenumireSelected">
+					  <mat-radio-button style="display:flex;align-self:center;margin:5px;" [ngStyle]="{'text-decoration': imprejurare.DenumireSelected == subDenumire || imprejurare.DenumireSelected == null ? 'none' : 'line-through'}" *ngFor="let subDenumire of imprejurare.Denumire" [value]="subDenumire" (change)="imprejurare.DenumireSelected = subDenumire">{{subDenumire}}</mat-radio-button>
+					</mat-radio-group>							
+				</td>
+				<td style="text-align: right; font-size: small; white-space: nowrap;">
+					<span>{{i+1}}</span>
+					<mat-checkbox [(ngModel)]="imprejurare.VehiculB" name="VehiculB" #VehiculB='ngModel' (ngModelChange)="refreshCasute(); Zona12.stabilireVinovatie()"></mat-checkbox>
+				</td>
+			</tr>
+			<tr>
+				<th style="border: 1px solid gray; text-align: center;"><mat-label [hidden]="Zona12.CasuteA==0">{{Zona12.CasuteA}}</mat-label></th>
+				<th>&larr; specificati numarul de casute marcate cu X &rarr;</th>
+				<th style="border: 1px solid gray; text-align: center;"><mat-label [hidden]="Zona12.CasuteB==0">{{Zona12.CasuteB}}</mat-label></th>			
+			</tr>
+		</table>
+		<div class="zona-title" *ngIf="Zona12.CasuteA > 0 && Zona12.CasuteB > 0" fxLayout="column" style="justify-content: center;align-self: center; background-color:pink;margin-top: 10px;">
+			Conform celor selectate este posibil ca soferul vehicului {{Zona12.VinovatEstimat}} sa fie cel vinovat de producerea accidentului.
+			Este corect?
+			<mat-radio-group fxLayout="row wrap" fxLayout.lt-sm="column" style="justify-content: center;" name="vinovatie" #vinovatie="ngModel" [(ngModel)]="Zona12.VinovatSelectat">
+			  <mat-radio-button style="display:flex;align-self:center;margin:5px;" [value]="Zona12.VinovatEstimat">Da</mat-radio-button>
+			  <mat-radio-button style="display:flex;align-self:center;margin:5px;" [value]="Zona12.reverseVinovat()">Nu, soferul vehicului {{Zona12.reverseVinovat()}} este vinovat</mat-radio-button>
+			  <mat-radio-button style="display:flex;align-self:center;margin:5px;" [value]="'AB'">Nu, este culpa comuna</mat-radio-button>
+			  <mat-radio-button style="display:flex;align-self:center;margin:5px;" [value]=null>Nu stim</mat-radio-button>
+			</mat-radio-group>							
+		</div>
+
+    <app-aditionale [Zona12]="Zona12" [Aditionale]="Aditionale"></app-aditionale>
+
+ 	  <app-display-errors
+ 	  	class="form-error-container"
+ 	  	[style]="{'max-height': Zona12.hasError() != null && childForm.touched ? '200px' : '0'}"
+ 	  	[errors]="Zona12.hasError()">
+  	</app-display-errors>	
+
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona12.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	</div>
+</form>

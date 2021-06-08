@@ -1,0 +1,69 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
+		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+			Rubrica 13 - Schita accidentului in momentul producerii impactului
+		</span>	
+		<mat-card fxFlex>
+			<mat-card-title>
+				<mat-toolbar style="height: 30px; padding: 2px;">	
+				  <button mat-icon-button (click)="putCarAB='A'" matTooltip="Plaseaza pe harta autoturismul A">
+				  	<img src="../assets/A.png" style="width: 24px;" />
+				  </button>
+				  <button mat-icon-button (click)="putCarAB='B'" matTooltip="Plaseaza pe harta autoturismul B">
+				  	<img src="../assets/B.png" style="width: 24px;" />
+				  </button>		
+				  <button mat-icon-button (click)="putCarAB='T'" matTooltip="Plaseaza pe harta o caseta de text">
+				  	<mat-icon>title</mat-icon>
+				  </button>
+				  <span class="example-spacer"></span>
+				  <button mat-icon-button (click)="rotateImg(-1)" [disabled]="selectedImgId == null">
+				  	<mat-icon>rotate_left</mat-icon>
+				  </button>
+				  <button mat-icon-button (click)="rotateImg(1)" [disabled]="selectedImgId == null">
+				  	<mat-icon>rotate_right</mat-icon>
+				  </button>
+				  <button mat-icon-button (click)="moveXImg(-1)" [disabled]="selectedImgId == null">
+				  	<mat-icon>arrow_back</mat-icon>
+				  </button>
+				  <button mat-icon-button (click)="moveXImg(1)" [disabled]="selectedImgId == null">
+				  	<mat-icon>arrow_forward</mat-icon>
+				  </button>
+				  <button mat-icon-button (click)="moveYImg(1)" [disabled]="selectedImgId == null">
+				  	<mat-icon>arrow_downward</mat-icon>
+				  </button>
+				  <button mat-icon-button (click)="moveYImg(-1)" [disabled]="selectedImgId == null">
+				  	<mat-icon>arrow_upward</mat-icon>
+				  </button>
+				  <button mat-icon-button (click)="deleteImg()" [disabled]="selectedImgId == null">
+				  	<mat-icon>delete</mat-icon>
+				  </button>
+				</mat-toolbar>			
+			</mat-card-title>
+			<mat-card-content fxLayout = "column" #signatureContainer>
+				<!--
+	      <signature-pad id="signaturePad" name="signaturePad" #signaturePad (window:resize)="resizeSignaturePad($event)" (click)="putCar($event)"></signature-pad>
+				-->
+				<div class="mapCanvasDiv" id="canvas" #canvas (click)="putCar($event)"></div>
+			  <mat-form-field fxFlex style="visibility: hidden;">
+			    <input matInput [(ngModel)]="Zona13.ImgMap" name="ImgMap" #ImgMap='ngModel' (ngModelChange)="setImgMap($event)" (change)="setImgMap($event)" >
+			  </mat-form-field>  
+			  <canvas id="canvasImg" class="mapCanvasDiv" style="display: none;"></canvas>	      
+			</mat-card-content>
+		  <mat-card-actions>
+    		<button mat-raised-button color="warn" (click)="setImgMap(null)">Preia harta</button>
+    		<button mat-raised-button color="warn" (click)="saveImgMap()">Salveaza schita</button>
+ 		  </mat-card-actions>		  
+ 		</mat-card>
+
+ 	  <app-display-errors
+ 	  	class="form-error-container"
+ 	  	[style]="{'max-height': Zona13.hasError() != null && childForm.touched ? '200px' : '0'}"
+ 	  	[errors]="Zona13.hasError()">
+  	</app-display-errors>	
+
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona13.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	</div>
+</form>

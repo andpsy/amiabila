@@ -1,0 +1,67 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv"[ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
+		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+			Rubrica 9 - Conducator vehicul (vezi permis de conducere)
+		</span>		
+		<mat-checkbox [(ngModel)]="Zona9.IdenticCuAsiguratul" name="IdenticCuAsiguratul" #IdenticCuAsiguratul='ngModel' (change)="preiaInfoAsigurat()">Acelasi cu Asiguratul</mat-checkbox>
+
+	  <mat-form-field fxFlex>
+	    <mat-label>Nume:</mat-label>
+	    <input matInput [(ngModel)]="Zona9.Nume" name="Nume" #Nume='ngModel' required>
+	  </mat-form-field>  
+	  <mat-form-field fxFlex>
+	    <mat-label>Prenume:</mat-label>
+	    <input matInput [(ngModel)]="Zona9.Prenume" name="Prenume" #Prenume='ngModel' required>
+	  </mat-form-field>  
+		<mat-form-field fxFlex>
+		  <mat-label>Data nasterii:</mat-label>
+		  <input matInput [matDatepicker]="picker4" disabled [(ngModel)]="Zona9.DataNasterii" name="DataNasterii" #DataNasterii="ngModel" required>
+		  <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+		  <mat-datepicker #picker4 disabled="false"></mat-datepicker>
+		</mat-form-field>
+	  <mat-form-field fxFlex>
+	    <mat-label>Adresa:</mat-label>
+	    <input matInput [(ngModel)]="Zona9.Adresa" name="Adresa" #Adresa='ngModel'>
+	  </mat-form-field> 
+	  <mat-form-field fxFlex>
+	    <mat-label>Tara:</mat-label>
+	    <input type="text" required 
+	           matInput [(ngModel)]="Zona9.Tara" name='Tara' #Tara='ngModel' (ngModelChange)="filterItem($event)"
+	           [matAutocomplete]="auto">
+	    <mat-autocomplete #auto="matAutocomplete">
+	      <mat-option *ngFor="let tara of Tari.Tari" [value]="tara.Denumire">
+	        {{tara.Denumire}}
+	      </mat-option>
+	    </mat-autocomplete>
+	  </mat-form-field>
+	  <mat-form-field fxFlex>
+	    <mat-label>Telefon/Email:</mat-label>
+	    <input matInput [(ngModel)]="Zona9.TelefonEmail" name="TelefonEmail" #TelefonEmail='ngModel'>
+	  </mat-form-field> 	  
+	  <mat-form-field fxFlex>
+	    <mat-label>Permis de conducere nr.:</mat-label>
+	    <input matInput [(ngModel)]="Zona9.PermisConducereNr" name="PermisConducereNr" #PermisConducereNr='ngModel' required>
+	  </mat-form-field>  
+	  <mat-form-field fxFlex>
+	    <mat-label>Categoria (A, B, ...):</mat-label>
+	    <input matInput [(ngModel)]="Zona9.Categoria" name="Categoria" #Categoria='ngModel' required>
+	  </mat-form-field> 
+		<mat-form-field fxFlex>
+		  <mat-label>Valabil pana la:</mat-label>
+		  <input matInput [matDatepicker]="picker5" disabled [(ngModel)]="Zona9.ValabilPanaLa" name="ValabilPanaLa" #ValabilPanaLa="ngModel" required>
+		  <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+		  <mat-datepicker #picker5 disabled="false"></mat-datepicker>
+		</mat-form-field>	  
+
+ 	  <app-display-errors
+ 	  	class="form-error-container"
+ 	  	[style]="{'max-height': Zona9.hasError() != null && childForm.touched ? '200px' : '0'}"
+ 	  	[errors]="Zona9.hasError()">
+  	</app-display-errors>	
+
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>	
+  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona9.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	</div>
+</form>

@@ -1,0 +1,261 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+/* You can add global styles to this file, and also import other style files */
+
+html { height: 100%; min-height: 100%;}
+body { height: 100%; min-height: 100%; margin: 0px; font-family: "Helvetica Neue", sans-serif, Roboto; font-size: smaller; }
+
+.form_block{
+	position: relative;
+}
+.row1 {
+	max-height: 30px;
+	text-align: left;
+	font-size: medium;
+}
+.row2 {
+	max-height: 40px;
+	margin: 2px;
+	width: 100%;
+	height: 100%;
+}
+.row3 {
+	max-height: 54px;
+	margin: 2px;
+	width: 100%;
+}
+.row4 {
+	width: 100%;
+	/* margin: 0px 2px 1px 2px; */
+}
+.row4_a {
+	width: 98%;
+	height: 98%;
+	margin: 0px 3px 1px 0px;
+}
+.row4_b {
+	width: 98%;
+	height: 98%;
+	margin: 0px 0px 1px 3px;
+}
+
+.vehicul_a {
+	max-height: 30px;
+	background-color: #1D3885;
+	text-align: center;
+	color: white;
+	font-size: 20px;
+}
+.vehicul_b {
+	max-height: 30px;
+	background-color: #F8D32D;
+	text-align: center;
+	color: black;
+	font-size: 20px;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  text-align: center;
+	width: 100%;
+	height: 100%;
+	font-size: x-small;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+}
+.form_block:hover .overlay {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.mainDiv{
+	background-color: white; 
+	position:absolute; 
+	top:20px; 
+	max-width: 800px !important;
+	/* visibility: hidden; */
+	/* padding: 10px; */
+	/*
+  left: 50%;
+  transform: translate(-50%, 0);  
+	width: 100%; 
+	height:100%; 
+	*/
+	min-height: 100%;
+  transition: left 1s ease;	
+  left:-100%;
+}
+.innerMainDiv{
+	/* width:90%; */
+	padding: 10px; 
+	margin: auto;
+	max-width: 800px;
+	background-color: white;
+}
+
+.mat-form-field {
+  margin-top: 10px;
+  /* padding-bottom: 5px !important; */
+  padding: 5px;
+  background-color: whitesmoke;
+  max-height: 43px;
+}
+.mat-raised-button{
+	margin: 5px !important;
+	border-radius: 0px !important;	
+}
+.mat-checkbox{
+	margin: 7px 7px 0px 7px;
+}
+.zona-title{
+	padding: 5px;
+	/* border: 1px solid lightgray;	*/
+	/* border-radius: 10px; */
+	text-align: center;
+	font-weight: bold;
+	background-color: lightgray;
+	margin-top: -10px;
+	margin-left: -10px;
+	margin-right: -10px;
+}
+.mat-card{
+	margin-top: 10px;
+	border-radius: 0px !important;
+	padding: 7px !important;
+}
+.mat-card-title{
+	text-align: center;
+	padding: 3px;
+	font-size: small;
+	margin-top: -7px !important;
+	margin-left: -7px !important;
+	margin-right: -7px !important;
+}
+.zona-subtitle{
+	padding: 5px;
+}
+.carCell{
+	border: 1px solid gray;
+	font-size: 30px;
+	color: red;
+	font-weight: bolder;
+	text-align: center;
+}
+.carCell:hover{
+	background-color: rgba(255, 0, 0, 0.3) !important;
+	cursor: pointer;
+	color: white;
+}
+
+.carCellPaguba{
+	border: 1px solid gray;
+}
+.carCellPaguba:hover{
+	background-color: rgba(255, 0, 0, 0.3) !important;
+	cursor: pointer;
+	color: white;
+}
+
+.car{
+	display:flex; 
+	align-self:center; 
+	width: 300px; 
+	height: 360px; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  background-size: contain;	
+}
+
+.carBlue{
+	background-image: url("/assets/full600blue.png");
+}
+.carYellow{
+	background-image: url("/assets/full600yellow.png");
+}
+
+mat-dialog-container {
+   background: pink !important;
+}
+.mat-checkbox-layout{
+	white-space: normal !important;
+}
+.form-error-container{
+	overflow:hidden;
+	transition:max-height 1s ease;
+}
+.form-error{
+	/*
+	justify-content: center;
+	align-items: center;
+	*/
+	text-align: center;
+	margin-top: 10px;
+	background-color: lavenderblush;
+	font-size: small;
+	font-weight: bold;
+  /* transition: 0.5s ease; */
+  background-image: url('/assets/error.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-blend-mode: color-burn;
+}
+/*
+.form-error::before {    
+  content: "";
+  background-image: url('/assets/error.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.75;
+}
+*/
+
+#map {
+  height: 400px;
+  width: 100%;
+}
+
+.mapCanvasDiv{
+	width: 100%;
+	height: 300px;
+	margin: auto;	
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+}
+.imgText{
+	background-color: transparent;
+	max-width: 200px;
+	min-width: 20px;
+	width: 100%;
+	height: 20px;
+	border-width: 0px;	
+	font-size:smaller;
+	padding: 1px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+.mat-icon-button{
+	width: 25px !important;
+}
+.mat-slide-toggle{
+	margin-top: 8px;
+	align-self: center;
+}
+.mat-label-no-field{
+	margin-top: 10px;
+	margin-left: 10px;
+}

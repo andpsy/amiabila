@@ -1,0 +1,14 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
+		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+			Rubrica 14 - Observatii
+		</span>	
+	  <mat-form-field fxFlex>
+	    <textarea matInput [(ngModel)]="Zona14.Observatii" name="Observatii" #Observatii='ngModel'></textarea>
+	  </mat-form-field>  
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	</div>
+</form>

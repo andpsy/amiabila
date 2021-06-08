@@ -1,0 +1,1060 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"back",
+				"background-color\tproperty"
+			],
+			[
+				"A",
+				"Adresa\tproperty"
+			],
+			[
+				"N",
+				"Nume\tproperty"
+			],
+			[
+				"Zona",
+				"Zona12"
+			],
+			[
+				"Zon",
+				"Zona12\tinterface"
+			],
+			[
+				"Ve",
+				"VehiculA"
+			],
+			[
+				"Telef",
+				"TelefonEmail"
+			],
+			[
+				"Tele",
+				"TelefonEmail"
+			],
+			[
+				"d",
+				"dialog\tdirectory"
+			],
+			[
+				"al",
+				"align-items\tproperty"
+			],
+			[
+				"ali",
+				"align-content\tproperty"
+			],
+			[
+				"s",
+				"x-small\tfont-size"
+			],
+			[
+				"v",
+				"vertical-align\tproperty"
+			],
+			[
+				"h",
+				"height\tproperty"
+			],
+			[
+				"font",
+				"font-size\tproperty"
+			],
+			[
+				"max",
+				"max-height\tproperty"
+			],
+			[
+				"col",
+				"column"
+			],
+			[
+				"margi",
+				"margin\tproperty"
+			],
+			[
+				"marg",
+				"margin\tproperty"
+			],
+			[
+				"fo",
+				"font-size\tproperty"
+			],
+			[
+				"Pr",
+				"Product\talias"
+			],
+			[
+				"pr",
+				"products\tproperty"
+			],
+			[
+				"fisa",
+				"Fisa_pe_email"
+			],
+			[
+				"bac",
+				"background-color\tproperty"
+			],
+			[
+				"sele",
+				"SelectedTipuriProduse\tproperty"
+			],
+			[
+				"filtere",
+				"filteredCategorii\tproperty"
+			],
+			[
+				"fil",
+				"filterByIds\tmethod"
+			],
+			[
+				"filter",
+				"filteredArrayKey\tparameter"
+			],
+			[
+				"filteredPro",
+				"filteredProducatori\tproperty"
+			],
+			[
+				"Ca",
+				"CategorieId\tproperty"
+			],
+			[
+				"pro",
+				"producatori\tproperty"
+			],
+			[
+				"Subca",
+				"SubCategorii\talias"
+			],
+			[
+				"c",
+				"CategorieId\tproperty"
+			],
+			[
+				"p",
+				"push\tmethod"
+			],
+			[
+				"se",
+				"SelectedProducatori\tproperty"
+			],
+			[
+				"ti",
+				"TipId\tproperty"
+			],
+			[
+				"On",
+				"OnDestroy\tinterface"
+			],
+			[
+				"spa",
+				"space-between"
+			],
+			[
+				"padd",
+				"padding-right\tproperty"
+			],
+			[
+				"pa",
+				"partialReturn\tlet"
+			],
+			[
+				"C",
+				"CategorieId\tproperty"
+			],
+			[
+				"Selected",
+				"SelectedCategorii\tproperty"
+			],
+			[
+				"P",
+				"ProducatorId\tproperty"
+			],
+			[
+				"Fil",
+				"Filters\talias"
+			],
+			[
+				"spe",
+				"oferteSpecialeFilter\tproperty"
+			],
+			[
+				"sel",
+				"selectedProducatori\tproperty"
+			],
+			[
+				"sub",
+				"subCategoriiFilterList"
+			],
+			[
+				"cate",
+				"categoriiFilterList"
+			],
+			[
+				"a",
+				"accent"
+			],
+			[
+				"side",
+				"sideNav"
+			],
+			[
+				"ov",
+				"overflow\tproperty"
+			],
+			[
+				"get",
+				"getBigImage\tmethod"
+			],
+			[
+				"e",
+				"expandedDetail"
+			],
+			[
+				"min",
+				"min-height\tproperty"
+			],
+			[
+				"l",
+				"lightyellow"
+			],
+			[
+				"or",
+				"order\tproperty"
+			],
+			[
+				"mar",
+				"margin-bottom\tproperty"
+			],
+			[
+				"I",
+				"important"
+			],
+			[
+				"pad",
+				"padding\tproperty"
+			],
+			[
+				"lig",
+				"lightgray"
+			],
+			[
+				"li",
+				"lightblue"
+			],
+			[
+				"order",
+				"orderForm"
+			],
+			[
+				"tot",
+				"total_quantity\tproperty"
+			],
+			[
+				"vi",
+				"ViewEncapsulation\tenum"
+			],
+			[
+				"i",
+				"important"
+			],
+			[
+				"max-h",
+				"max-height\tproperty"
+			],
+			[
+				"o",
+				"overflow-y\tproperty"
+			],
+			[
+				"max-",
+				"max-height\tproperty"
+			],
+			[
+				"over",
+				"overflow-y\tproperty"
+			],
+			[
+				"Id",
+				"IdTipLivrare\tproperty"
+			],
+			[
+				"font-s",
+				"font-size\tproperty"
+			],
+			[
+				"n",
+				"None\tenum member"
+			],
+			[
+				"con",
+				"console\tvar"
+			],
+			[
+				"O",
+				"Order\talias"
+			],
+			[
+				"wi",
+				"width\tproperty"
+			],
+			[
+				"ch",
+				"childFormsValid\tproperty"
+			],
+			[
+				"Chi",
+				"ChildFormValid\talias"
+			],
+			[
+				"ord",
+				"orderForm\tproperty"
+			],
+			[
+				"chil",
+				"childFormsValid\tproperty"
+			],
+			[
+				"Adres",
+				"AdreseDiferite"
+			],
+			[
+				"margin",
+				"margin-top\tproperty"
+			],
+			[
+				"m",
+				"margin-left\tproperty"
+			],
+			[
+				"box",
+				"box-shadow\tproperty"
+			],
+			[
+				"f",
+				"font-size\tproperty"
+			],
+			[
+				"in",
+				"initial\twidth"
+			],
+			[
+				"View",
+				"ViewEncapsulation\talias"
+			],
+			[
+				"Vi",
+				"ViewEncapsulation\tenum"
+			],
+			[
+				"Mod",
+				"ModalitatiPlata\talias"
+			],
+			[
+				"pl",
+				"plata"
+			],
+			[
+				"getm",
+				"getMinutes\tmethod"
+			],
+			[
+				"ge",
+				"getMonth\tmethod"
+			],
+			[
+				"Ad",
+				"AdresaLivrare\tproperty"
+			],
+			[
+				"re",
+				"required\tAttr"
+			],
+			[
+				"bord",
+				"border-top\tproperty"
+			],
+			[
+				"Cart",
+				"CartItem\talias"
+			],
+			[
+				"fa",
+				"false\tkeyword"
+			],
+			[
+				"Comm",
+				"CommonFunctions\talias"
+			],
+			[
+				"total_q",
+				"total_quantity\tproperty"
+			],
+			[
+				"to",
+				"total_value\tproperty"
+			],
+			[
+				"t",
+				"total_value\tproperty"
+			],
+			[
+				"nu",
+				"number\tkeyword"
+			],
+			[
+				"Eve",
+				"EventEmitter\talias"
+			],
+			[
+				"x-",
+				"xx-small\tfont-size"
+			],
+			[
+				"ma",
+				"margin-left\tproperty"
+			],
+			[
+				"sp",
+				"space-between"
+			],
+			[
+				"co",
+				"console\tvar"
+			],
+			[
+				"parse",
+				"parseInt\tfunction"
+			],
+			[
+				"va",
+				"value\tproperty"
+			],
+			[
+				"prod",
+				"productsService\tproperty"
+			],
+			[
+				"Prod",
+				"ProductsService\talias"
+			],
+			[
+				"text-",
+				"text-align\tproperty"
+			],
+			[
+				"text",
+				"text-align\tproperty"
+			],
+			[
+				"fl",
+				"flex-flow\tproperty"
+			],
+			[
+				"flex",
+				"flex-direction\tproperty"
+			],
+			[
+				"S",
+				"Subscription\talias"
+			],
+			[
+				"activ",
+				"activeFilterSpecialOffer\tproperty"
+			],
+			[
+				"th",
+				"this\tkeyword"
+			],
+			[
+				"ac",
+				"activeFilter\tproperty"
+			],
+			[
+				"tr",
+				"transformedFilter\tlet"
+			],
+			[
+				"acti",
+				"activeFilterSpecialOffer\tproperty"
+			],
+			[
+				"b",
+				"boolean\tkeyword"
+			],
+			[
+				"fon",
+				"font-weight\tproperty"
+			],
+			[
+				"r",
+				"round\tmethod"
+			],
+			[
+				"Of",
+				"Oferta_speciala"
+			],
+			[
+				"it",
+				"align-items\tproperty"
+			],
+			[
+				"De",
+				"Detalii"
+			],
+			[
+				"getP",
+				"getProducts\tmethod"
+			],
+			[
+				"bo",
+				"boardXPos\twarning"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/app/app.component.html",
+			"settings":
+			{
+				"buffer_size": 9404,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/styles.css",
+			"settings":
+			{
+				"buffer_size": 1444,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/app/app.component.ts",
+			"settings":
+			{
+				"buffer_size": 978,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/app/zona1/zona1.component.html",
+			"settings":
+			{
+				"buffer_size": 865,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/app/zona1/zona1.component.ts",
+			"settings":
+			{
+				"buffer_size": 472,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/app/entities.ts",
+			"settings":
+			{
+				"buffer_size": 40166,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/amvast/amiabila",
+		"/D/amvast/amiabila/src",
+		"/D/amvast/amiabila/src/app",
+		"/D/amvast/amiabila/src/app/overlay",
+		"/D/amvast/amiabila/src/app/zona1",
+		"/D/amvast/amiabila/src/assets"
+	],
+	"file_history":
+	[
+		"/D/amvast/amiabila/src/app/overlay/overlay.component.html",
+		"/D/amvast/amiabila/src/styles.css",
+		"/D/amvast/amiabila/src/app/app.component.css",
+		"/D/amvast/amiabila/src/app/app.component.html",
+		"/D/amvast/amiabila/src/app/app.module.ts",
+		"/D/amvast/amiabila/src/app/material-module.ts",
+		"/C/TEMP/store-termo/src/app/entities.ts",
+		"/C/TEMP/store-termo/src/app/product-detail/product-detail.component.html",
+		"/C/TEMP/store-termo/src/app/products/products.component.html",
+		"/C/TEMP/store-termo/src/app/app.module.ts",
+		"/C/TEMP/store-termo/src/app/products.service.ts",
+		"/C/TEMP/store-termo/src/app/app.component.css",
+		"/C/TEMP/store-termo/src/app/app.component.html",
+		"/C/TEMP/store-termo/src/index.html",
+		"/C/TEMP/store-termo/src/app/products/products.component.css",
+		"/C/TEMP/store-termo/src/app/products/products.component.ts",
+		"/C/TEMP/store-termo/src/app/product-detail/product-detail.component.css",
+		"/C/TEMP/store-termo/src/styles.css",
+		"/C/TEMP/store-termo/src/app/info/info.component.html",
+		"/C/TEMP/store-termo/src/app/order-form/order-form.component.html",
+		"/C/TEMP/store-termo/src/app/product-detail/product-detail.component.ts",
+		"/C/TEMP/store-termo/src/app/order-form/order-form.component.ts",
+		"/C/TEMP/store-termo/src/app/contact-header/contact-header.component.html",
+		"/C/TEMP/store-termo/src/app/order-form/order-form.component.css",
+		"/C/TEMP/store-termo/src/app/client/client.component.ts",
+		"/C/TEMP/store-termo/src/app/cart/cart.component.ts",
+		"/C/TEMP/store-termo/src/app/cart/cart.component.spec.ts",
+		"/C/TEMP/store-termo/src/sendorder.php",
+		"/C/TEMP/store-termo/src/app/products/products.component_back.html",
+		"/C/TEMP/store-termo/src/app/material-module.ts",
+		"/C/TEMP/store-termo/src/app/info-dialog/info-dialog.component.ts",
+		"/C/TEMP/store-termo/src/app/info-dialog/info-dialog.component.html",
+		"/C/TEMP/store-termo/src/app/info-dialog/info-dialog.component.css",
+		"/C/TEMP/store-termo/src/app/confirm-dialog/confirm-dialog.component.ts",
+		"/C/TEMP/store-termo/src/app/confirm-dialog/confirm-dialog.component.html",
+		"/C/TEMP/store-termo/src/app/app.component.ts",
+		"/C/TEMP/store-termo/angular.json",
+		"/C/TEMP/store-termo/src/app/cart/cart.component.html",
+		"/C/TEMP/store-termo/src/sendmail.php",
+		"/C/TEMP/store-termo/src/app/cart/cart.component.css",
+		"/C/TEMP/store-termo/src/app/contact-header/contact-header.component.ts",
+		"/C/TEMP/store-termo/src/app/info/info.component.css",
+		"/C/TEMP/store-termo/src/app/app.component.spec.ts",
+		"/C/TEMP/store-termo/src/app/client/client.component.html",
+		"/C/TEMP/store-termo/src/app/adresa/adresa.component.html",
+		"/C/TEMP/store-termo/src/app/info/info.component.ts",
+		"/C/TEMP/store-termo/src/app/persoana-contact/persoana-contact.component.ts",
+		"/C/TEMP/store-termo/src/app/adresa/adresa.component.ts",
+		"/C/TEMP/store-termo/src/app/client/client.component.css",
+		"/C/TEMP/store-termo/src/app/adresa/adresa.component.css",
+		"/C/TEMP/store-termo/src/app/persoana-contact/persoana-contact.component.css",
+		"/C/TEMP/store-termo/src/app/contact-header/contact-header.component.css",
+		"/C/TEMP/store-termo/src/app/confirm-dialog/confirm-dialog.component.css",
+		"/C/TEMP/store-termo/src/app/info/info.component.spec.ts",
+		"/C/TEMP/store-termo/src/app/persoana-contact/persoana-contact.component.html",
+		"/C/TEMP/store-termo/src/app/order-form/order-form.component.spec.ts",
+		"/C/TEMP/store-termo/src/app/product-detail/product-detail.component.spec.ts",
+		"/C/TEMP/store-termo/src/app/products/product-detail-dialog.html",
+		"/C/TEMP/store-termodinamic/src/app/products/products.component.css",
+		"/C/TEMP/store-termodinamic/src/styles.css",
+		"/C/TEMP/store-termodinamic/src/app/app.component.css",
+		"/C/TEMP/store-termodinamic/src/app/app.module.ts",
+		"/C/TEMP/store-termodinamic/src/index.html",
+		"/C/TEMP/store-termodinamic/src/app/Produse.json",
+		"/C/TEMP/store-termodinamic/src/app/product.ts",
+		"/C/TEMP/store-termodinamic/angular.json",
+		"/C/TEMP/store-termodinamic/src/app/app.component.html",
+		"/C/TEMP/store-termodinamic/src/app/app.component.ts",
+		"/C/TEMP/store-termodinamic/tsconfig.json",
+		"/C/TEMP/store-termodinamic/src/app/products/products.component.html",
+		"/C/TEMP/store-termodinamic/src/assets/Produse.json",
+		"/C/TEMP/store-termodinamic/src/tsconfig.spec.json",
+		"/C/TEMP/store-termodinamic/tslint.json",
+		"/C/TEMP/store-termodinamic/src/tslint.json",
+		"/C/TEMP/store-termodinamic/src/app/products.service.ts",
+		"/C/TEMP/store-termodinamic/src/tsconfig.app.json",
+		"/C/TEMP/store-termodinamic/src/app/material-module.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/port-item/port-item.component.css",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/port-item/port-item.component.html",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/technology/technology.component.html",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/tech/tech.component.html",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/app.component.html",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/mock-portofolio.ts",
+		"/C/chess/Chess.js",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/port/port.component.html",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/port/port.component.css",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/technology/technology.component.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/tech/tech.component.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/tech/tech.component.css",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/contact/contact.component.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/contact/contact.component.html",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/app.component.css",
+		"/C/TEMP/SITE_AMVAST/amvast/src/styles.css",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/home/home.component.html",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/port-item/port-item.component.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/port-item/dialog-overview-example-dialog.html",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/port/port.component.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/app.component.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/home/home.component.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/mock-tech.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/language.service.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/port.service.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/app.module.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/contact/contact.component.css",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/contact/bottom-sheet-overview-example-sheet.html",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/contact/bottom-sheet-overview-example-sheet.css",
+		"/C/TEMP/SITE_AMVAST/amvast/dist/amvast/sendmail.php",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/sendmail.php",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/home/home.component.css",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/technology/technology.component.css",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/portofolio-subitem.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/portofolio-item.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/port-item/dialog-overview-example-dialog.css",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/material-module.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/tech.service.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/tech.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/app-routing.module.ts",
+		"/C/TEMP/SITE_AMVAST/amvast/src/index.html",
+		"/C/TEMP/SITE_AMVAST/amvast/src/app/sidebar/sidebar.component.html",
+		"/C/TEMP/ProMaCo/src/app/app.module.ts",
+		"/C/TEMP/ProMaCo/src/app/in-memory-data.service.ts",
+		"/C/TEMP/ProMaCo/src/app/hero.service.ts",
+		"/C/TEMP/ProMaCo/src/app/dashboard/dashboard.component.html",
+		"/C/TEMP/ProMaCo/src/app/hero-search/hero-search.component.html",
+		"/C/TEMP/ProMaCo/src/app/hero-search/hero-search.component.css",
+		"/C/TEMP/ProMaCo/src/app/hero-search/hero-search.component.ts",
+		"/C/TEMP/ProMaCo/src/app/heroes/heroes.component.ts",
+		"/C/TEMP/ProMaCo/src/app/hero-detail/hero-detail.component.html"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			" class=\"tile-image\"",
+			" class=\"row2\""
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/app/app.component.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9404,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9371,
+								9371
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/styles.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1444,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1439,
+								1439
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 790.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/app/app.component.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 978,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								941,
+								941
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"typescript_plugin_format_options":
+							{
+								"convertTabsToSpaces": false,
+								"indentSize": 2,
+								"tabSize": 2
+							},
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/app/zona1/zona1.component.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 865,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								95,
+								95
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/app/zona1/zona1.component.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 472,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								438,
+								438
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/app/entities.ts",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 40166,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								240,
+								240
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/TypeScript/TypeScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"use_tab_stops": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 39.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "amiabila.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 303.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

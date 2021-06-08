@@ -1,0 +1,37 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
+		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+			Rubrica 2 - Localizare
+		</span>	
+
+		<app-google (newItemEvent)="Zona2.Loc = $event" (imgMapEvent)="imgMapEvent.emit($event)"></app-google>
+
+	  <mat-form-field fxFlex>
+	    <mat-label>Locul accidentului:</mat-label>
+	    <input matInput [(ngModel)]="Zona2.Loc" name="Loc" #Loc='ngModel' required>
+	  </mat-form-field>  
+
+	  <mat-form-field fxFlex>
+	    <mat-label>Tara:</mat-label>
+	    <input type="text" required 
+	           matInput [(ngModel)]="Zona2.Tara" name='Tara' #Tara='ngModel' (ngModelChange)="filterItem($event)"
+	           [matAutocomplete]="auto">
+	    <mat-autocomplete #auto="matAutocomplete">
+	      <mat-option *ngFor="let tara of Tari.Tari" [value]="tara.Denumire">
+	        {{tara.Denumire}}
+	      </mat-option>
+	    </mat-autocomplete>
+	  </mat-form-field>
+
+ 	  <app-display-errors
+ 	  	class="form-error-container"
+ 	  	[style]="{'max-height': Zona2.hasError() != null && childForm.touched ? '200px' : '0'}"
+ 	  	[errors]="Zona2.hasError()">
+  	</app-display-errors>	
+
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona2.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	</div>
+</form>

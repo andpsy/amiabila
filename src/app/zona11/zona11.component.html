@@ -1,0 +1,116 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
+		<span class="zona-title" [ngStyle]="{'margin-bottom':'10px', 'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+			Rubrica 11 - Pagube vizibile la vehiculul {{step == 10 ? "A" : "B"}}
+		</span>	
+<!--
+		<mat-chip-list aria-label="pagube" fxFlex>
+		  <mat-chip *ngFor="let p of Zona11.Pagube; let i = index">{{p}}</mat-chip>
+		</mat-chip-list>
+
+		<mat-form-field>
+		  <input matInput [(ngModel)]="newPaguba" name="newPaguba" (blur)="addPaguba()">
+		 	<mat-icon matSuffix *ngIf="!CommonFunctions.isNullOrWhiteSpaces(newPaguba)" (click)="addPaguba()">control_point</mat-icon>  
+		</mat-form-field>  
+-->
+
+		<mat-form-field fxFlex style="display:contents;">
+		  <mat-label>Pagube</mat-label>
+		  <mat-chip-list #chipList aria-label="pagube">
+		    <mat-chip *ngFor="let p of Zona11.Pagube" [selectable]="selectable"
+		             [removable]="removable" (removed)="remove(p)">
+		      {{p}}
+		      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+		    </mat-chip>
+		    <input placeholder="Paguba noua..."
+		           [matChipInputFor]="chipList"
+		           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+		           [matChipInputAddOnBlur]="addOnBlur"
+		           (matChipInputTokenEnd)="add($event)">
+		  </mat-chip-list>
+		</mat-form-field>
+
+		<div *ngIf="tipVehicul == 'autoturism'" [ngStyle]="{'background-image': (step<14 ? 'url(../assets/full_no_margin_blue.png)' : 'url(../assets/full_no_margin_yellow.png)') }" style="display:flex; align-self:center; background-repeat:no-repeat;background-position:center;background-size:contain;max-width:280px;width:280px;height:600px;min-height:600px;">
+			<table style="width:100%;height:600px;">
+			  <tr>
+			    <td width="10%" height="23">&nbsp;</td>
+			    <td width="17%" colspan="2" rowspan="2" class="carCellPaguba" style="border-top-left-radius: 100%;" id="far-stanga-fata" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td width="46%" class="carCellPaguba" id="bara-fata" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td width="17%" colspan="2" rowspan="2" class="carCellPaguba" style="border-top-right-radius: 100%;" id="far-dreapta-fata" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td width="10%">&nbsp;</td>
+			  </tr>
+			  <tr>
+			    <td height="23">&nbsp;</td>
+			    <td id="capota1" (click)="getId($event)" class="carCellPaguba" style="border-bottom-width: 0px;" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td>&nbsp;</td>
+			  </tr>
+			  <tr>
+			    <td height="61">&nbsp;</td>
+			    <td width="11%" rowspan="2" class="carCellPaguba" id="aripa-stanga-fata" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td colspan="3" class="carCellPaguba" style="border-top-width: 0px;" id="capota2" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td width="11%" rowspan="2" class="carCellPaguba" id="aripa-dreapta-fata" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td>&nbsp;</td>
+			  </tr>
+			  <tr>
+			    <td height="48">&nbsp;</td>
+			    <td colspan="3" rowspan="3" class="carCellPaguba" id="parbriz" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td>&nbsp;</td>
+			  </tr>
+			  <tr>
+			    <td height="37" class="carCellPaguba" id="oglinda-stanga" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td rowspan="3" class="carCellPaguba" id="usa-stanga-fata" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td rowspan="3" class="carCellPaguba" id="usa-dreapta-fata" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td class="carCellPaguba" id="oglinda-dreapta" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			  </tr>
+			  <tr>
+			    <td height="28">&nbsp;</td>
+			    <td>&nbsp;</td>
+			  </tr>
+			  <tr>
+			    <td height="80">&nbsp;</td>
+			    <td colspan="3" rowspan="3" class="carCellPaguba" id="plafon" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td>&nbsp;</td>
+			  </tr>
+			  <tr>
+			    <td>&nbsp;</td>
+			    <td rowspan="2" class="carCellPaguba" id="usa-stanga-spate" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td rowspan="2" class="carCellPaguba" id="usa-dreapta-spate" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td>&nbsp;</td>
+			  </tr>
+			  <tr>
+			    <td height="93">&nbsp;</td>
+			    <td>&nbsp;</td>
+			  </tr>
+			  <tr>
+			    <td>&nbsp;</td>
+			    <td rowspan="2" class="carCellPaguba" id="aripa-stanga-spate" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td colspan="3" rowspan="2" class="carCellPaguba" id="haion" (click)="getId($event)"  (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}" style="height: 85px;">&nbsp;</td>
+			    <td rowspan="2" class="carCellPaguba" id="aripa-dreapta-spate" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td>&nbsp;</td>
+			  </tr>
+			  <tr>
+			    <td>&nbsp;</td>
+			    <td>&nbsp;</td>
+			  </tr>
+			  <tr>
+			    <td>&nbsp;</td>
+			    <td colspan="2" class="carCellPaguba" style="border-bottom-left-radius: 100%;" id="stop-stanga" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td class="carCellPaguba" id="bara-spate" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}" style="height: 35px;">&nbsp;</td>
+			    <td colspan="2" class="carCellPaguba" style="border-bottom-right-radius: 100%;" id="stop-dreapta" (click)="getId($event)" (mouseenter)="getText($event)" (mouseleave)="curTooltip = null" matTooltip="{{curTooltip}}">&nbsp;</td>
+			    <td>&nbsp;</td>
+			  </tr>
+			</table>
+		</div>
+
+ 	  <app-display-errors
+ 	  	class="form-error-container"
+ 	  	[style]="{'max-height': Zona11.hasError() != null && childForm.touched ? '200px' : '0'}"
+ 	  	[errors]="Zona11.hasError()">
+  	</app-display-errors>	
+
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona11.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	</div>
+</form>

@@ -1,0 +1,96 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
+		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+			Rubrica 8 - Societate de asigurare (vezi documentul de asigurare)
+		</span>		
+		<!--
+	  <mat-form-field fxFlex>
+	    <mat-label>DENUMIRE:</mat-label>
+	    <input matInput [(ngModel)]="Zona8.Denumire" name="Denumire" #Denumire='ngModel' required>
+	    <mat-error *ngIf="Denumire.invalid">Campul Denumire este obligatoriu!</mat-error>
+	  </mat-form-field>  
+		-->
+	  <mat-form-field fxFlex>
+	    <mat-label>DENUMIRE:</mat-label>
+	    <input type="text" required 
+	           matInput [(ngModel)]="Zona8.Denumire" name='Denumire' #Denumire='ngModel' (ngModelChange)="filterSocietati($event)"
+	           [matAutocomplete]="societati">
+	    <mat-error *ngIf="Denumire.invalid">Campul DENUMIRE este obligatoriu!</mat-error>
+	    <mat-autocomplete #societati="matAutocomplete">
+	      <mat-option *ngFor="let societate of SocietatiRCA.Societati" [value]="societate.Denumire">
+	        {{societate.Denumire}}
+	      </mat-option>
+	    </mat-autocomplete>
+	  </mat-form-field>
+
+ 	  <mat-form-field fxFlex>
+	    <mat-label>Polita nr.:</mat-label>
+	    <input matInput [(ngModel)]="Zona8.PolitaNr" name="PolitaNr" #PolitaNr='ngModel' required>
+	  </mat-form-field> 
+
+	  <mat-form-field fxFlex>
+	    <mat-label>Carte Verde nr.:</mat-label>
+	    <input matInput [(ngModel)]="Zona8.CarteVerdeNr" name="CarteVerdeNr" #CarteVerdeNr='ngModel' required>
+	  </mat-form-field> 
+
+		<mat-form-field fxFlex>
+		  <mat-label>Polita de asigurare sau Carte Verde cu valabilitate de la:</mat-label>
+		  <input matInput [matDatepicker]="picker2" disabled [(ngModel)]="Zona8.ValabilDeLa" name="ValabilDeLa" #ValabilDeLa="ngModel" required>
+		  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+		  <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+		</mat-form-field>
+		<mat-form-field fxFlex>
+		  <mat-label>pana la:</mat-label>
+		  <input matInput [matDatepicker]="picker3" disabled [(ngModel)]="Zona8.ValabilPanaLa" name="ValabilPanaLa" #ValabilPanaLa="ngModel" required>
+		  <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+		  <mat-datepicker #picker3 disabled="false"></mat-datepicker>
+		</mat-form-field>
+	  <mat-form-field fxFlex>
+	    <mat-label>Sucursala (sau agentia, sau brokerul):</mat-label>
+	    <input matInput [(ngModel)]="Zona8.Sucursala" name="Sucursala" #Sucursala='ngModel'>
+	  </mat-form-field> 
+	  <mat-form-field fxFlex>
+	    <mat-label>DENUMIRE:</mat-label>
+	    <input matInput [(ngModel)]="Zona8.DenumireSucursala" name="DenumireSucursala" #DenumireSucursala='ngModel'>
+	  </mat-form-field> 
+	  <mat-form-field fxFlex>
+	    <mat-label>Adresa:</mat-label>
+	    <input matInput [(ngModel)]="Zona8.Adresa" name="Adresa" #Adresa='ngModel'>
+	  </mat-form-field> 
+	  <mat-form-field fxFlex>
+	    <mat-label>Tara:</mat-label>
+	    <input type="text" required 
+	           matInput [(ngModel)]="Zona8.Tara" name='Tara' #Tara='ngModel' (ngModelChange)="filterItem($event)"
+	           [matAutocomplete]="auto">
+	    <mat-autocomplete #auto="matAutocomplete">
+	      <mat-option *ngFor="let tara of Tari.Tari" [value]="tara.Denumire">
+	        {{tara.Denumire}}
+	      </mat-option>
+	    </mat-autocomplete>
+	  </mat-form-field>
+	  <mat-form-field fxFlex>
+	    <mat-label>Telefon/Email:</mat-label>
+	    <input matInput [(ngModel)]="Zona8.TelefonEmail" name="TelefonEmail" #TelefonEmail='ngModel'>
+	  </mat-form-field> 	  
+
+    <mat-label class="mat-label-no-field">Daunele materiale ale vehiculului sunt acoperite printr-o polita CASCO?</mat-label>
+		<mat-slide-toggle [(ngModel)]="Zona8.Casco"></mat-slide-toggle>
+	  <!--
+	  <span>Daunele materiale ale vehiculului sunt acoperite printr-o polita CASCO?</span>
+		<div fxLayout="row" style="justify-content: center;">
+			<mat-checkbox [(ngModel)]="!Zona8.Casco" name="CascoNu" #CascoNu='ngModel'>nu</mat-checkbox>
+			<mat-checkbox [(ngModel)]="Zona8.Casco" name="CascoDa" #CascoDa='ngModel'>da</mat-checkbox>
+		</div>
+		-->
+ 	  <app-display-errors
+ 	  	class="form-error-container"
+ 	  	[style]="{'max-height': Zona8.hasError() != null && childForm.touched ? '200px' : '0'}"
+ 	  	[errors]="Zona8.hasError()">
+  	</app-display-errors>	
+
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona8.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	</div>
+</form>

@@ -1,0 +1,62 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
+		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+			Rubrica 10 - Indicati punctul initial de impact pentru vehiculul {{step == 9 ? "A" : "B"}} printr-o sageata &rarr;
+		</span>	
+
+		<!-- vehicul altfel decat autoturism (motocicleta, camion etc) -->
+		<div *ngIf="tipVehicul != 'autoturism'" fxLayout="row" style="justify-content: center;">
+			<mat-radio-group aria-label="Select an option" fxLayout="column" name="PunctImpact" [(ngModel)]="Zona10.PunctImpact" required>
+			  <mat-radio-button style="margin:5px;" *ngFor="let zona of zoneImpact" [value]="zona.zona">{{zona.zona}}</mat-radio-button>
+			</mat-radio-group>		
+		</div>
+
+		<!-- vehicul autoturism -->
+		<div *ngIf="tipVehicul == 'autoturism'" [ngStyle]="{'background-image': (step<13 ? 'url(../assets/full600blue.png)' : 'url(../assets/full600yellow.png)') }" style="display:flex; align-self:center; width: 300px; height: 360px; 
+		  background-position: center; 
+		  background-repeat: no-repeat;
+		  background-size: contain;">
+
+		  <table style="width: 100%;height:360px;">
+				<tr>
+					<td rowspan=3 class="carCell" style="height: 30%;" matTooltip="stanga-fata" (click)="Zona10.PunctImpact='stanga-fata'" [ngStyle]="{'background-color': Zona10.PunctImpact == 'stanga-fata' ? 'rgba(255, 0, 0, 0.8)' : 'transparent', 'color': Zona10.PunctImpact == 'stanga-fata' ? 'white' : 'red' }">&#8600;</td>
+					<td colspan="2" class="carCell" style="width: 50%; height: 15%;" matTooltip="fata"  (click)="Zona10.PunctImpact='fata'" [ngStyle]="{'background-color': Zona10.PunctImpact == 'fata' ? 'rgba(255, 0, 0, 0.8)' : 'transparent', 'color': Zona10.PunctImpact == 'fata' ? 'white' : 'red' }">&#8595;</td>
+					<td rowspan=3 class="carCell" matTooltip="dreapta-fata" (click)="Zona10.PunctImpact='dreapta-fata'" [ngStyle]="{'background-color': Zona10.PunctImpact == 'dreapta-fata' ? 'rgba(255, 0, 0, 0.8)' : 'transparent', 'color': Zona10.PunctImpact == 'dreapta-fata' ? 'white' : 'red' }">&#8601;</td>
+				</tr>
+				<tr>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td class="carCell" style="height: 40%;" matTooltip="stanga" (click)="Zona10.PunctImpact='stanga'" [ngStyle]="{'background-color': Zona10.PunctImpact == 'stanga' ? 'rgba(255, 0, 0, 0.8)' : 'transparent', 'color': Zona10.PunctImpact == 'stanga' ? 'white' : 'red' }">&#8594;</td>
+					<td colspan="2"></td>
+					<td class="carCell" matTooltip="dreapta" (click)="Zona10.PunctImpact='dreapta'" [ngStyle]="{'background-color': Zona10.PunctImpact == 'dreapta' ? 'rgba(255, 0, 0, 0.8)' : 'transparent', 'color': Zona10.PunctImpact == 'dreapta' ? 'white' : 'red' }">&#8592;</td>
+				</tr>
+				<tr>
+					<td rowspan=3 class="carCell" style="height: 30%;" matTooltip="stanga-spate" (click)="Zona10.PunctImpact='stanga-spate'" [ngStyle]="{'background-color': Zona10.PunctImpact == 'stanga-spate' ? 'rgba(255, 0, 0, 0.8)' : 'transparent', 'color': Zona10.PunctImpact == 'stanga-spate' ? 'white' : 'red' }">&#8599;</td>
+					<td colspan="2"></td>
+					<td rowspan=3 class="carCell" matTooltip="dreapta-spate" (click)="Zona10.PunctImpact='dreapta-spate'" [ngStyle]="{'background-color': Zona10.PunctImpact == 'dreapta-spate' ? 'rgba(255, 0, 0, 0.8)' : 'transparent', 'color': Zona10.PunctImpact == 'dreapta-spate' ? 'white' : 'red' }">&#8598;</td>
+				</tr>
+				<tr>
+					<td colspan="2"></td>
+				</tr>
+				<tr>
+					<td colspan="2" class="carCell" style="height: 15%;" matTooltip="spate" (click)="Zona10.PunctImpact='spate'" [ngStyle]="{'background-color': Zona10.PunctImpact == 'spate' ? 'rgba(255, 0, 0, 0.8)' : 'transparent', 'color': Zona10.PunctImpact == 'spate' ? 'white' : 'red' }">&#8593;</td>
+				</tr>
+			</table>
+		</div>
+
+ 	  <app-display-errors
+ 	  	class="form-error-container"
+ 	  	[style]="{'max-height': Zona10.hasError() != null && childForm.touched ? '200px' : '0'}"
+ 	  	[errors]="Zona10.hasError()">
+  	</app-display-errors>	
+
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona10.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	</div>
+</form>

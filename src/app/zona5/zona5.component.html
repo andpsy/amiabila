@@ -1,0 +1,31 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
+		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+			Rubrica 5 - Martori: nume, adrese, tel.:
+		</span>	
+		<mat-slide-toggle [(ngModel)]="Zona5.ExistaMartori" (ngModelChange)="existaMartori()">Exista martori?</mat-slide-toggle>
+		<mat-card fxFlex *ngFor="let martor of Zona5.Martori; let i = index">
+			<mat-card-title>
+				Martor {{i + 1}}:
+			</mat-card-title>
+			<mat-card-content>
+				<app-martor fxLayout = "column" [martor]="martor"></app-martor>
+			</mat-card-content>
+		  <mat-card-actions>
+				<button *ngIf="Zona5.Martori.length > 1" mat-raised-button color="primary" (click)="RemoveMartor(martor)">Sterge martor</button>
+				<button *ngIf="i == Zona5.Martori.length-1 && Zona5.Martori.length < 6" mat-raised-button color="primary" (click)="AddMartor()">Adauga martor</button>
+		  </mat-card-actions>		  
+		</mat-card>
+
+ 	  <app-display-errors
+ 	  	class="form-error-container"
+ 	  	[style]="{'max-height': Zona5.hasError() != null && childForm.touched ? '200px' : '0'}"
+ 	  	[errors]="Zona5.hasError()">
+  	</app-display-errors>	
+
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona5.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	</div>
+</form>

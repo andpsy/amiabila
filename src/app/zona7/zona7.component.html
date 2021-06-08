@@ -1,0 +1,99 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
+		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+			Rubrica 7 - Vehicul
+		</span>		
+		<mat-card fxFlex>
+			<mat-card-title style="background-color: #7F95BE;">
+				CU MOTOR:
+			</mat-card-title>
+			<mat-card-content fxLayout = "column">
+			  <mat-form-field fxFlex>
+			    <mat-label>Marca:</mat-label>
+			    <input type="text" required 
+			           matInput [(ngModel)]="Zona7.Motor.Marca" name='marca' #marca='ngModel' (ngModelChange)="filterItem($event)"
+			           [matAutocomplete]="auto">
+			    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+			      <mat-option *ngFor="let marcaAuto of MarciAuto.MarciAuto" [value]="marcaAuto.Model">
+			        {{marcaAuto.Model}}
+			      </mat-option>
+			    </mat-autocomplete>
+			  </mat-form-field>
+
+				<div fxLayout="column" class="mat-label-no-field" style="justify-content: center;">
+			    <mat-label>Tip:</mat-label>
+					<mat-radio-group style="display: block; text-align: center;" aria-label="Select an option" name="Tip" #Tip="ngModel" [(ngModel)]="Zona7.Motor.Tip" required>
+					  <mat-radio-button style="margin:5px;" *ngFor="let tip of TipVehicul" [value]="tip">{{tip}}</mat-radio-button>
+					</mat-radio-group>		
+				  <mat-form-field fxFlex *ngIf="Zona7.Motor.Tip == 'altul'">
+				    <input matInput [(ngModel)]="Zona7.Motor.TipAltul" name='MotorTipAltul' #MotorTipAltul='ngModel'>
+				  </mat-form-field>  
+				</div>
+
+			  <mat-form-field fxFlex>
+			    <mat-label>Nr. inmatriculare/inregistrare:</mat-label>
+			    <input matInput [(ngModel)]="Zona7.Motor.NrInmatriculare" name='MotorNrInmatriculare' #MotorNrInmatriculare='ngModel' required>
+			  </mat-form-field>  
+			  <!--
+			  <mat-form-field fxFlex>
+			    <mat-label>Tara in care este inmatriculat/inregistrat:</mat-label>
+			    <input matInput [(ngModel)]="Zona7.Motor.TaraInmatriculare" name='MotorTaraInmatriculare' #MotorTaraInmatriculare='ngModel' required>
+			    <mat-error *ngIf="MotorTaraInmatriculare.invalid && childForm.touched">Campul Tara Inmatriculare este obligatoriu!</mat-error>
+			  </mat-form-field> 			
+				-->
+			  <mat-form-field fxFlex>
+			    <mat-label>Tara in care este inmatriculat/inregistrat:</mat-label>
+			    <input type="text" 
+           matInput (ngModel)="Zona7.Motor.TaraInmatriculare" [value]="Zona7.Motor.TaraInmatriculare" name='MotorTaraInmatriculare' #MotorTaraInmatriculare='ngModel' (ngModelChange)="filterTari($event, 'motor')"
+           [matAutocomplete]="taraMotor">
+			    <mat-autocomplete #taraMotor="matAutocomplete">
+			      <mat-option *ngFor="let tara of TariMotor.Tari" [value]="tara.Denumire">
+			        {{tara.Denumire}}
+			      </mat-option>
+			    </mat-autocomplete>
+			  </mat-form-field>			  		
+
+			</mat-card-content>
+		</mat-card>
+		<mat-card fxFlex>
+			<mat-card-title style="background-color: #BDC8DE;">
+				REMORCA:
+			</mat-card-title>
+			<mat-card-content fxLayout = "column">
+			  <mat-form-field fxFlex>
+			    <mat-label>Nr. inmatriculare/inregistrare:</mat-label>
+			    <input matInput [(ngModel)]="Zona7.Remorca.NrInmatriculare" name='RemorcaNrInmatriculare' #RemorcaNrInmatriculare='ngModel' required>
+			  </mat-form-field>  
+			  <!--
+			  <mat-form-field fxFlex>
+			    <mat-label>Tara in care este inmatriculata/inregistrata:</mat-label>
+			    <input matInput [(ngModel)]="Zona7.Remorca.TaraInmatriculare" name='RemorcaTaraInmatriculare' #RemorcaTaraInmatriculare='ngModel' required>
+			    <mat-error *ngIf="RemorcaTaraInmatriculare.invalid && childForm.touched">Campul Tara Inmatriculare este obligatoriu!</mat-error>
+			  </mat-form-field> 	
+				-->
+			  <mat-form-field fxFlex>
+			    <mat-label>Tara in care este inmatriculata/inregistrata:</mat-label>
+			    <input type="text" 
+           matInput [(ngModel)]="Zona7.Remorca.TaraInmatriculare" name='RemorcaTaraInmatriculare' #RemorcaTaraInmatriculare='ngModel' (ngModelChange)="filterTari($event, 'remorca')"
+           [matAutocomplete]="taraRemorca">
+			    <mat-autocomplete #taraRemorca="matAutocomplete">
+			      <mat-option *ngFor="let tara of TariRemorca.Tari" [value]="tara.Denumire">
+			        {{tara.Denumire}}
+			      </mat-option>
+			    </mat-autocomplete>
+			  </mat-form-field>			  		
+			</mat-card-content>
+		</mat-card>
+
+ 	  <app-display-errors
+ 	  	class="form-error-container"
+ 	  	[style]="{'max-height': Zona7.hasError() != null && childForm.touched ? '200px' : '0'}"
+ 	  	[errors]="Zona7.hasError()">
+  	</app-display-errors>	
+
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona7.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	</div>
+</form>

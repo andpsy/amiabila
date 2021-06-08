@@ -1,0 +1,34 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
+		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+			Rubrica 4 - Pagube materiale
+		</span>
+
+		<span class="zona-subtitle">
+			la alte vehicule decat A si B
+		</span>
+		<div fxLayout="row" style="justify-content: center;">
+			<mat-checkbox [(ngModel)]="Zona4.PagubeAlteVehiculeDa" name="PagubeAlteVehiculeDa" #PagubeAlteVehiculeDa='ngModel' (change)="Zona4.PagubeAlteVehiculeNu = !Zona4.PagubeAlteVehiculeDa">da</mat-checkbox>
+			<mat-checkbox [(ngModel)]="Zona4.PagubeAlteVehiculeNu" name="PagubeAlteVehiculeNu" #PagubeAlteVehiculeNu='ngModel' (change)="Zona4.PagubeAlteVehiculeDa = !Zona4.PagubeAlteVehiculeNu">nu</mat-checkbox>
+		</div>
+
+		<span class="zona-subtitle">
+			la alte obiecte, in afara de vehicule
+		</span>
+		<div fxLayout="row" style="justify-content: center;">
+			<mat-checkbox [(ngModel)]="Zona4.PagubeAlteObiecteDa" name="PagubeAlteObiecteDa" #PagubeAlteObiecteDa='ngModel' (change)="Zona4.PagubeAlteObiecteNu = !Zona4.PagubeAlteObiecteDa">da</mat-checkbox>
+			<mat-checkbox [(ngModel)]="Zona4.PagubeAlteObiecteNu" name="PagubeAlteObiecteNu" #PagubeAlteObiecteNu='ngModel' (change)="Zona4.PagubeAlteObiecteDa = !Zona4.PagubeAlteObiecteNu">nu</mat-checkbox>
+		</div>
+
+ 	  <app-display-errors
+ 	  	class="form-error-container"
+ 	  	[style]="{'max-height': Zona4.hasError() != null && childForm.touched ? '200px' : '0'}"
+ 	  	[errors]="Zona4.hasError()">
+  	</app-display-errors>	
+
+  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona4.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	</div>
+</form>
