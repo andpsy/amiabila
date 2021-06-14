@@ -45,10 +45,13 @@ export class Marker {
 
 export class CommonFunctions{
   public static DISABLE_BUTTONS_ON_VALIDATION_ERROR = false;
-  public static GOOGLE_API_KEY = "AIzaSyCgXPkbiFYrV2Na-_XmGN0sUjAUq3WVKCs";
+  // public static GOOGLE_API_KEY = "AIzaSyCgXPkbiFYrV2Na-_XmGN0sUjAUq3WVKCs";
+  public static GOOGLE_API_KEY = "AIzaSyBDS3LAPdSf1eV6wFFgxsjkn0qNJCuC2Eo";
   public static IMG_CAPTURE_ZOOM = "18";
   public static IMG_CAPTURE_SIZE = "300x300";
   public static IMG_MAP_ID = "roadmap";
+
+  public static SRV_URL = "https://localhost:44322/api/";
 
   public static isNullOrWhiteSpaces(str){
     return str === null || str.trim() === '';
@@ -73,6 +76,11 @@ export class CommonFunctions{
     {"id":6, "zona":"dreapta-spate"}, 
     {"id":7, "zona":"dreapta"}, 
     {"id":8, "zona":"dreapta-fata"}];
+
+  public static DocumenteNecesare = [{"selected":false, "name":"CI soferi"}, 
+    {"selected":false, "name":"Permise conducere soferi"}, 
+    {"selected":false, "name":"Polite auto RCA"}, 
+    {"selected":false, "name":"Alte acte"}];
 
   public static showDiv(step:number, visibility:boolean):void{
     var divId = CommonFunctions.Steps[step].DivId;
@@ -498,12 +506,20 @@ export class Zona15 {
 }
 
 export class Aditionale {
+  Conditii: boolean;
+  DocumenteNecesare: boolean;
+  GDPR: boolean;
+  TermeniSiConditii: boolean; 
   PagubitDecontareDirecta: boolean;
   PagubitSocietateDecontareDirecta: string;
   VinovatCasco: boolean;
   VinovatSocietateCasco: string;
   StepCompleted: boolean;
   constructor(){
+    this.Conditii = false;
+    this.DocumenteNecesare = false;
+    this.GDPR = false;
+    this.TermeniSiConditii = false;
     this.PagubitDecontareDirecta = false;
     this.PagubitSocietateDecontareDirecta = null;
     this.VinovatCasco = false;
@@ -645,6 +661,10 @@ export class Formular {
     this.Zona12 = new Zona12();
     this.Zona13 = new Zona13();    
     this.Aditionale = new Aditionale();
+  }
+
+  public getPrererquisites():boolean{
+    return this.Aditionale.Conditii && this.Aditionale.DocumenteNecesare && this.Aditionale.GDPR && this.Aditionale.TermeniSiConditii;
   }
 
   public getPreviousZoneCompletedStatus(step):boolean{

@@ -2,8 +2,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 html { height: 100%; min-height: 100%;}
-body { height: 100%; min-height: 100%; margin: 0px; font-family: "Helvetica Neue", sans-serif, Roboto; font-size: smaller; }
-
+body { height: 100%; min-height: 100%; margin: 0px; font-family: calibri, "Helvetica Neue", sans-serif, Roboto !important; font-size: small !important; }
+.mat-body{
+	font-family: calibri;
+}
 .form_block{
 	position: relative;
 }
@@ -56,7 +58,7 @@ body { height: 100%; min-height: 100%; margin: 0px; font-family: "Helvetica Neue
   position: absolute;
   top: 0;
   background: rgb(0, 0, 0);
-  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
   transition: .5s ease;
   opacity:0;
@@ -72,6 +74,34 @@ body { height: 100%; min-height: 100%; margin: 0px; font-family: "Helvetica Neue
 .form_block:hover .overlay {
   opacity: 1;
   cursor: pointer;
+}
+.overlaySpan{
+	position: absolute;
+}
+
+.progressBarDiv{
+	display: flex; 
+	justify-content: center; 
+	max-width:800px; 
+	width:100%;
+	margin:auto;
+	height: 15px; 
+	margin-bottom: 5px;
+	background-color: gray;
+}
+
+.progressBarLabel{
+	position: absolute;
+	top: -3px;
+	font-size: x-small; 
+	text-align: center;
+}
+
+.mainDivContent{
+	max-width: 800px;
+	margin: auto;
+	border:1px solid black;
+	padding: 5px;
 }
 
 .mainDiv{
@@ -105,11 +135,25 @@ body { height: 100%; min-height: 100%; margin: 0px; font-family: "Helvetica Neue
   padding: 5px;
   background-color: whitesmoke;
   max-height: 43px;
+  font-family: calibri;
 }
 .mat-raised-button{
-	margin: 5px !important;
+	margin: 3px !important;
+	/*
+	margin-top: 5px !important;
+	margin-right: 5px !important;
+	*/
 	border-radius: 0px !important;	
+	background-color: gray;
+	color: white;
+	font-family: calibri;
+	width: inherit;
 }
+.mat-raised-button.mat-primary{
+	background-color: crimson !important;
+	color: white;
+}
+
 .mat-checkbox{
 	margin: 7px 7px 0px 7px;
 }
@@ -258,4 +302,37 @@ mat-dialog-container {
 .mat-label-no-field{
 	margin-top: 10px;
 	margin-left: 10px;
+}
+.ZonaButtonsContainer{
+	width: 100%;
+}
+
+.mat-badge-content{
+	right: 8px !important;
+	top: 7px !important;
+	background-color: greenyellow;
+	color: darkgreen;
+	border: 1px solid darkseagreen;
+	box-shadow: 1px 1px 5px #888;
+}
+
+.prerequisite{
+	border-width: 0px;
+	/* border-radius: 30px; */
+	background-image: linear-gradient(to bottom right, #2AB5BB, #2A7BBB);
+	text-align: center;
+	color: white;
+	box-shadow: 5px 5px 5px #888;
+	padding: 15px;
+}
+.prerequisite_button{
+	background-image: linear-gradient(to right, #593093, #7643BE);
+	max-width: 200px;
+	display: inline-block;
+	width: max-content;
+	border-radius: 5px;
+	padding: 3px;
+}
+.prerequisite_button .mat-checkbox{
+	margin:  3px !important;
 }

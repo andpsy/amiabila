@@ -55,8 +55,10 @@
  	  	[errors]="Zona10.hasError()">
   	</app-display-errors>	
 
-  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
-  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
-  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona10.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+  	<div fxFlex fxLayout="row" fxLayout.lt-md="column" class="ZonaButtonsContainer">
+	  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  		<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  		<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona10.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+  	</div>
 	</div>
 </form>

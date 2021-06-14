@@ -6,9 +6,12 @@
 		</span>	
 	  <mat-form-field fxFlex>
 	    <textarea matInput [(ngModel)]="Zona14.Observatii" name="Observatii" #Observatii='ngModel'></textarea>
-	  </mat-form-field>  
-  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
-  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
-  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+	  </mat-form-field> 
+
+  	<div fxFlex fxLayout="row" fxLayout.lt-md="column" class="ZonaButtonsContainer">
+	  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+  		<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+  		<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+  	</div>
 	</div>
 </form>

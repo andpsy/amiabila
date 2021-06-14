@@ -1,16 +1,21 @@
-<div class="content">
-  <div style="display: flex; justify-content: center; max-width:800px; width:100%;margin:auto;height: 15px; margin-bottom: 5px;">
+<app-conditii [Conditii]="Formular.Aditionale.Conditii" [hidden]="Formular.Aditionale.Conditii" (confirmed)="Formular.Aditionale.Conditii = $event"></app-conditii>
+<app-documente-necesare *ngIf="Formular.Aditionale.Conditii" [hidden]="Formular.Aditionale.DocumenteNecesare" [DocumenteNecesare]="Formular.Aditionale.DocumenteNecesare" (confirmed)="Formular.Aditionale.DocumenteNecesare = $event"></app-documente-necesare>
+<app-gdpr *ngIf="Formular.Aditionale.DocumenteNecesare" [GDPR]="Formular.Aditionale.GDPR" [hidden]="Formular.Aditionale.GDPR" (confirmed)="Formular.Aditionale.GDPR = $event"></app-gdpr>
+<app-termeni-si-conditii *ngIf="Formular.Aditionale.GDPR" [TermeniSiConditii]="Formular.Aditionale.TermeniSiConditii" [hidden]="Formular.Aditionale.TermeniSiConditii" (confirmed)="Formular.Aditionale.TermeniSiConditii = $event"></app-termeni-si-conditii>
+
+<div *ngIf="Formular.getPrererquisites()" class="content">
+  <div class="progressBarDiv">
     <mat-progress-bar 
       style="width:100%;height: 15px;"
       color="primary"
       mode="determinate"
       [value]="pas">
     </mat-progress-bar>   
-    <div style="position: absolute;top: -3px;font-size: x-small; text-align: center;">  
+    <div class="progressBarLabel">  
       completat: {{pas}}%
     </div>
   </div> 
-  <div fxLayout="column" style="max-width: 800px;margin: auto;border:1px solid black;padding: 5px;" id="mainDiv" #mainDiv>
+  <div fxLayout="column" class="mainDivContent" id="mainDiv" #mainDiv>
     <div fxLayout="row">
       <div fxFlex="100" class="row1">
         CONSTATARE AMIABILA DE ACCIDENT
@@ -18,27 +23,27 @@
     </div>
 
     <div fxLayout="row">
-      <div class="form_block">
+      <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.Zona1.StepCompleted">
         <img src="{{_cale_parts + '1.png'}}" class="row2">  
         <div class="overlay row2" fxLayout="column" (click)="showDiv(0, true)">
           <mat-icon [ngStyle]= "{'color': !Formular.Zona1.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.Zona1.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-          <span>Click pentru completare</span>
+          <span class="overlaySpan">Click pentru completare</span>
         </div> 
       </div>
 
-      <div class="form_block">
+      <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.Zona2.StepCompleted">
         <img src="{{_cale_parts + '2.png'}}" class="row2">   
         <div class="overlay row2" fxLayout="column" (click)="showDiv(1, true)">
           <mat-icon [ngStyle]= "{'color': !Formular.Zona2.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.Zona2.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-          <span>Click pentru completare</span>
+          <span class="overlaySpan">Click pentru completare</span>
         </div> 
       </div>
 
-      <div class="form_block">
+      <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.Zona3.StepCompleted">
         <img src="{{_cale_parts + '3.png'}}" class="row2">   
         <div class="overlay row2" fxLayout="column" (click)="showDiv(2, true)">
           <mat-icon [ngStyle]= "{'color': !Formular.Zona3.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.Zona3.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-          <span>Click pentru completare</span>
+          <span class="overlaySpan">Click pentru completare</span>
         </div> 
       </div>
 
@@ -48,18 +53,18 @@
     </div>
 
     <div fxLayout="row">
-      <div class="form_block">
+      <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.Zona4.StepCompleted">
         <img src="{{_cale_parts + '4.png'}}" class="row3">   
         <div class="overlay row3" fxLayout="column" (click)="showDiv(3, true)">
           <mat-icon [ngStyle]= "{'color': !Formular.Zona4.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.Zona4.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-          <span>Click pentru completare</span>
+          <span class="overlaySpan">Click pentru completare</span>
         </div> 
       </div>
-      <div class="form_block">
+      <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.Zona5.StepCompleted">
         <img src="{{_cale_parts + '5.png'}}" class="row3">   
         <div class="overlay row3" fxLayout="column" (click)="showDiv(4, true)">
           <mat-icon [ngStyle]= "{'color': !Formular.Zona5.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.Zona5.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-          <span>Click pentru completare</span>
+          <span class="overlaySpan">Click pentru completare</span>
         </div> 
       </div>
     </div>
@@ -67,84 +72,84 @@
     <div fxLayout="row">
       <div fxLayout="column" fxFlex="35" style="background-color: #1D3885">
         <span class="vehicul_a">VEHICUL A</span>
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculA.Zona6.StepCompleted">
           <img src="{{_cale_parts + '6A.png'}}" class="row4_a">   
           <div class="overlay row4_a" fxLayout="column" (click)="showDiv(5, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculA.Zona6.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculA.Zona6.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
 
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculA.Zona7.StepCompleted">
           <img src="{{_cale_parts + '7A.png'}}" class="row4_a">   
           <div class="overlay row4_a" fxLayout="column" (click)="showDiv(6, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculA.Zona7.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculA.Zona7.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
 
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculA.Zona8.StepCompleted">
           <img src="{{_cale_parts + '8A.png'}}" class="row4_a">   
           <div class="overlay row4_a" fxLayout="column" (click)="showDiv(7, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculA.Zona8.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculA.Zona8.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
 
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculA.Zona9.StepCompleted">
           <img src="{{_cale_parts + '9A.png'}}" class="row4_a">   
           <div class="overlay row4_a" fxLayout="column" (click)="showDiv(8, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculA.Zona9.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculA.Zona9.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
       </div>
 
       <div fxLayout="column" fxFlex="30">
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.Zona12.StepCompleted">
           <img src="{{_cale_parts + '12.png'}}" class="row4">   
           <div class="overlay row4" fxLayout="column" (click)="showDiv(21, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.Zona12.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.Zona12.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.Zona13.StepCompleted">
           <img src="{{_cale_parts + '13_1.png'}}" class="row4">   
           <div class="overlay row4" fxLayout="column" (click)="showDiv(22, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.Zona13.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.Zona13.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
       </div>
 
       <div fxLayout="column" fxFlex="35" style="background-color: #F8D32D">
         <span class="vehicul_b">VEHICUL B</span>
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona6.StepCompleted">
           <img src="{{_cale_parts + '6B.png'}}" class="row4_b">   
           <div class="overlay row4_b" fxLayout="column" (click)="showDiv(13, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona6.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona6.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona7.StepCompleted">
           <img src="{{_cale_parts + '7B.png'}}" class="row4_b">   
           <div class="overlay row4_b" fxLayout="column" (click)="showDiv(14, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona7.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona7.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona9.StepCompleted">
           <img src="{{_cale_parts + '8B.png'}}" class="row4_b">   
           <div class="overlay row4_b" fxLayout="column" (click)="showDiv(15, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona8.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona8.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>               
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona9.StepCompleted">
           <img src="{{_cale_parts + '9B.png'}}" class="row4_b">   
           <div class="overlay row4_b" fxLayout="column" (click)="showDiv(16, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona9.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona9.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
       </div>
@@ -152,46 +157,46 @@
 
     <div fxLayout="row">
       <div fxLayout="column" fxFlex="20" style="background-color: #1D3885">
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculA.Zona10.StepCompleted">
           <img src="{{_cale_parts + '10A.png'}}" class="row4_a">   
           <div class="overlay row4_a" fxLayout="column" (click)="showDiv(9, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculA.Zona10.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculA.Zona10.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
 
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculA.Zona11.StepCompleted">
           <img src="{{_cale_parts + '11A.png'}}" class="row4_a">   
           <div class="overlay row4_a" fxLayout="column" (click)="showDiv(10, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculA.Zona11.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculA.Zona11.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
       </div>
 
       <div fxLayout="column" fxFlex="60">
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.Zona13.StepCompleted">
           <img src="{{_cale_parts + '13_2.png'}}" class="row4">   
           <div class="overlay row4" fxLayout="column" (click)="showDiv(22, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.Zona13.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.Zona13.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
       </div>
 
       <div fxLayout="column" fxFlex="20" style="background-color: #F8D32D">
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona10.StepCompleted">
           <img src="{{_cale_parts + '10B.png'}}" class="row4_b">   
           <div class="overlay row4_b" fxLayout="column" (click)="showDiv(17, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona10.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona10.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>                
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona11.StepCompleted">
           <img src="{{_cale_parts + '11B.png'}}" class="row4_b">   
           <div class="overlay row4_b" fxLayout="column" (click)="showDiv(18, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona11.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona11.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>                
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
       </div>
@@ -199,40 +204,40 @@
 
     <div fxLayout="row">
       <div fxLayout="column" fxFlex="36" style="background-color: #1D3885">
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculA.Zona14.StepCompleted">
           <img src="{{_cale_parts + '14A.png'}}" class="row4_a">   
           <div class="overlay row4_a" fxLayout="column" (click)="showDiv(11, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculA.Zona14.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculA.Zona14.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>                
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
       </div>
 
       <div fxLayout="column" fxFlex="14">
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculA.Zona15.StepCompleted">
           <img src="{{_cale_parts + '15A.png'}}" class="row4">   
           <div class="overlay row4" fxLayout="column" (click)="showDiv(12, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculA.Zona15.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculA.Zona15.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>                
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
       </div>
       <div fxLayout="column" fxFlex="14">
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona15.StepCompleted">
           <img src="{{_cale_parts + '15B.png'}}" class="row4">   
           <div class="overlay row4" fxLayout="column" (click)="showDiv(20, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona15.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona15.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>                
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
       </div>
 
       <div fxLayout="column" fxFlex="36" style="background-color: #F8D32D">
-        <div class="form_block">
+        <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona14.StepCompleted">
           <img src="{{_cale_parts + '14B.png'}}" class="row4_b">   
           <div class="overlay row4_b" fxLayout="column" (click)="showDiv(19, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona14.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona14.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>                
-            <span>Click pentru completare</span>
+            <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
       </div>      

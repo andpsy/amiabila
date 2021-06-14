@@ -6,7 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
-import { GoogleMapsModule } from '@angular/google-maps'
+import { GoogleMapsModule } from '@angular/google-maps';
+import { HttpClientModule } from '@angular/common/http';
 
 import {
   MAT_MOMENT_DATE_FORMATS,
@@ -37,6 +38,10 @@ import { AditionaleComponent } from './aditionale/aditionale.component';
 import { DisplayErrorsComponent } from './display-errors/display-errors.component';
 import { MartorComponent } from './martor/martor.component';
 import { GoogleComponent } from './google/google.component';
+import { ConditiiComponent } from './conditii/conditii.component';
+import { DocumenteNecesareComponent } from './documente-necesare/documente-necesare.component';
+import { GDPRComponent } from './gdpr/gdpr.component';
+import { TermeniSiConditiiComponent } from './termeni-si-conditii/termeni-si-conditii.component';
 
 
 @NgModule({
@@ -61,7 +66,11 @@ import { GoogleComponent } from './google/google.component';
     AditionaleComponent,
     DisplayErrorsComponent,
     MartorComponent,
-    GoogleComponent  
+    GoogleComponent,
+    ConditiiComponent,
+    DocumenteNecesareComponent,
+    GDPRComponent,
+    TermeniSiConditiiComponent  
   ],
   imports: [
     AppRoutingModule,
@@ -71,7 +80,8 @@ import { GoogleComponent } from './google/google.component';
     FormsModule,
     ReactiveFormsModule,
     SignaturePadModule,    
-    GoogleMapsModule
+    GoogleMapsModule,
+    HttpClientModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'ro-RO'},

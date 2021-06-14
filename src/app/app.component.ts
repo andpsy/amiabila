@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { CommonFunctions, Formular } from './entities';
+import { MongoDbService } from './mongo-db.service';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +15,15 @@ export class AppComponent implements OnInit {
   public _cale_parts: string;
   public CommonFunctions = CommonFunctions;  
 
-	constructor(public dialog: MatDialog) {
+	constructor(private mongoDbSrv:MongoDbService, public dialog: MatDialog) {
     this.pas = 0;
     this.Formular = new Formular();
     this._cale_parts = CommonFunctions._cale_parts;
+    /*
+    this.mongoDbSrv.getData().subscribe(data=>{
+      console.warn(data);
+    });
+    */
   }
 
   ngOnInit(): void {
