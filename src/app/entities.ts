@@ -1,3 +1,5 @@
+export const GOOGLE_API_KEY = "AIzaSyBDS3LAPdSf1eV6wFFgxsjkn0qNJCuC2Eo";
+
 export const DD_MM_YYYY_Format = {
     parse: {
         dateInput: 'LL',
@@ -46,7 +48,6 @@ export class Marker {
 export class CommonFunctions{
   public static DISABLE_BUTTONS_ON_VALIDATION_ERROR = false;
   // public static GOOGLE_API_KEY = "AIzaSyCgXPkbiFYrV2Na-_XmGN0sUjAUq3WVKCs";
-  public static GOOGLE_API_KEY = "AIzaSyBDS3LAPdSf1eV6wFFgxsjkn0qNJCuC2Eo";
   public static IMG_CAPTURE_ZOOM = "18";
   public static IMG_CAPTURE_SIZE = "300x300";
   public static IMG_MAP_ID = "roadmap";

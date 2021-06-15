@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, Inject, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { CommonFunctions, Formular } from './entities';
+import { CommonFunctions, Formular, GOOGLE_API_KEY } from './entities';
 import { MongoDbService } from './mongo-db.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,10 @@ export class AppComponent implements OnInit {
   public _cale_parts: string;
   public CommonFunctions = CommonFunctions;  
 
-	constructor(private mongoDbSrv:MongoDbService, public dialog: MatDialog) {
+	constructor(@Inject(DOCUMENT) private doc: any, private mongoDbSrv:MongoDbService, public dialog: MatDialog) {
+
+
+
     this.pas = 0;
     this.Formular = new Formular();
     this._cale_parts = CommonFunctions._cale_parts;
@@ -27,6 +31,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setGTagManager();
   }
 
   showDiv(step: number, visibility:boolean):void{
@@ -65,5 +70,13 @@ export class AppComponent implements OnInit {
     tmp += this.Formular.Zona12.StepCompleted ? 1 : 0;  
     tmp += this.Formular.Zona13.StepCompleted ? 1 : 0;  
     this.pas = Math.round(tmp/22 * 100); 
+  }  
+
+  private setGTagManager() {
+    const s = this.doc.createElement('script');
+    s.type = 'text/javascript';
+    s.src = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_API_KEY;   
+    const head = this.doc.getElementsByTagName('head')[0];
+    head.appendChild(s);
   }  
 }

@@ -43,7 +43,6 @@ import { DocumenteNecesareComponent } from './documente-necesare/documente-neces
 import { GDPRComponent } from './gdpr/gdpr.component';
 import { TermeniSiConditiiComponent } from './termeni-si-conditii/termeni-si-conditii.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +89,7 @@ import { TermeniSiConditiiComponent } from './termeni-si-conditii/termeni-si-con
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
     },
-    {provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format},  ],
+    {provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation, AfterViewInit  } from '@angular/core';
 import { CommonFunctions, Zona13, ImgMapList } from '../entities';
+import { GOOGLE_API_KEY } from '../entities';
 import { SignaturePad } from 'angular2-signaturepad';
 import html2canvas from 'html2canvas';
 
@@ -59,7 +60,7 @@ export class Zona13Component implements OnInit {
   setImgMap(event){
     if(this.Zona13.ImgMap){
       var staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap?";
-      staticMapUrl += "key=" + this.CommonFunctions.GOOGLE_API_KEY;
+      staticMapUrl += "key=" + GOOGLE_API_KEY;
       staticMapUrl += "&center=" + this.Zona13.ImgMap;
       //staticMapUrl += "&size=" + this.CommonFunctions.IMG_CAPTURE_SIZE;
       //staticMapUrl += "&size=" + this.canvas.width + "x" + this.canvas.height;
