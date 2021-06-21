@@ -1,0 +1,5 @@
+sa ia denumire societate asigurare din nomenclator
+sa ia marci auto din nomenclator
+sa ia tara din domenclator
+sa ia agentia/broker din polita
+

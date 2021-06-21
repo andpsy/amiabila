@@ -18,6 +18,8 @@ export class Zona8Component implements OnInit {
   public TariTemp: TariCarteVerde;  
   public SocietatiRCA: SocietatiAsigurare;
   public SocietatiRCATemp: SocietatiAsigurare;  
+  public SocietatiCASCO: SocietatiAsigurare;
+  public SocietatiCASCOTemp: SocietatiAsigurare;  
   public CommonFunctions = CommonFunctions;  
 
   constructor() { 
@@ -26,6 +28,8 @@ export class Zona8Component implements OnInit {
     this.TariTemp = new TariCarteVerde();
     this.SocietatiRCA = new SocietatiAsigurare();
     this.SocietatiRCATemp = new SocietatiAsigurare();
+    this.SocietatiCASCO = new SocietatiAsigurare();
+    this.SocietatiCASCOTemp = new SocietatiAsigurare();
   }
 
   ngOnInit(): void {
@@ -37,7 +41,8 @@ export class Zona8Component implements OnInit {
   showDiv(step:number, visibility:boolean):void{
     if(this.childForm.valid){
       this.Zona8.StepCompleted = true;
-      this.zoneCompleted.emit(true);
+      //this.zoneCompleted.emit(true);
+      this.zoneCompleted.emit(this.Zona8);
     }
     CommonFunctions.showDiv(step, visibility);
   }
@@ -47,7 +52,6 @@ export class Zona8Component implements OnInit {
           this.Tari.Tari = this.TariTemp.Tari;
       } // when nothing has typed*/   
       if (typeof event === 'string') {
-          console.log(event);
           this.Tari.Tari = this.TariTemp.Tari.filter(a => a.Denumire.toLowerCase()
                                              .startsWith(event.toLowerCase())); 
       }
@@ -58,8 +62,16 @@ export class Zona8Component implements OnInit {
           this.SocietatiRCA.Societati = this.SocietatiRCATemp.Societati;
       } // when nothing has typed*/   
       if (typeof event === 'string') {
-          console.log(event);
           this.SocietatiRCA.Societati = this.SocietatiRCATemp.Societati.filter(a => a.Denumire.toLowerCase()
+                                             .startsWith(event.toLowerCase())); 
+      }
+   }     
+  filterSocietatiCasco(event):void{
+      if(!event){
+          this.SocietatiCASCO.Societati = this.SocietatiCASCOTemp.Societati;
+      } // when nothing has typed*/   
+      if (typeof event === 'string') {
+          this.SocietatiCASCO.Societati = this.SocietatiCASCOTemp.Societati.filter(a => a.Denumire.toLowerCase()
                                              .startsWith(event.toLowerCase())); 
       }
    }     

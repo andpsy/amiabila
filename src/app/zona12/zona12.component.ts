@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { CommonFunctions, Zona12, Aditionale } from '../entities';
+import { CommonFunctions, Zona12, Aditionale, Zona8 } from '../entities';
 
 @Component({
   selector: 'app-zona12',
@@ -11,6 +11,8 @@ export class Zona12Component implements OnInit {
 	@ViewChild("childForm", {static: true}) childForm;
   @Input() Zona12: Zona12;  
   @Input() Aditionale: Aditionale;  
+  @Input() Zona8A: Zona8;  
+  @Input() Zona8B: Zona8;  
   @Output() zoneCompleted = new EventEmitter();
   @Input() step: number;  
   public CommonFunctions = CommonFunctions;  
@@ -25,7 +27,8 @@ export class Zona12Component implements OnInit {
   showDiv(step:number, visibility:boolean):void{
     if(this.childForm.valid){
       this.Zona12.StepCompleted = true;
-      this.zoneCompleted.emit(true);
+      //this.zoneCompleted.emit(true);
+      this.zoneCompleted.emit(this.Zona12);
     }
     CommonFunctions.showDiv(step, visibility);
   }

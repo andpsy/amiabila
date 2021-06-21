@@ -1,7 +1,10 @@
-<app-conditii [Conditii]="Formular.Aditionale.Conditii" [hidden]="Formular.Aditionale.Conditii" (confirmed)="Formular.Aditionale.Conditii = $event"></app-conditii>
-<app-documente-necesare *ngIf="Formular.Aditionale.Conditii" [hidden]="Formular.Aditionale.DocumenteNecesare" [DocumenteNecesare]="Formular.Aditionale.DocumenteNecesare" (confirmed)="Formular.Aditionale.DocumenteNecesare = $event"></app-documente-necesare>
-<app-gdpr *ngIf="Formular.Aditionale.DocumenteNecesare" [GDPR]="Formular.Aditionale.GDPR" [hidden]="Formular.Aditionale.GDPR" (confirmed)="Formular.Aditionale.GDPR = $event"></app-gdpr>
-<app-termeni-si-conditii *ngIf="Formular.Aditionale.GDPR" [TermeniSiConditii]="Formular.Aditionale.TermeniSiConditii" [hidden]="Formular.Aditionale.TermeniSiConditii" (confirmed)="Formular.Aditionale.TermeniSiConditii = $event"></app-termeni-si-conditii>
+<!--
+<app-conditii [Conditii]="Formular.Aditionale.Conditii" [hidden]="Formular.Aditionale.Conditii" (confirmed)="Formular.Aditionale.Conditii = $event; nextStep()"></app-conditii>
+<app-documente-necesare *ngIf="Formular.Aditionale.Conditii" [hidden]="Formular.Aditionale.DocumenteNecesare" [DocumenteNecesare]="Formular.Aditionale.DocumenteNecesare" (confirmed)="Formular.Aditionale.DocumenteNecesare = $event; nextStep()"></app-documente-necesare>
+<app-gdpr *ngIf="Formular.Aditionale.DocumenteNecesare" [GDPR]="Formular.Aditionale.GDPR" [hidden]="Formular.Aditionale.GDPR" (confirmed)="Formular.Aditionale.GDPR = $event; nextStep()"></app-gdpr>
+<app-termeni-si-conditii *ngIf="Formular.Aditionale.GDPR" [TermeniSiConditii]="Formular.Aditionale.TermeniSiConditii" [hidden]="Formular.Aditionale.TermeniSiConditii" (confirmed)="Formular.Aditionale.TermeniSiConditii = $event; nextStep()"></app-termeni-si-conditii>
+-->
+<app-prerequisites [a]="a" [hidden]="Formular.getPrererquisites()" (confirmed)="Formular.Aditionale = $event; nextStep()"></app-prerequisites>
 
 <div *ngIf="Formular.getPrererquisites()" class="content">
   <div class="progressBarDiv">
@@ -15,7 +18,7 @@
       completat: {{pas}}%
     </div>
   </div> 
-  <div fxLayout="column" class="mainDivContent" id="mainDiv" #mainDiv>
+  <div fxLayout="column" class="mainDivContent" id="mainDiv" #mainDiv [style.visibility]="CommonFunctions.step != null ? 'hidden' : 'visible' ">
     <div fxLayout="row">
       <div fxFlex="100" class="row1">
         CONSTATARE AMIABILA DE ACCIDENT
@@ -244,83 +247,80 @@
     </div>
   </div>
 
-  <div id="{{getDivId(0)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==0" id="{{getDivId(0)}}" class="mainDiv" fxFlexFill>
     <app-zona1 [Zona1]="Formular.Zona1" [step]="0" (zoneCompleted)="refreshProgressBar($event)"></app-zona1>
   </div>
-  <div id="{{getDivId(1)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==1" id="{{getDivId(1)}}" class="mainDiv" fxFlexFill>
     <app-zona2 [Zona2]="Formular.Zona2" [step]="1" (zoneCompleted)="refreshProgressBar($event)" (imgMapEvent)="Formular.Zona13.ImgMap=$event"></app-zona2>
   </div>
-  <div id="{{getDivId(2)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==2" id="{{getDivId(2)}}" class="mainDiv" fxFlexFill>
     <app-zona3 [Zona3]="Formular.Zona3" [step]="2" (zoneCompleted)=refreshProgressBar($event)></app-zona3>
   </div>
-  <div id="{{getDivId(3)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==3" id="{{getDivId(3)}}" class="mainDiv" fxFlexFill>
     <app-zona4 [Zona4]="Formular.Zona4" [step]="3" (zoneCompleted)=refreshProgressBar($event)></app-zona4>
   </div>
-  <div id="{{getDivId(4)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==4" id="{{getDivId(4)}}" class="mainDiv" fxFlexFill>
     <app-zona5 [Zona5]="Formular.Zona5" [step]="4" (zoneCompleted)=refreshProgressBar($event)></app-zona5>
   </div>
-  <div id="{{getDivId(5)}}" class="mainDiv" fxFlexFill>
-    <app-zona6 [Zona6]="Formular.VehiculA.Zona6" [step]="5" (zoneCompleted)=refreshProgressBar($event)></app-zona6>
-  </div>
 
-  <div id="{{getDivId(6)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==5" id="{{getDivId(5)}}" class="mainDiv" fxFlexFill>
+    <app-zona6 [Zona6]="Formular.VehiculA.Zona6" [Polita]="Formular.VehiculA.Polita" [step]="5" (zoneCompleted)="refreshProgressBar($event)" (politaFound)="populateFormularFromPolita($event, 'A')"></app-zona6>
+  </div>
+  <div *ngIf="CommonFunctions.step==6" id="{{getDivId(6)}}" class="mainDiv" fxFlexFill>
     <app-zona7 [Zona7]="Formular.VehiculA.Zona7" [step]="6" (zoneCompleted)=refreshProgressBar($event)></app-zona7>
   </div>
-  <div id="{{getDivId(7)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==7" id="{{getDivId(7)}}" class="mainDiv" fxFlexFill>
     <app-zona8 [Zona8]="Formular.VehiculA.Zona8" [step]="7" (zoneCompleted)=refreshProgressBar($event)></app-zona8>
   </div>
-  <div id="{{getDivId(8)}}" class="mainDiv" fxFlexFill>
+  <div  *ngIf="CommonFunctions.step==8"id="{{getDivId(8)}}" class="mainDiv" fxFlexFill>
     <app-zona9 [Zona9]="Formular.VehiculA.Zona9" [Zona6]="Formular.VehiculA.Zona6" [step]="8" (zoneCompleted)=refreshProgressBar($event)></app-zona9>
   </div>
-  <div id="{{getDivId(9)}}" class="mainDiv" fxFlexFill>
+  <div  *ngIf="CommonFunctions.step==9" id="{{getDivId(9)}}" class="mainDiv" fxFlexFill>
     <app-zona10 [Zona10]="Formular.VehiculA.Zona10" [tipVehicul]="Formular.VehiculA.Zona7.Motor.Tip" [step]="9" (zoneCompleted)=refreshProgressBar($event)></app-zona10>
   </div>
-  <div id="{{getDivId(10)}}" class="mainDiv" fxFlexFill>
+  <div  *ngIf="CommonFunctions.step==10" id="{{getDivId(10)}}" class="mainDiv" fxFlexFill>
     <app-zona11 [Zona11]="Formular.VehiculA.Zona11" [tipVehicul]="Formular.VehiculA.Zona7.Motor.Tip" [step]="10" (zoneCompleted)=refreshProgressBar($event)></app-zona11>
   </div>
-
-  <div id="{{getDivId(11)}}" class="mainDiv" fxFlexFill>
+  <div  *ngIf="CommonFunctions.step==11" id="{{getDivId(11)}}" class="mainDiv" fxFlexFill>
     <app-zona14 [Zona14]="Formular.VehiculA.Zona14" [step]="11" (zoneCompleted)=refreshProgressBar($event)></app-zona14>
   </div>
-  <div id="{{getDivId(12)}}" class="mainDiv" fxFlexFill>
+  <div  *ngIf="CommonFunctions.step==12" id="{{getDivId(12)}}" class="mainDiv" fxFlexFill>
     <app-zona15 [Zona15]="Formular.VehiculA.Zona15" [step]="12" (zoneCompleted)=refreshProgressBar($event)></app-zona15>
   </div>
 
 
-  <div id="{{getDivId(13)}}" class="mainDiv" fxFlexFill>
-    <app-zona6 [Zona6]="Formular.VehiculB.Zona6" [step]="13" (zoneCompleted)=refreshProgressBar($event)></app-zona6>
+  <div *ngIf="CommonFunctions.step==13" id="{{getDivId(13)}}" class="mainDiv" fxFlexFill>
+    <app-zona6 [Zona6]="Formular.VehiculB.Zona6" [Polita]="Formular.VehiculB.Polita" [step]="13" (zoneCompleted)="refreshProgressBar($event)" (politaFound)="populateFormularFromPolita($event, 'B')"></app-zona6>
   </div>
-  <div id="{{getDivId(14)}}" class="mainDiv" fxFlexFill>
+  <div  *ngIf="CommonFunctions.step==14" id="{{getDivId(14)}}" class="mainDiv" fxFlexFill>
     <app-zona7 [Zona7]="Formular.VehiculB.Zona7" [step]="14" (zoneCompleted)=refreshProgressBar($event)></app-zona7>
   </div>
-  <div id="{{getDivId(15)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==15" id="{{getDivId(15)}}" class="mainDiv" fxFlexFill>
     <app-zona8 [Zona8]="Formular.VehiculB.Zona8" [step]="15" (zoneCompleted)=refreshProgressBar($event)></app-zona8>
   </div>
-  <div id="{{getDivId(16)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==16" id="{{getDivId(16)}}" class="mainDiv" fxFlexFill>
     <app-zona9 [Zona9]="Formular.VehiculB.Zona9" [Zona6]="Formular.VehiculB.Zona6" [step]="16" (zoneCompleted)=refreshProgressBar($event)></app-zona9>
   </div>
-  <div id="{{getDivId(17)}}" class="mainDiv" fxFlexFill>
+  <div  *ngIf="CommonFunctions.step==17" id="{{getDivId(17)}}" class="mainDiv" fxFlexFill>
     <app-zona10 [Zona10]="Formular.VehiculB.Zona10" [tipVehicul]="Formular.VehiculB.Zona7.Motor.Tip" [step]="17" (zoneCompleted)=refreshProgressBar($event)></app-zona10>
   </div>
-  <div id="{{getDivId(18)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==18" id="{{getDivId(18)}}" class="mainDiv" fxFlexFill>
     <app-zona11 [Zona11]="Formular.VehiculB.Zona11" [tipVehicul]="Formular.VehiculB.Zona7.Motor.Tip" [step]="18" (zoneCompleted)=refreshProgressBar($event)></app-zona11>
   </div>
-
-  <div id="{{getDivId(19)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==19" id="{{getDivId(19)}}" class="mainDiv" fxFlexFill>
     <app-zona14 [Zona14]="Formular.VehiculB.Zona14" [step]="19" (zoneCompleted)=refreshProgressBar($event)></app-zona14>
   </div>
-  <div id="{{getDivId(20)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==20" id="{{getDivId(20)}}" class="mainDiv" fxFlexFill>
     <app-zona15 [Zona15]="Formular.VehiculB.Zona15" [step]="20" (zoneCompleted)=refreshProgressBar($event)></app-zona15>
   </div>
 
 
-  <div id="{{getDivId(21)}}" class="mainDiv" fxFlexFill>
-    <app-zona12 [Zona12]="Formular.Zona12" [Aditionale]="Formular.Aditionale" [step]="21" (zoneCompleted)=refreshProgressBar($event)></app-zona12>
+  <div *ngIf="CommonFunctions.step==21" id="{{getDivId(21)}}" class="mainDiv" fxFlexFill>
+    <app-zona12 [Zona12]="Formular.Zona12" [Aditionale]="Formular.Aditionale" [Zona8A]="Formular.VehiculA.Zona8" [Zona8B]="Formular.VehiculB.Zona8" [step]="21" (zoneCompleted)=refreshProgressBar($event)></app-zona12>
   </div>
-  <div id="{{getDivId(22)}}" class="mainDiv" fxFlexFill>
+  <div *ngIf="CommonFunctions.step==22" id="{{getDivId(22)}}" class="mainDiv" fxFlexFill>`
     <app-zona13 [Zona13]="Formular.Zona13" [step]="22" (zoneCompleted)="refreshProgressBar($event)"></app-zona13>
   </div>
-
 </div>
 
 <router-outlet></router-outlet>

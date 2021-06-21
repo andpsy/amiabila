@@ -5,21 +5,37 @@
 			Rubrica 4 - Pagube materiale
 		</span>
 
-		<span class="zona-subtitle">
-			la alte vehicule decat A si B
-		</span>
 		<div fxLayout="row" style="justify-content: center;">
-			<mat-checkbox [(ngModel)]="Zona4.PagubeAlteVehiculeDa" name="PagubeAlteVehiculeDa" #PagubeAlteVehiculeDa='ngModel' (change)="Zona4.PagubeAlteVehiculeNu = !Zona4.PagubeAlteVehiculeDa">da</mat-checkbox>
-			<mat-checkbox [(ngModel)]="Zona4.PagubeAlteVehiculeNu" name="PagubeAlteVehiculeNu" #PagubeAlteVehiculeNu='ngModel' (change)="Zona4.PagubeAlteVehiculeDa = !Zona4.PagubeAlteVehiculeNu">nu</mat-checkbox>
+			<mat-slide-toggle [(ngModel)]="Zona4.PagubeAlteVehicule" (ngModelChange)="existaPagubeAuto($event)" class="zona-subtitle">la alte vehicule decat A si B</mat-slide-toggle>
 		</div>
+		<mat-card fxFlex *ngFor="let pagubaAuto of Zona4.Pagube.PagubeAuto; let i = index">
+			<mat-card-title>
+				Vehicul avariat {{i + 1}}:
+			</mat-card-title>
+			<mat-card-content>
+				<app-paguba-auto fxLayout = "column" [PagubaAuto]="pagubaAuto"></app-paguba-auto>
+			</mat-card-content>
+		  <mat-card-actions>
+				<button *ngIf="Zona4.Pagube.PagubeAuto.length > 1" mat-raised-button color="primary" (click)="RemovePagubaAuto(pagubaAuto)">Sterge</button>
+				<button *ngIf="i == Zona4.Pagube.PagubeAuto.length-1 && Zona4.Pagube.PagubeAuto.length < 6" mat-raised-button color="primary" (click)="AddPagubaAuto()">Adauga</button>
+		  </mat-card-actions>		  
+		</mat-card>
 
-		<span class="zona-subtitle">
-			la alte obiecte, in afara de vehicule
-		</span>
 		<div fxLayout="row" style="justify-content: center;">
-			<mat-checkbox [(ngModel)]="Zona4.PagubeAlteObiecteDa" name="PagubeAlteObiecteDa" #PagubeAlteObiecteDa='ngModel' (change)="Zona4.PagubeAlteObiecteNu = !Zona4.PagubeAlteObiecteDa">da</mat-checkbox>
-			<mat-checkbox [(ngModel)]="Zona4.PagubeAlteObiecteNu" name="PagubeAlteObiecteNu" #PagubeAlteObiecteNu='ngModel' (change)="Zona4.PagubeAlteObiecteDa = !Zona4.PagubeAlteObiecteNu">nu</mat-checkbox>
+			<mat-slide-toggle [(ngModel)]="Zona4.PagubeAlteObiecte" (ngModelChange)="existaPagubeObiecte($event)"class="zona-subtitle">la alte obiecte, in afara de vehicule</mat-slide-toggle>
 		</div>
+		<mat-card fxFlex *ngFor="let pagubaObiect of Zona4.Pagube.PagubeObiecte; let i = index">
+			<mat-card-title>
+				Obiect avariat {{i + 1}}:
+			</mat-card-title>
+			<mat-card-content>
+				<app-paguba-obiect fxLayout = "column" [PagubaObiect]="pagubaObiect"></app-paguba-obiect>
+			</mat-card-content>
+		  <mat-card-actions>
+				<button *ngIf="Zona4.Pagube.PagubeObiecte.length > 1" mat-raised-button color="primary" (click)="RemovePagubaObiect(pagubaObiect)">Sterge</button>
+				<button *ngIf="i == Zona4.Pagube.PagubeObiecte.length-1 && Zona4.Pagube.PagubeObiecte.length < 6" mat-raised-button color="primary" (click)="AddPagubaObiect()">Adauga</button>
+		  </mat-card-actions>		  
+		</mat-card>
 
  	  <app-display-errors
  	  	class="form-error-container"

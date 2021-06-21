@@ -4,7 +4,7 @@
 			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
 			Rubrica 5 - Martori: nume, adrese, tel.:
 		</span>	
-		<mat-slide-toggle [(ngModel)]="Zona5.ExistaMartori" (ngModelChange)="existaMartori()">Exista martori?</mat-slide-toggle>
+		<mat-slide-toggle [(ngModel)]="Zona5.ExistaMartori" (ngModelChange)="existaMartori()" class="zona-subtitle">Exista martori?</mat-slide-toggle>
 		<mat-card fxFlex *ngFor="let martor of Zona5.Martori; let i = index">
 			<mat-card-title>
 				Martor {{i + 1}}:

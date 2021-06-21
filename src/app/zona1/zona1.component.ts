@@ -19,14 +19,17 @@ export class Zona1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.Zona1.Data = new Date();
-    this.Zona1.Ora = CommonFunctions.addZero(this.Zona1.Data.getHours()) + ":" + CommonFunctions.addZero(this.Zona1.Data.getMinutes());
+    if(this.Zona1.Data == null && this.Zona1.Ora == null){
+      this.Zona1.Data = new Date();
+      this.Zona1.Ora = CommonFunctions.addZero(this.Zona1.Data.getHours()) + ":" + CommonFunctions.addZero(this.Zona1.Data.getMinutes());
+    }
   }
 
   showDiv(step:number, visibility:boolean):void{
     if(this.childForm.valid && this.Zona1.hasError() == null){
       this.Zona1.StepCompleted = true;
-      this.zoneCompleted.emit(true);
+      //this.zoneCompleted.emit(true);
+      this.zoneCompleted.emit(this.Zona1);
     }
     CommonFunctions.showDiv(step, visibility);
   }

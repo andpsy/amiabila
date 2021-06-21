@@ -25,7 +25,8 @@ export class Zona5Component implements OnInit {
   showDiv(step:number, visibility:boolean):void{
     if(this.childForm.valid){
       this.Zona5.StepCompleted = true;
-      this.zoneCompleted.emit(true);
+      //this.zoneCompleted.emit(true);
+      this.zoneCompleted.emit(this.Zona5);
     }
     CommonFunctions.showDiv(step, visibility);
   }
@@ -40,6 +41,7 @@ export class Zona5Component implements OnInit {
   }
 
   AddMartor(): void{
+    if(this.Zona5.Martori[this.Zona5.Martori.length-1].hasError()) return;
   	var newMartor = new Martor();
   	this.Zona5.Martori.push(newMartor);
   }

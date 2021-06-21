@@ -2,8 +2,8 @@ namespace amiabila_backend.Models
 {
   public class Zona7
   {
-    Motor Motor;
-    Remorca Remorca;
-    bool StepCompleted;
+    public Motor Motor { get; set; }
+    public Remorca Remorca { get; set; }
+    public bool StepCompleted { get; set; }
   }
 }

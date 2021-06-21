@@ -4,8 +4,8 @@ namespace amiabila_backend.Models
 {
   public class Zona1
   {
-    public DateTime Data;
-    public string Ora;
-    public bool StepCompleted;
+    public DateTime? Data { get; set; }
+    public string Ora { get; set; }
+    public bool StepCompleted { get; set; }
   }
 }

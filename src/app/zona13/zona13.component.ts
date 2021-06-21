@@ -24,6 +24,8 @@ export class Zona13Component implements OnInit {
   //canvas:any;
   ImgLst:ImgMapList[] = [];
   selectedImgId:string = null;
+  zoom:number = this.CommonFunctions.IMG_CAPTURE_ZOOM;
+  idIndex:number = 0;
 
   constructor() { 
   	//this.Zona13 = new Zona13();
@@ -49,7 +51,8 @@ export class Zona13Component implements OnInit {
   showDiv(step:number, visibility:boolean):void{
     if(this.childForm.valid){
       this.Zona13.StepCompleted = true;
-      this.zoneCompleted.emit(true);
+      //this.zoneCompleted.emit(true);
+      this.zoneCompleted.emit(this.Zona13);
     }
     CommonFunctions.showDiv(step, visibility);
   }
@@ -58,6 +61,7 @@ export class Zona13Component implements OnInit {
   	//this.signaturePad.clear();
   }
   setImgMap(event){
+    //console.log(this.Zona13.ImgMap);
     if(this.Zona13.ImgMap){
       var staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap?";
       staticMapUrl += "key=" + GOOGLE_API_KEY;
@@ -65,7 +69,7 @@ export class Zona13Component implements OnInit {
       //staticMapUrl += "&size=" + this.CommonFunctions.IMG_CAPTURE_SIZE;
       //staticMapUrl += "&size=" + this.canvas.width + "x" + this.canvas.height;
       staticMapUrl += "&size=" + this.canvasDiv.clientWidth + "x" + this.canvasDiv.clientHeight;
-      staticMapUrl += "&zoom=" + this.CommonFunctions.IMG_CAPTURE_ZOOM;
+      staticMapUrl += "&zoom=" + this.zoom;
       staticMapUrl += "&maptype=" + this.CommonFunctions.IMG_MAP_ID;
       this.canvasDiv.style.backgroundImage = "url('" + staticMapUrl + "')";
     }    
@@ -94,21 +98,23 @@ export class Zona13Component implements OnInit {
     switch (this.putCarAB) {
       case "A":
         elem.src = "../assets/As.png";      
-        elem.id = "As";
+        elem.id = "As"; // + this.idIndex; // daca vrem sa putem pune mai multe masini pe desem
         elem.style.height = "33px";
         elem.style.width = "20px";
+        // this.idIndex++; // daca vrem sa putem pune mai multe masini pe desem
         break;
       case "B":
         elem.src = "../assets/Bs.png";      
-        elem.id = "Bs";
+        elem.id = "Bs"; // + this.idIndex; // daca vrem sa putem pune mai multe masini pe desem
         elem.style.height = "33px";
         elem.style.width = "20px";
+        // this.idIndex++; // daca vrem sa putem pune mai multe masini pe desem
         break;      
       case "T":
         elem.setAttribute("type", "text");
-        elem.id = "Ts";
+        elem.id = "Ts" + this.idIndex;
         elem.className = "imgText";
-        //elem.innerHTML = "<input type='text' class='imgInput' />";
+        this.idIndex++;
         break;  
       default:
         break;
@@ -123,6 +129,10 @@ export class Zona13Component implements OnInit {
     this.ImgLst.push({'Id':elem.id, 'RotateStep':0, 'MoveStepX':0, "MoveStepY":0});
     this.putCarAB = null;
     this.selectedImgId = elem.id;
+  }
+
+  getImgById(id){
+    return this.ImgLst.find(x => x.Id === id);
   }
 
   onClick(event) {    
@@ -187,9 +197,17 @@ export class Zona13Component implements OnInit {
 
   saveImgMap(){
     var canvasImg = document.getElementById('canvasImg') as HTMLCanvasElement;
-    html2canvas(this.canvasDiv, {allowTaint:true, useCORS:true, canvas:canvasImg, logging:false}).then(function(canvas) {
+    html2canvas(this.canvasDiv, {allowTaint:true, useCORS:true, canvas:canvasImg, logging:false }).then(function(canvas) {
       //document.body.appendChild(canvas);
       canvasImg.style.display = 'block';
     });
+  }
+  mapZoomIn(){
+    this.zoom += 1;
+    this.setImgMap(null);
+  }
+  mapZoomOut(){
+    this.zoom -= 1;
+    this.setImgMap(null);
   }
 }

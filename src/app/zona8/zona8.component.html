@@ -83,6 +83,25 @@
 			<mat-checkbox [(ngModel)]="Zona8.Casco" name="CascoDa" #CascoDa='ngModel'>da</mat-checkbox>
 		</div>
 		-->
+	  <mat-form-field fxFlex *ngIf="Zona8.Casco">
+	    <mat-label>Numar polita CASCO:</mat-label>
+	    <input matInput [(ngModel)]="Zona8.NrPolitaCasco" name="NrPolitaCasco" #NrPolitaCasco='ngModel'>
+	  </mat-form-field> 	  
+	  <mat-form-field fxFlex *ngIf="Zona8.Casco">
+	    <mat-label>DENUMIRE:</mat-label>
+	    <input type="text"
+	           matInput [(ngModel)]="Zona8.DenumireCasco" name='DenumireCasco' #DenumireCasco='ngModel' (ngModelChange)="filterSocietatiCasco($event)"
+	           [matAutocomplete]="societatiCasco">
+	    <mat-autocomplete #societatiCasco="matAutocomplete">
+	      <mat-option *ngFor="let societate of SocietatiCASCO.Societati" [value]="societate.Denumire">
+	        {{societate.Denumire}}
+	      </mat-option>
+	    </mat-autocomplete>
+	  </mat-form-field>
+    <mat-label class="mat-label-no-field">Polita RCA are clauza de decontare directa?</mat-label>
+		<mat-slide-toggle [(ngModel)]="Zona8.DecontareDirecta"></mat-slide-toggle>
+
+
  	  <app-display-errors
  	  	class="form-error-container"
  	  	[style]="{'max-height': Zona8.hasError() != null && childForm.touched ? '200px' : '0'}"

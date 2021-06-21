@@ -1,0 +1,20 @@
+<div class="content">
+	<div class="mainDivContent prerequisite" style="text-align: center;">
+		<h1>AȚI FOST IMPLICAT ÎNTR-UN ACCIDENT?</h1>
+		<h3>
+		Am creat acest serviciu exclusiv on-line, din dorința de ajuta consumatorii de servicii de asigurare și nu numai, să interacționeze în cel mai ușor, mai ieftin și rapid mod cu putință cu societățile de asigurare, în demersurile lor de a își recupera despăgubirile cuvenite.</h3>
+
+		<h3>
+		Inainte de a incepe, sa clarificam cateva aspecte...
+		</h3>
+
+		<mat-checkbox [(ngModel)]="a.Conditii">Am citit si sunt de acord cu <a href="">Conditiile de utilizare a siteului faragrija.ro</a></mat-checkbox>
+		<mat-checkbox [(ngModel)]="a.DocumenteNecesare">Am verificat si suntem in posesia <a fref="">documentelor necesare completarii formularului de constat amiabil</a></mat-checkbox>
+		<mat-checkbox [(ngModel)]="a.GDPR">Am citit si sunt de acord cu <a href="">conditiile rezultate din reglementarile privind protectia datelor cu caracter personal</a></mat-checkbox>
+		<mat-checkbox [(ngModel)]="a.TermeniSiConditii">Am citit si sunt de acord cu <a href="">termenii si conditiile de utilizare a serviciului nostru</a></mat-checkbox>
+
+		<h3>Pentru a continua, avem nevoie de acordul dumneavoastra pentru toate aspectele de mai sus</h3>
+
+		<button class="prerequisite_button" (click)="this.confirmed.emit(a);" [disabled]="!(a.Conditii && a.DocumenteNecesare && a.GDPR && a.TermeniSiConditii)"> Continua >> </button>
+	</div>
+</div>

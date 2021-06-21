@@ -48,7 +48,7 @@ export class Marker {
 export class CommonFunctions{
   public static DISABLE_BUTTONS_ON_VALIDATION_ERROR = false;
   // public static GOOGLE_API_KEY = "AIzaSyCgXPkbiFYrV2Na-_XmGN0sUjAUq3WVKCs";
-  public static IMG_CAPTURE_ZOOM = "18";
+  public static IMG_CAPTURE_ZOOM = 20;
   public static IMG_CAPTURE_SIZE = "300x300";
   public static IMG_MAP_ID = "roadmap";
 
@@ -57,6 +57,8 @@ export class CommonFunctions{
   public static isNullOrWhiteSpaces(str){
     return str === null || str.trim() === '';
   } 
+
+  public static step:number = null;
 
   public static addZero(i) {
     if (i < 10) {
@@ -84,6 +86,7 @@ export class CommonFunctions{
     {"selected":false, "name":"Alte acte"}];
 
   public static showDiv(step:number, visibility:boolean):void{
+    /*
     var divId = CommonFunctions.Steps[step].DivId;
     var div = document.querySelector("#"+divId) as HTMLElement;
     //div.style.visibility = visibility ? "visible" : "hidden";
@@ -92,6 +95,8 @@ export class CommonFunctions{
     var mainDiv = document.querySelector("#mainDiv") as HTMLElement;
     mainDiv.style.visibility = visibility ? 'hidden' : 'visible';
     mainDiv.style.overflow = visibility ? 'hidden' : 'auto';   
+    */
+    CommonFunctions.step = visibility ? step : null;
   }  
 
   public static Steps = [{'Step':0, 'DivId':'zona1Div'},
@@ -125,6 +130,83 @@ export class CommonFunctions{
     return idx > CommonFunctions.Steps.length - 2 ? null : CommonFunctions.Steps[idx+1].DivId;
   }  
 
+}
+
+export class Polita{
+  Serie: string;
+  Numar: string;
+  DenumireAsigurator: string;
+  AgentieAsigurator: string;
+  DenumireBrokerAgent: string;
+  NrAuto: string;
+  NrSasiuAuto: string;
+  TipAuto: string;
+  MarcaAuto: string;
+  DenumireAsiguratProprietar: string;
+  CuiAsiguratProprietar: string;
+  DenumireAsiguratUtilizator: string;
+  CuiAsiguratUtilizator: string;
+  AdresaAsigurat: string;
+  TaraAsigurat: string;
+  TelefonAsigurat: string;
+  EmailAsigurat: string;
+  ValabilDeLa: Date;
+  ValabilPanaLa: Date;  
+}
+
+export class Polite{
+  Polite: Polita[];
+  constructor(){
+    this.Polite = [{"Serie":"RO/22/P22/HI",
+      "Numar":"014320853",
+      "DenumireAsigurator":"OMNIASIG VIENNA INSURANCE GROUP SA",
+      "AgentieAsigurator":"Titulescu",
+      "DenumireBrokerAgent":"ILEANA VASILE",
+      "NrAuto":"B65LNO",
+      "NrSasiuAuto":"UU1HSDADG52730748",
+      "TipAuto":"autoturism",
+      "MarcaAuto":"DACIA",
+      "DenumireAsiguratProprietar":"TERMODINAMIC SRL",
+      "CuiAsiguratProprietar":"10078376",
+      "DenumireAsiguratUtilizator":"TERMODINAMIC SRL",
+      "CuiAsiguratUtilizator":"10078376",
+      "AdresaAsigurat":"Moise Nicoara, nr.36, bl.D2, sc.A, ap.34, Bucuresti, Sector 3",
+      "TaraAsigurat":"ROMANIA",
+      "TelefonAsigurat":"0724000880",
+      "EmailAsigurat":null,
+      "ValabilDeLa":new Date('2021-05-10T00:00:00'),
+      "ValabilPanaLa":new Date('2022-05-09T00:00:00')},
+      {"Serie":"RO/22/P22/HI",
+      "Numar":"014110114",
+      "DenumireAsigurator":"OMNIASIG VIENNA INSURANCE GROUP SA",
+      "AgentieAsigurator":"Titulescu",
+      "DenumireBrokerAgent":"ILEANA VASILE",
+      "NrAuto":"B14HJG",
+      "NrSasiuAuto":"MALBA51BP9M058077",
+      "TipAuto":"autoturism",
+      "MarcaAuto":"HYUNDAI",
+      "DenumireAsiguratProprietar":"ELENA LIXANDRU",
+      "CuiAsiguratProprietar":"2570702400088",
+      "DenumireAsiguratUtilizator":"ELENA LIXANDRU",
+      "CuiAsiguratUtilizator":"2570702400088",
+      "AdresaAsigurat":"Splaiul Unirii, nr.35, bl.M7, sc.1, ap.1, Bucuresti, Sector 3",
+      "TaraAsigurat":"ROMANIA",
+      "TelefonAsigurat":"0724000880",
+      "EmailAsigurat":null,
+      "ValabilDeLa":new Date('2020-09-23T00:00:00'),
+      "ValabilPanaLa":new Date('2021-09-22T00:00:00')}
+      ];
+  }
+  public findPolita(numar:string):Polita
+  {
+    for(var i=0;i<this.Polite.length;i++)
+    {
+      if(this.Polite[i].Numar == numar){
+        return this.Polite[i];
+      }
+    }
+    return null;
+  }
 }
 
 export class Martor {
@@ -200,10 +282,10 @@ export class Zona3 {
   StepCompleted: boolean;
   Confirma112: boolean;
   constructor(){
-    this.VatamariDa = null;
-    this.VatamariNu = null;
+    this.VatamariDa = false;
+    this.VatamariNu = false;
     this.StepCompleted = false;
-    this.Confirma112 = null;
+    this.Confirma112 = false;
   }  
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -215,24 +297,42 @@ export class Zona3 {
   }    
 }
 export class Zona4 {
-  PagubeAlteVehiculeDa: boolean;
-  PagubeAlteVehiculeNu: boolean;
-  PagubeAlteObiecteDa: boolean;
-  PagubeAlteObiecteNu: boolean;
+  PagubeAlteVehicule: boolean;
+  PagubeAlteObiecte: boolean;
+  Pagube: Pagube;
   StepCompleted: boolean;
   constructor(){
-    this.PagubeAlteVehiculeDa = null;
-    this.PagubeAlteVehiculeNu = null;
-    this.PagubeAlteObiecteDa = null;
-    this.PagubeAlteObiecteNu = null;
+    this.PagubeAlteVehicule = false;
+    this.PagubeAlteObiecte = false;
+    this.Pagube = new Pagube();
     this.StepCompleted = false;
   }  
   public hasError():string[]{
     var toReturn:string[] = [];
-    if(!(this.PagubeAlteVehiculeDa || this.PagubeAlteVehiculeNu))
-      toReturn.push("Selectati daca exista sau nu pagube la alte vehicule!");
-    if(!(this.PagubeAlteObiecteDa || this.PagubeAlteObiecteNu))
-      toReturn.push("Selectati daca exista sau nu pagube la alte obiecte!");
+
+    if(this.PagubeAlteVehicule){
+      if(this.Pagube.PagubeAuto.length > 0){
+        for(var i=0;i<this.Pagube.PagubeAuto.length;i++){
+          var err = this.Pagube.PagubeAuto[i].hasError();
+          if(err != null && err.length > 0){
+            for(var j=0;j<err.length;j++)
+              toReturn.push('Paguba auto ' + (i+1) + ': ' + err[j]);
+          }
+        }
+      }
+    }
+    if(this.PagubeAlteObiecte){
+      if(this.Pagube.PagubeObiecte.length > 0){
+        for(var i=0;i<this.Pagube.PagubeObiecte.length;i++){
+          var err = this.Pagube.PagubeObiecte[i].hasError();
+          if(err != null && err.length > 0){
+            for(var j=0;j<err.length;j++)
+              toReturn.push('Paguba obiect ' + (i+1) + ': ' + err[j]);
+          }
+        }
+      }
+    }
+
     return toReturn.length > 0? toReturn : null;
   }   
 }
@@ -376,7 +476,10 @@ export class Zona8 {
   Tara: string;
   TelefonEmail: string;
   Casco: boolean;
+  DecontareDirecta: boolean;
   StepCompleted: boolean;
+  DenumireCasco: string;
+  NrPolitaCasco: string;
   constructor(){
     this.Denumire = null;
     this.PolitaNr = null;
@@ -389,6 +492,9 @@ export class Zona8 {
     this.Tara = null;
     this.TelefonEmail = null;
     this.Casco = false;
+    this.DecontareDirecta = false;
+    this.DenumireCasco = null;
+    this.NrPolitaCasco = null;
     this.StepCompleted = false;
   }
   public hasError():string[]{
@@ -417,7 +523,7 @@ export class Zona9 {
   ValabilPanaLa: Date;
   StepCompleted: boolean;
   constructor(){
-    this.IdenticCuAsiguratul = null;
+    this.IdenticCuAsiguratul = false;
     this.Nume = null;
     this.Prenume = null;
     this.DataNasterii = null;
@@ -511,25 +617,29 @@ export class Aditionale {
   DocumenteNecesare: boolean;
   GDPR: boolean;
   TermeniSiConditii: boolean; 
+
   PagubitDecontareDirecta: boolean;
-  PagubitSocietateDecontareDirecta: string;
+  //PagubitSocietateDecontareDirecta: string;
   VinovatCasco: boolean;
-  VinovatSocietateCasco: string;
+  //VinovatSocietateCasco: string;
   StepCompleted: boolean;
   constructor(){
-    this.Conditii = false;
-    this.DocumenteNecesare = false;
-    this.GDPR = false;
-    this.TermeniSiConditii = false;
+    this.Conditii = true;
+    this.DocumenteNecesare = true;
+    this.GDPR = true;
+    this.TermeniSiConditii = false; 
+    // mai sus true - pt. teste 
+
     this.PagubitDecontareDirecta = false;
-    this.PagubitSocietateDecontareDirecta = null;
+    //this.PagubitSocietateDecontareDirecta = null;
     this.VinovatCasco = false;
-    this.VinovatSocietateCasco = null;
+    //this.VinovatSocietateCasco = null;
     this.StepCompleted = false;    
   }
 }
 
 export class Vehicul {
+  Polita: Polita;
   Zona6: Zona6;
   Zona7: Zona7;
   Zona8: Zona8;
@@ -539,6 +649,7 @@ export class Vehicul {
   Zona14: Zona14;
   Zona15: Zona15;
   constructor(){
+    this.Polita = new Polita();
     this.Zona6 = new Zona6();
     this.Zona7 = new Zona7();
     this.Zona8 = new Zona8();
@@ -641,6 +752,7 @@ export class Zona13 {
 }
 
 export class Formular {
+  Id: string;
   Zona1: Zona1;
   Zona2: Zona2;
   Zona3: Zona3;
@@ -651,21 +763,75 @@ export class Formular {
   Zona12: Zona12;
   Zona13: Zona13;
   Aditionale: Aditionale;
-  constructor(){
-    this.Zona1 = new Zona1();
-    this.Zona2 = new Zona2();
-    this.Zona3 = new Zona3();
-    this.Zona4 = new Zona4();
-    this.Zona5 = new Zona5();
-    this.VehiculA = new Vehicul();
-    this.VehiculB = new Vehicul();
-    this.Zona12 = new Zona12();
-    this.Zona13 = new Zona13();    
-    this.Aditionale = new Aditionale();
+
+  constructor(f?:Formular){
+    if(f == null){
+      this.Id = null;
+      this.Zona1 = new Zona1();
+      this.Zona2 = new Zona2();
+      this.Zona3 = new Zona3();
+      this.Zona4 = new Zona4();
+      this.Zona5 = new Zona5();
+      this.VehiculA = new Vehicul();
+      this.VehiculB = new Vehicul();
+      this.Zona12 = new Zona12();
+      this.Zona13 = new Zona13();    
+      this.Aditionale = new Aditionale();
+    }else{
+      this.Id = f.Id;
+      this.Zona1 = Object.assign(this.Zona1, f.Zona1);
+      this.Zona2 = Object.assign(this.Zona2, f.Zona2);
+      this.Zona3 = Object.assign(this.Zona3, f.Zona3);
+      this.Zona4 = Object.assign(this.Zona4, f.Zona4);
+      this.Zona5 = Object.assign(this.Zona5, f.Zona5);
+      this.VehiculA = Object.assign(this.VehiculA, f.VehiculA);
+      this.VehiculB = Object.assign(this.VehiculB, f.VehiculB);
+      this.Zona12 = Object.assign(this.Zona12, f.Zona12);
+      this.Zona13 = Object.assign(this.Zona13, f.Zona13);
+      this.Aditionale = Object.assign(this.Aditionale, f.Aditionale);
+    }
+  }
+
+  public populateFormularFromPolita(vehicul:string){
+    if(vehicul=='A'){
+      this.VehiculA.Zona6.Nume = this.VehiculA.Polita.DenumireAsiguratProprietar;
+      this.VehiculA.Zona6.Prenume = this.VehiculA.Polita.DenumireAsiguratProprietar;
+      this.VehiculA.Zona6.Adresa = this.VehiculA.Polita.AdresaAsigurat;
+      this.VehiculA.Zona6.Tara = this.VehiculA.Polita.TaraAsigurat;
+      this.VehiculA.Zona6.TelefonEmail = this.VehiculA.Polita.TelefonAsigurat + ' / ' + this.VehiculA.Polita.EmailAsigurat;
+      this.VehiculA.Zona7.Motor.Tip = this.VehiculA.Polita.TipAuto;
+      this.VehiculA.Zona7.Motor.NrInmatriculare = this.VehiculA.Polita.NrAuto;
+      this.VehiculA.Zona7.Motor.Marca = this.VehiculA.Polita.MarcaAuto;
+      this.VehiculA.Zona8.Denumire = this.VehiculA.Polita.DenumireAsigurator;
+      this.VehiculA.Zona8.PolitaNr = this.VehiculA.Polita.Numar;
+      this.VehiculA.Zona8.ValabilDeLa = this.VehiculA.Polita.ValabilDeLa;
+      this.VehiculA.Zona8.ValabilPanaLa = this.VehiculA.Polita.ValabilPanaLa;
+      this.VehiculA.Zona9.Nume = this.VehiculA.Polita.DenumireAsiguratUtilizator;
+      this.VehiculA.Zona9.Prenume = this.VehiculA.Polita.DenumireAsiguratUtilizator;
+    }else{
+      this.VehiculB.Zona6.Nume = this.VehiculB.Polita.DenumireAsiguratProprietar;
+      this.VehiculB.Zona6.Prenume = this.VehiculB.Polita.DenumireAsiguratProprietar;
+      this.VehiculB.Zona6.Adresa = this.VehiculB.Polita.AdresaAsigurat;
+      this.VehiculB.Zona6.Tara = this.VehiculB.Polita.TaraAsigurat;
+      this.VehiculB.Zona6.TelefonEmail = this.VehiculB.Polita.TelefonAsigurat + ' / ' + this.VehiculB.Polita.EmailAsigurat;
+      this.VehiculB.Zona7.Motor.Tip = this.VehiculB.Polita.TipAuto;
+      this.VehiculB.Zona7.Motor.NrInmatriculare = this.VehiculB.Polita.NrAuto;
+      this.VehiculB.Zona7.Motor.Marca = this.VehiculB.Polita.MarcaAuto;
+      this.VehiculB.Zona8.Denumire = this.VehiculB.Polita.DenumireAsigurator;
+      this.VehiculB.Zona8.PolitaNr = this.VehiculB.Polita.Numar;
+      this.VehiculB.Zona8.ValabilDeLa = this.VehiculB.Polita.ValabilDeLa;
+      this.VehiculB.Zona8.ValabilPanaLa = this.VehiculB.Polita.ValabilPanaLa;
+      this.VehiculB.Zona9.Nume = this.VehiculB.Polita.DenumireAsiguratUtilizator;
+      this.VehiculB.Zona9.Prenume = this.VehiculB.Polita.DenumireAsiguratUtilizator;
+    }
   }
 
   public getPrererquisites():boolean{
-    return this.Aditionale.Conditii && this.Aditionale.DocumenteNecesare && this.Aditionale.GDPR && this.Aditionale.TermeniSiConditii;
+    try{
+      //console.log(this);
+      return this.Aditionale.Conditii && this.Aditionale.DocumenteNecesare && this.Aditionale.GDPR && this.Aditionale.TermeniSiConditii;
+      //return true;
+    }catch(e){return false;}
   }
 
   public getPreviousZoneCompletedStatus(step):boolean{
@@ -713,6 +879,52 @@ export class ImprejurareProducereAccident{
     this.VehiculB = null;
   }
 }
+export class PagubaAuto{
+  NrAuto: string;
+  Marca: string;
+  Model: string;
+  constructor(){
+    this.NrAuto = null;
+    this.Marca = null;
+    this.Model = null;
+  }
+  public hasError():string[]{
+    var toReturn:string[] = [];
+    if(CommonFunctions.isNullOrWhiteSpaces(this.NrAuto))
+      toReturn.push("Numarul vehicului este obligatoriu!");
+    if(CommonFunctions.isNullOrWhiteSpaces(this.Marca))
+      toReturn.push("Marca vehicului este obligatoriu!");
+    if(CommonFunctions.isNullOrWhiteSpaces(this.Model))
+      toReturn.push("Modelul vehicului este obligatoriu!");
+    return toReturn.length > 0? toReturn : null;
+  }  
+}
+export class PagubaObiect{
+  DenumireObiect: string;
+  DescrierePaguba: string;
+  constructor(){
+    this.DenumireObiect = null;
+    this.DescrierePaguba = null;
+  }
+  public hasError():string[]{
+    var toReturn:string[] = [];
+    if(CommonFunctions.isNullOrWhiteSpaces(this.DenumireObiect))
+      toReturn.push("Denumirea obiectului este obligatorie!");
+    if(CommonFunctions.isNullOrWhiteSpaces(this.DescrierePaguba))
+      toReturn.push("Descrierea pagubei este obligatorie!");
+    return toReturn.length > 0? toReturn : null;
+  }  
+}
+
+export class Pagube{
+  PagubeAuto: PagubaAuto[];
+  PagubeObiecte: PagubaObiect[];
+  constructor(){
+    this.PagubeAuto = [];
+    this.PagubeObiecte = [];
+  }
+}
+
 export class ImprejurariProducereAccident{
   Imprejurari: ImprejurareProducereAccident[];
   constructor(){

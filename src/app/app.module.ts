@@ -42,6 +42,10 @@ import { ConditiiComponent } from './conditii/conditii.component';
 import { DocumenteNecesareComponent } from './documente-necesare/documente-necesare.component';
 import { GDPRComponent } from './gdpr/gdpr.component';
 import { TermeniSiConditiiComponent } from './termeni-si-conditii/termeni-si-conditii.component';
+import { PolitaComponent } from './polita/polita.component';
+import { PrerequisitesComponent } from './prerequisites/prerequisites.component';
+import { PagubaAutoComponent } from './paguba-auto/paguba-auto.component';
+import { PagubaObiectComponent } from './paguba-obiect/paguba-obiect.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +73,11 @@ import { TermeniSiConditiiComponent } from './termeni-si-conditii/termeni-si-con
     ConditiiComponent,
     DocumenteNecesareComponent,
     GDPRComponent,
-    TermeniSiConditiiComponent  
+    TermeniSiConditiiComponent,
+    PolitaComponent,
+    PrerequisitesComponent,
+    PagubaAutoComponent,
+    PagubaObiectComponent  
   ],
   imports: [
     AppRoutingModule,

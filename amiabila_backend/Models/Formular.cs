@@ -1,16 +1,23 @@
+using MongoDB.Bson.Serialization.Attributes;
+using System;
+
 namespace amiabila_backend.Models
 {
   public class Formular
   {
-    public Zona1 Zona1;
-    public Zona2 Zona2;
-    public Zona3 Zona3;
-    public Zona4 Zona4;
-    public Zona5 Zona5;
-    public Vehicul VehiculA;
-    public Vehicul VehiculB;
-    public Zona12 Zona12;
-    public Zona13 Zona13;
-    public Aditionale Aditionale;
+    [BsonId]
+    public Guid? Id { get; set; }
+    
+    public Zona1 Zona1 { get; set; }
+    public Zona2 Zona2 { get; set; }
+    public Zona3 Zona3 { get; set; }
+    public Zona4 Zona4 { get; set; }
+    public Zona5 Zona5 { get; set; }
+    public Vehicul VehiculA { get; set; }
+    public Vehicul VehiculB { get; set; }
+    public Zona12 Zona12 { get; set; }
+    public Zona13 Zona13 { get; set; }
+    
+    public Aditionale Aditionale { get; set; }
   }
 }

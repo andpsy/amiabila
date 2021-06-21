@@ -1,0 +1,19 @@
+<form #childForm="ngForm" autocomplete="off" novalidate>
+	<div mat-dialog-title fxLayoutAlign="center">
+		Introduceti numarul politei RCA
+	</div>
+	<div mat-dialog-content fxLayout="column" fxLayoutAlign="center">
+		<h3>
+		Pentru o completare cat mai rapida si usoara a formularului de constat amiabil, putem prelua pentru dumneavoastra, informatiile din polita RCA, obligatorii pentru completarea si validarea formularului.</h3>
+	  <mat-form-field>
+	    <mat-label>Numar polita RCA:</mat-label>
+	    <input matInput [(ngModel)]="data.Numar" name="Numar" #Numar='ngModel' (ngModelChange)="findPolita()">
+	  </mat-form-field>  
+    <mat-label *ngIf="p == null">Nu am gasit nici o polita cu numarul introdus!</mat-label>
+    <mat-label *ngIf="p != null && p.Numar != undefined">Am gasit o polita cu numarul introdus!</mat-label>
+	</div>
+	<div fxLayout="row" fxLayout.lt-md="column" class="ZonaButtonsContainer">
+		<button mat-raised-button (click)="onNoClick()"> << Renunta </button>
+	  <button mat-raised-button color="primary" (click)="preluarePolita()" [disabled]="p == null"> Preia date polita >> </button>
+	</div>
+</form>

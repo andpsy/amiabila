@@ -1,6 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ViewChild } from '@angular/core';
-import { CommonFunctions, Marker } from '../entities';
+import { CommonFunctions, Marker, Zona2 } from '../entities';
 import { GoogleMap } from '@angular/google-maps'
 
 
@@ -10,6 +10,7 @@ import { GoogleMap } from '@angular/google-maps'
   styleUrls: ['./google.component.css']
 })
 export class GoogleComponent implements OnInit {
+  @Input() Zona2: Zona2;  
 	@Output() newItemEvent = new EventEmitter<string>();
 	@Output() imgMapEvent = new EventEmitter<string>();
 	@ViewChild(GoogleMap, { static: false }) map: GoogleMap;
@@ -94,6 +95,7 @@ export class GoogleComponent implements OnInit {
 
 	exportMapImg() {
 	  var staticMapUrl = this.center.lat + "," + this.center.lng;
+    //console.warn(staticMapUrl);
   	this.imgMapEvent.emit(staticMapUrl);
 	}  
 }

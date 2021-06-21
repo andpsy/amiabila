@@ -22,3 +22,23 @@
   	</div>
 	</div>
 </form>
+<ng-template #dialog1>
+  <h2 matDialogTitle>Nu putem continua acum...</h2>
+  <mat-dialog-content>
+    <h3>Va rugam sa reveniti cand detineti documentele emise de politie!</h3>
+    <h3>Va recomandam sa efectuati fotografii de la locul accidentului!</h3>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose color="primary">Inchide</button>
+  </mat-dialog-actions>
+</ng-template>
+<ng-template #dialog2>
+  <h2 matDialogTitle>Puteti continua, dar...</h2>
+  <mat-dialog-content>
+    <h3>Avizarea de dauna se va face dupa completarea documentatie cu procesul verbal de la politie!</h3>
+    <h3>Va recomandam sa efectuati fotografii de la locul accidentului!</h3>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button matDialogClose color="primary">Inchide</button>
+  </mat-dialog-actions>
+</ng-template>

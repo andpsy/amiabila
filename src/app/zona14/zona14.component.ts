@@ -23,7 +23,8 @@ export class Zona14Component implements OnInit {
   showDiv(step:number, visibility:boolean):void{
     if(this.childForm.valid){
       this.Zona14.StepCompleted = true;
-      this.zoneCompleted.emit(true);
+      //this.zoneCompleted.emit(true);
+      this.zoneCompleted.emit(this.Zona14);
     }
     CommonFunctions.showDiv(step, visibility);
   }

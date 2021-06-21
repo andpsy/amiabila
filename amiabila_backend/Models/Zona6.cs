@@ -2,12 +2,12 @@ namespace amiabila_backend.Models
 {
   public class Zona6
   {
-    string Nume;
-    string Prenume;
-    string Adresa;
-    string CodPostal;
-    string Tara;
-    string TelefonEmail;
-    bool StepCompleted;
+    public string Nume { get; set; }
+    public string Prenume { get; set; }
+    public string Adresa { get; set; }
+    public string CodPostal { get; set; }
+    public string Tara { get; set; }
+    public string TelefonEmail { get; set; }
+    public bool StepCompleted { get; set; }
   }
 }

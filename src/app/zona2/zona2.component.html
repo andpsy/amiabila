@@ -5,11 +5,11 @@
 			Rubrica 2 - Localizare
 		</span>	
 
-		<app-google (newItemEvent)="Zona2.Loc = $event" (imgMapEvent)="imgMapEvent.emit($event)"></app-google>
+		<app-google [Zona2]="Zona2" (newItemEvent)="Zona2.Loc = $event" (imgMapEvent)="imgMapEvent.emit($event)"></app-google>
 
 	  <mat-form-field fxFlex>
 	    <mat-label>Locul accidentului:</mat-label>
-	    <input matInput [(ngModel)]="Zona2.Loc" name="Loc" #Loc='ngModel' required>
+	    <input id="Loc" matInput [(ngModel)]="Zona2.Loc" name="Loc" #Loc='ngModel' required>
 	  </mat-form-field>  
 
 	  <mat-form-field fxFlex>
@@ -23,6 +23,7 @@
 	      </mat-option>
 	    </mat-autocomplete>
 	  </mat-form-field>
+    <mat-label class="warnInfoLabel" fxLayoutAlign="center" *ngIf="!childForm.touched && !Zona2.StepCompleted">Am preluat automat locatia dispozitivului. Daca nu este corecta, va rugam sa o modificati!</mat-label>
 
  	  <app-display-errors
  	  	class="form-error-container"

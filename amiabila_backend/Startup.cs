@@ -25,7 +25,9 @@ namespace amiabila_backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+          services.AddControllers().AddJsonOptions(options => {
+            options.JsonSerializerOptions.PropertyNamingPolicy = null; // System.Text.Json.JsonNamingPolicy.CamelCase;
+            options.JsonSerializerOptions.PropertyNameCaseInsensitive = false; } );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,7 +42,7 @@ namespace amiabila_backend
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseCors(s => s.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); // TO DO - ADD JTOKEN !!!
 

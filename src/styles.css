@@ -118,8 +118,9 @@ body { height: 100%; min-height: 100%; margin: 0px; font-family: calibri, "Helve
 	height:100%; 
 	*/
 	min-height: 100%;
-  transition: left 1s ease;	
-  left:-100%;
+  transition: 1s ease;	
+  /* left:-100%; */ /* -- pentru varianta cu incarcare toate la inceput */
+  left: 0px;
 }
 .innerMainDiv{
 	/* width:90%; */
@@ -183,6 +184,9 @@ body { height: 100%; min-height: 100%; margin: 0px; font-family: calibri, "Helve
 }
 .zona-subtitle{
 	padding: 5px;
+	font-size: medium;
+	font-weight: bold;
+	margin-top: 7px;
 }
 .carCell{
 	border: 1px solid gray;
@@ -326,13 +330,26 @@ mat-dialog-container {
 	padding: 15px;
 }
 .prerequisite_button{
-	background-image: linear-gradient(to right, #593093, #7643BE);
+	background-image: linear-gradient(to right, #593093, #7643BE) !important;
 	max-width: 200px;
 	display: inline-block;
 	width: max-content;
-	border-radius: 5px;
-	padding: 3px;
+	/* border-radius: 5px; */
+	padding: 7px;
+	min-width: 120px;
+	color:  white;
 }
 .prerequisite_button .mat-checkbox{
 	margin:  3px !important;
+}
+
+.scrollable{
+	 width:100%; 
+	 height:300px; 
+	 overflow-y:auto;
+	 scrollbar-width: thin;
+}
+.warnInfoLabel{
+	color: darkorange;
+	font-weight: bold;
 }

@@ -7,15 +7,24 @@
 		<mat-card fxFlex>
 			<mat-card-title>
 				<mat-toolbar style="height: 30px; padding: 2px;">	
-				  <button mat-icon-button (click)="putCarAB='A'" matTooltip="Plaseaza pe harta autoturismul A">
+				  <button mat-icon-button (click)="putCarAB='A'" matTooltip="Plaseaza pe harta autoturismul A" [disabled]="getImgById('As') != null"> <!-- scoatem disabled daca vrem mai multe masini pe desen -->
 				  	<img src="../assets/A.png" style="width: 24px;" />
 				  </button>
-				  <button mat-icon-button (click)="putCarAB='B'" matTooltip="Plaseaza pe harta autoturismul B">
+				  <button mat-icon-button (click)="putCarAB='B'" matTooltip="Plaseaza pe harta autoturismul B" [disabled]="getImgById('Bs') != null">  <!-- scoatem disabled daca vrem mai multe masini pe desen -->
 				  	<img src="../assets/B.png" style="width: 24px;" />
 				  </button>		
 				  <button mat-icon-button (click)="putCarAB='T'" matTooltip="Plaseaza pe harta o caseta de text">
 				  	<mat-icon>title</mat-icon>
 				  </button>
+
+				  <span class="example-spacer"></span>
+				  <button mat-icon-button (click)="mapZoomIn()" [disabled]="zoom > 25" matTooltip="Zoom In harta">
+				  	<mat-icon>zoom_in</mat-icon>
+				  </button>
+				  <button mat-icon-button (click)="mapZoomOut()" [disabled]="zoom < 2" matTooltip="Zoom Out harta">
+				  	<mat-icon>zoom_out</mat-icon>
+				  </button>
+
 				  <span class="example-spacer"></span>
 				  <button mat-icon-button (click)="rotateImg(-1)" [disabled]="selectedImgId == null">
 				  	<mat-icon>rotate_left</mat-icon>
@@ -51,7 +60,8 @@
 			  <canvas id="canvasImg" class="mapCanvasDiv" style="display: none;"></canvas>	      
 			</mat-card-content>
 		  <mat-card-actions>
-    		<button mat-raised-button color="warn" (click)="setImgMap(null)">Preia harta</button>
+		  	<mat-label *ngIf="this.Zona13.ImgMap == null">Pentru vizualizarea locului accidentului, selectati mai intai locatia in Rubrica 2 a formularului</mat-label>
+    		<!-- <button mat-raised-button color="warn" (click)="setImgMap(null)">Preia harta</button> -->
     		<button mat-raised-button color="warn" (click)="saveImgMap()">Salveaza schita</button>
  		  </mat-card-actions>		  
  		</mat-card>

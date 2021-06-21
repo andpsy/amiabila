@@ -14,6 +14,7 @@
 	    <mat-label>Ora:</mat-label>
 	    <input matInput placeholder="00:00" [(ngModel)]="Zona1.Ora" name="Ora" #Ora='ngModel' required>
 	  </mat-form-field>  
+    <mat-label class="warnInfoLabel" fxLayoutAlign="center" *ngIf="!childForm.touched && !Zona1.StepCompleted">Am preluat automat data si ora dispozitivului. Daca nu sunt corecte, va rugam sa le modificati!</mat-label>
 	  
  	  <app-display-errors
  	  	class="form-error-container"
@@ -21,7 +22,7 @@
  	  	[errors]="Zona1.hasError()">
   	</app-display-errors>	
   	<div fxFlex fxLayout="row" fxLayout.lt-md="column" class="ZonaButtonsContainer">
-	  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+	  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)" [disabled]="true"> << Rubrica anterioara </button>
 	  	<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
 	  	<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona1.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
 	  </div>

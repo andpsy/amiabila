@@ -7,11 +7,11 @@ import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsul
 })
 export class ConditiiComponent implements OnInit {
   @Input() Conditii: boolean;  
+  //public Conditii: boolean;
   @Output() confirmed = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

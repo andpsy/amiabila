@@ -2,7 +2,7 @@ namespace amiabila_backend.Models
 {
   public class Remorca
   {
-    string NrInmatriculare;
-    string TaraInmatriculare;
+    public string NrInmatriculare { get; set; }
+    public string TaraInmatriculare { get; set; }
   }
 }
