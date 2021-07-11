@@ -1,7 +1,7 @@
 <form #childForm="ngForm" autocomplete="off">
-	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
-		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
-			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+	<div fxLayout="column" class="innerMainDiv" style="border-width: 6px; border-style:solid;" [ngStyle]="{'border-color': CommonFunctions.Steps[step].bgColor}">	
+		<span class="zona-title" [ngStyle]="{'background-color': CommonFunctions.Steps[step].bgColor,
+			'color': CommonFunctions.Steps[step].color }">
 			Rubrica 10 - Indicati punctul initial de impact pentru vehiculul {{step == 9 ? "A" : "B"}} printr-o sageata &rarr;
 		</span>	
 

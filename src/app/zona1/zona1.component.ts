@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { CommonFunctions, Zona1 } from '../entities';
 
 @Component({
@@ -24,12 +24,16 @@ export class Zona1Component implements OnInit {
       this.Zona1.Ora = CommonFunctions.addZero(this.Zona1.Data.getHours()) + ":" + CommonFunctions.addZero(this.Zona1.Data.getMinutes());
     }
   }
+  ngOnDestroy(): void{
+    this.zoneCompleted = null;
+  }
 
   showDiv(step:number, visibility:boolean):void{
     if(this.childForm.valid && this.Zona1.hasError() == null){
       this.Zona1.StepCompleted = true;
       //this.zoneCompleted.emit(true);
-      this.zoneCompleted.emit(this.Zona1);
+      if(step === this.CommonFunctions.step)
+        this.zoneCompleted.emit(this.Zona1);
     }
     CommonFunctions.showDiv(step, visibility);
   }

@@ -53,6 +53,7 @@ export class CommonFunctions{
   public static IMG_MAP_ID = "roadmap";
 
   public static SRV_URL = "https://localhost:44322/api/";
+  public static SRV_RESOURCES_URL = "https://localhost:44322/Resources/Formulare/";
 
   public static isNullOrWhiteSpaces(str){
     return str === null || str.trim() === '';
@@ -85,6 +86,10 @@ export class CommonFunctions{
     {"selected":false, "name":"Polite auto RCA"}, 
     {"selected":false, "name":"Alte acte"}];
 
+  public static TipPoze = [{"selected":false, "name":"1. Carte/Buletin de identitate:"}, 
+    {"selected":false, "name":"2. Permis de conducere:"},     
+    {"selected":false, "name":"3. Imagini avarii auto:"}];
+
   public static showDiv(step:number, visibility:boolean):void{
     /*
     var divId = CommonFunctions.Steps[step].DivId;
@@ -99,29 +104,35 @@ export class CommonFunctions{
     CommonFunctions.step = visibility ? step : null;
   }  
 
-  public static Steps = [{'Step':0, 'DivId':'zona1Div'},
-      {'Step':1, 'DivId':'zona2Div'},
-      {'Step':2, 'DivId':'zona3Div'},
-      {'Step':3, 'DivId':'zona4Div'},
-      {'Step':4, 'DivId':'zona5Div'},
-      {'Step':5, 'DivId':'zona6ADiv'},
-      {'Step':6, 'DivId':'zona7ADiv'},
-      {'Step':7, 'DivId':'zona8ADiv'},
-      {'Step':8, 'DivId':'zona9ADiv'},
-      {'Step':9, 'DivId':'zona10ADiv'},
-      {'Step':10, 'DivId':'zona11ADiv'},
-      {'Step':11, 'DivId':'zona14ADiv'},
-      {'Step':12, 'DivId':'zona15ADiv'},
-      {'Step':13, 'DivId':'zona6BDiv'},
-      {'Step':14, 'DivId':'zona7BDiv'},
-      {'Step':15, 'DivId':'zona8BDiv'},
-      {'Step':16, 'DivId':'zona9BDiv'},
-      {'Step':17, 'DivId':'zona10BDiv'},
-      {'Step':18, 'DivId':'zona11BDiv'},
-      {'Step':19, 'DivId':'zona14BDiv'},
-      {'Step':20, 'DivId':'zona15BDiv'},
-      {'Step':21, 'DivId':'zona12Div'},
-      {'Step':22, 'DivId':'zona13Div'}];
+  public static Steps = [
+      {'Step':0, 'DivId':'zona1Div', 'vehicul':null, 'zona':'Zona1', 'bgColor':'lightgray', 'color':'navy'},
+      {'Step':1, 'DivId':'zona2Div', 'vehicul':null, 'zona':'Zona2', 'bgColor':'lightgray', 'color':'navy'},
+      {'Step':2, 'DivId':'zona3Div', 'vehicul':null, 'zona':'Zona3', 'bgColor':'lightgray', 'color':'navy'},
+      {'Step':3, 'DivId':'zona4Div', 'vehicul':null, 'zona':'Zona4', 'bgColor':'lightgray', 'color':'navy'},
+      {'Step':4, 'DivId':'zona5Div', 'vehicul':null, 'zona':'Zona5', 'bgColor':'lightgray', 'color':'navy'},
+
+      {'Step':5, 'DivId':'zona6ADiv', 'vehicul':'A', 'zona':'Zona6', 'bgColor':'#1D3885', 'color':'white'},
+      {'Step':6, 'DivId':'zona7ADiv', 'vehicul':'A', 'zona':'Zona7', 'bgColor':'#1D3885', 'color':'white'},
+      {'Step':7, 'DivId':'zona8ADiv', 'vehicul':'A', 'zona':'Zona8', 'bgColor':'#1D3885', 'color':'white'},
+      {'Step':8, 'DivId':'zona9ADiv', 'vehicul':'A', 'zona':'Zona9', 'bgColor':'#1D3885', 'color':'white'},
+      {'Step':9, 'DivId':'zona10ADiv', 'vehicul':'A', 'zona':'Zona10', 'bgColor':'#1D3885', 'color':'white'},
+      {'Step':10, 'DivId':'zona11ADiv', 'vehicul':'A', 'zona':'Zona11', 'bgColor':'#1D3885', 'color':'white'},
+      {'Step':11, 'DivId':'zona14ADiv', 'vehicul':'A', 'zona':'Zona14', 'bgColor':'#1D3885', 'color':'white'},
+      {'Step':12, 'DivId':'zona15ADiv', 'vehicul':'A', 'zona':'Zona15', 'bgColor':'#1D3885', 'color':'white'},
+      {'Step':13, 'DivId':'fisiereADiv', 'vehicul':'A', 'zona':'ZonaFisiere', 'bgColor':'#1D3885', 'color':'white'},
+
+      {'Step':14, 'DivId':'zona6BDiv', 'vehicul':'B', 'zona':'Zona6', 'bgColor':'#F8D32D', 'color':'black'},
+      {'Step':15, 'DivId':'zona7BDiv', 'vehicul':'B', 'zona':'Zona7', 'bgColor':'#F8D32D', 'color':'black'},
+      {'Step':16, 'DivId':'zona8BDiv', 'vehicul':'B', 'zona':'Zona8', 'bgColor':'#F8D32D', 'color':'black'},
+      {'Step':17, 'DivId':'zona9BDiv', 'vehicul':'B', 'zona':'Zona9', 'bgColor':'#F8D32D', 'color':'black'},
+      {'Step':18, 'DivId':'zona10BDiv', 'vehicul':'B', 'zona':'Zona10', 'bgColor':'#F8D32D', 'color':'black'},
+      {'Step':19, 'DivId':'zona11BDiv', 'vehicul':'B', 'zona':'Zona11', 'bgColor':'#F8D32D', 'color':'black'},
+      {'Step':20, 'DivId':'zona14BDiv', 'vehicul':'B', 'zona':'Zona14', 'bgColor':'#F8D32D', 'color':'black'},
+      {'Step':21, 'DivId':'zona15BDiv', 'vehicul':'B', 'zona':'Zona15', 'bgColor':'#F8D32D', 'color':'black'},
+      {'Step':22, 'DivId':'fisiereBDiv', 'vehicul':'B', 'zona':'ZonaFisiere', 'bgColor':'#F8D32D', 'color':'black'},
+
+      {'Step':23, 'DivId':'zona12Div', 'vehicul':null, 'zona':'Zona12', 'bgColor':'lightgray', 'color':'navy'},
+      {'Step':24, 'DivId':'zona13Div', 'vehicul':null, 'zona':'Zona13', 'bgColor':'lightgray', 'color':'navy'}];
 
   public static getPreviousStepDivId(idx:number):string{
     return idx < 1 ? null : CommonFunctions.Steps[idx-1].DivId;
@@ -130,6 +141,17 @@ export class CommonFunctions{
     return idx > CommonFunctions.Steps.length - 2 ? null : CommonFunctions.Steps[idx+1].DivId;
   }  
 
+  public static copyObj(source:any, target:any){
+    const props = Object.keys(source);
+    for (const prop of props) {
+      var objVal = source[prop];
+      if(typeof objVal === 'object' && objVal !== null)
+        target[prop] = CommonFunctions.copyObj(objVal, target[prop]);
+      else
+        target[prop]=objVal;
+    }
+    return target;
+  }
 }
 
 export class Polita{
@@ -370,7 +392,8 @@ export class Zona6 {
   Adresa: string;
   CodPostal: string;
   Tara: string;
-  TelefonEmail: string;
+  Telefon: string;
+  Email: string;
   StepCompleted: boolean;
   constructor(){
     this.Nume = null;
@@ -378,7 +401,8 @@ export class Zona6 {
     this.Adresa = null;
     this.CodPostal = null;
     this.Tara = null;
-    this.TelefonEmail = null;
+    this.Telefon = null;
+    this.Email = null;
     this.StepCompleted = false;
   }
   public hasError():string[]{
@@ -391,7 +415,7 @@ export class Zona6 {
       toReturn.push("Adresa asiguratului este obligatorie!");
     if(CommonFunctions.isNullOrWhiteSpaces(this.Tara))
       toReturn.push("Tara asiguratului este obligatorie!");
-    if(CommonFunctions.isNullOrWhiteSpaces(this.TelefonEmail))
+    if(CommonFunctions.isNullOrWhiteSpaces(this.Telefon) && CommonFunctions.isNullOrWhiteSpaces(this.Email))
       toReturn.push("Telefonul sau emailul asiguratului este obligatoriu!");
     return toReturn.length > 0? toReturn : null;
   }    
@@ -474,7 +498,8 @@ export class Zona8 {
   DenumireSucursala: string;
   Adresa: string;
   Tara: string;
-  TelefonEmail: string;
+  Telefon: string;
+  Email: string;
   Casco: boolean;
   DecontareDirecta: boolean;
   StepCompleted: boolean;
@@ -490,7 +515,8 @@ export class Zona8 {
     this.DenumireSucursala = null;
     this.Adresa = null;
     this.Tara = null;
-    this.TelefonEmail = null;
+    this.Telefon = null;
+    this.Email = null;
     this.Casco = false;
     this.DecontareDirecta = false;
     this.DenumireCasco = null;
@@ -517,7 +543,8 @@ export class Zona9 {
   DataNasterii: Date;
   Adresa: string;
   Tara: string;
-  TelefonEmail: string;
+  Telefon: string;
+  Email: string;
   PermisConducereNr: string;
   Categoria: string;
   ValabilPanaLa: Date;
@@ -529,7 +556,8 @@ export class Zona9 {
     this.DataNasterii = null;
     this.Adresa = null;
     this.Tara = null;
-    this.TelefonEmail = null;
+    this.Telefon = null;
+    this.Email = null;
     this.PermisConducereNr = null;
     this.Categoria = null;
     this.ValabilPanaLa = null;    
@@ -638,6 +666,21 @@ export class Aditionale {
   }
 }
 
+export class ZonaFisiere{
+  Fisiere: Fisier[] = [];
+  StepCompleted: boolean;
+
+  public hasError():string[]{
+    var toReturn:string[] = [];
+    if(this.Fisiere.length < 3)
+      toReturn.push("Incarcati documentele!");
+    else if(this.Fisiere[0].Tip.indexOf("identitate")<0 && this.Fisiere[1].Tip.indexOf("conducere")<0 && this.Fisiere[2].Tip.indexOf("avarii")<0 ){
+      toReturn.push("Incarcati documentele!");
+    }
+    return toReturn.length > 0? toReturn : null;
+  }  
+}
+
 export class Vehicul {
   Polita: Polita;
   Zona6: Zona6;
@@ -648,6 +691,8 @@ export class Vehicul {
   Zona11: Zona11;
   Zona14: Zona14;
   Zona15: Zona15;
+  ZonaFisiere: ZonaFisiere;
+
   constructor(){
     this.Polita = new Polita();
     this.Zona6 = new Zona6();
@@ -658,6 +703,7 @@ export class Vehicul {
     this.Zona11 = new Zona11();
     this.Zona14 = new Zona14();
     this.Zona15 = new Zona15();
+    this.ZonaFisiere = new ZonaFisiere();
   }
 }
 
@@ -751,6 +797,12 @@ export class Zona13 {
 
 }
 
+export class Fisier{
+  Tip: string;
+  DenumireClient: string;
+  DenumireServer: string; 
+}
+
 export class Formular {
   Id: string;
   Zona1: Zona1;
@@ -798,7 +850,8 @@ export class Formular {
       this.VehiculA.Zona6.Prenume = this.VehiculA.Polita.DenumireAsiguratProprietar;
       this.VehiculA.Zona6.Adresa = this.VehiculA.Polita.AdresaAsigurat;
       this.VehiculA.Zona6.Tara = this.VehiculA.Polita.TaraAsigurat;
-      this.VehiculA.Zona6.TelefonEmail = this.VehiculA.Polita.TelefonAsigurat + ' / ' + this.VehiculA.Polita.EmailAsigurat;
+      this.VehiculA.Zona6.Telefon = this.VehiculA.Polita.TelefonAsigurat;
+      this.VehiculA.Zona6.Email =  this.VehiculA.Polita.EmailAsigurat;
       this.VehiculA.Zona7.Motor.Tip = this.VehiculA.Polita.TipAuto;
       this.VehiculA.Zona7.Motor.NrInmatriculare = this.VehiculA.Polita.NrAuto;
       this.VehiculA.Zona7.Motor.Marca = this.VehiculA.Polita.MarcaAuto;
@@ -813,7 +866,8 @@ export class Formular {
       this.VehiculB.Zona6.Prenume = this.VehiculB.Polita.DenumireAsiguratProprietar;
       this.VehiculB.Zona6.Adresa = this.VehiculB.Polita.AdresaAsigurat;
       this.VehiculB.Zona6.Tara = this.VehiculB.Polita.TaraAsigurat;
-      this.VehiculB.Zona6.TelefonEmail = this.VehiculB.Polita.TelefonAsigurat + ' / ' + this.VehiculB.Polita.EmailAsigurat;
+      this.VehiculB.Zona6.Telefon = this.VehiculB.Polita.TelefonAsigurat;
+      this.VehiculA.Zona6.Email =  this.VehiculB.Polita.EmailAsigurat;
       this.VehiculB.Zona7.Motor.Tip = this.VehiculB.Polita.TipAuto;
       this.VehiculB.Zona7.Motor.NrInmatriculare = this.VehiculB.Polita.NrAuto;
       this.VehiculB.Zona7.Motor.Marca = this.VehiculB.Polita.MarcaAuto;
@@ -836,15 +890,19 @@ export class Formular {
 
   public getPreviousZoneCompletedStatus(step):boolean{
     if(CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR){
+      /*
       var vehicul = null;
       var zona = null;
-      if(step > 0 && step < 6) {vehicul = null; zona = "Zona" + step;}
+      if(step > 0 && step <= 5) {vehicul = null; zona = "Zona" + (step+1);}
       if(step > 5 && step < 11) {vehicul = "VehiculA"; zona = "Zona" + step;}
       if(step > 12 && step < 19) {vehicul = "VehiculB"; zona = "Zona" + (step-7);}
       if(step == 11 || step == 19) {vehicul = "VehiculA"; zona = "Zona" + 14;}
       if(step == 12 || step == 20) {vehicul = "VehiculB"; zona = "Zona" + 15;}
       if(step == 21) {vehicul = null; zona = "Zona" + 12;}
       if(step == 22) {vehicul = null; zona = "Zona" + 13;}
+      */
+      var vehicul = CommonFunctions.Steps[step].vehicul == null ? null : "Vehicul" + CommonFunctions.Steps[step].vehicul;
+      var zona = CommonFunctions.Steps[step].zona;
 
       if(vehicul != null && zona != null)
         return this[vehicul][zona].StepCompleted;

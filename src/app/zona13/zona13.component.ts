@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsul
 import { CommonFunctions, Zona13, ImgMapList } from '../entities';
 import { GOOGLE_API_KEY } from '../entities';
 import { SignaturePad } from 'angular2-signaturepad';
-import html2canvas from 'html2canvas';
+//import html2canvas from 'html2canvas';
+import domtoimage from 'dom-to-image';
 
 @Component({
   selector: 'app-zona13',
@@ -52,7 +53,8 @@ export class Zona13Component implements OnInit {
     if(this.childForm.valid){
       this.Zona13.StepCompleted = true;
       //this.zoneCompleted.emit(true);
-      this.zoneCompleted.emit(this.Zona13);
+      if(step === this.CommonFunctions.step)
+        this.zoneCompleted.emit(this.Zona13);
     }
     CommonFunctions.showDiv(step, visibility);
   }
@@ -196,11 +198,30 @@ export class Zona13Component implements OnInit {
   }
 
   saveImgMap(){
-    var canvasImg = document.getElementById('canvasImg') as HTMLCanvasElement;
-    html2canvas(this.canvasDiv, {allowTaint:true, useCORS:true, canvas:canvasImg, logging:false }).then(function(canvas) {
+    /*
+    var canvasImg = document.getElementById('canvasImg') as HTMLCanvasElement;    
+    html2canvas(this.canvasDiv, {allowTaint:true, useCORS:true, canvas:canvasImg, logging:false, 
+      scrollX: -window.scrollX,
+      scrollY: -window.scrollY,
+      windowWidth: document.documentElement.offsetWidth,
+      windowHeight: document.documentElement.offsetHeight }).then(function(canvas) {
       //document.body.appendChild(canvas);
       canvasImg.style.display = 'block';
     });
+    */
+
+    domtoimage.toPng(this.canvasDiv)
+      .then(function (dataUrl) {
+          var img = new Image();
+          img.src = dataUrl;
+          //document.body.appendChild(img);
+          var canvasImg = document.getElementById('canvasImg') as HTMLElement;    
+          canvasImg.appendChild(img);
+          canvasImg.style.display = 'block';
+      })
+      .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+    });    
   }
   mapZoomIn(){
     this.zoom += 1;

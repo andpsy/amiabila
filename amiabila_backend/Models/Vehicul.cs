@@ -10,5 +10,6 @@ namespace amiabila_backend.Models
     public Zona11 Zona11 { get; set; }
     public Zona14 Zona14 { get; set; }
     public Zona15 Zona15 { get; set; }
+    public ZonaFisiere ZonaFisiere { get; set; }
   }
 }

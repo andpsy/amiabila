@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { CommonFunctions, Marker, Zona2 } from '../entities';
 import { GoogleMap } from '@angular/google-maps'
@@ -11,8 +11,10 @@ import { GoogleMap } from '@angular/google-maps'
 })
 export class GoogleComponent implements OnInit {
   @Input() Zona2: Zona2;  
+  @Input() NewPlaceSelected: any;  
 	@Output() newItemEvent = new EventEmitter<string>();
 	@Output() imgMapEvent = new EventEmitter<string>();
+  @Output() newPositionSelectedEvent = new EventEmitter<google.maps.LatLngBounds>();
 	@ViewChild(GoogleMap, { static: false }) map: GoogleMap;
   public CommonFunctions = CommonFunctions;  
   //public adresa:string;
@@ -55,11 +57,22 @@ export class GoogleComponent implements OnInit {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes.NewPlaceSelected.currentValue){
+      var place = changes.NewPlaceSelected.currentValue.geometry.location;
+      this.marker.position.lat = place.lat();
+      this.marker.position.lng = place.lng();
+      this.center = {lat:place.lat(), lng: place.lng()};
+      //this.map.panTo(new google.maps.LatLng(place.lat(), place.lng()));
+      this.m.setPosition(new google.maps.LatLng(place.lat(), place.lng()));    
+      this.exportMapImg();
+    }
+  }  
+
   getAddress(){
+    this.newPositionSelectedEvent.emit(new google.maps.LatLngBounds(this.center));
 	  const geocoder = new google.maps.Geocoder();		  
 		//const infowindow = new google.maps.InfoWindow();
-
-  	//console.log(this.marker.position);
 		geocoder.geocode({ location: {'lat':this.marker.position.lat, 'lng':this.marker.position.lng} }, (results, status) => 
 		{
 	    if (status === "OK") 
@@ -67,7 +80,6 @@ export class GoogleComponent implements OnInit {
 	      if (results[0]) 
 	      {
 	      	this.newItemEvent.emit(results[0].formatted_address);
-	      	//console.log('adresa: ' + this.adresa);
 	        //infowindow.setContent(results[0].formatted_address);
 	        //infowindow.open(this.map, this.marker);
 	        this.exportMapImg();
@@ -81,10 +93,8 @@ export class GoogleComponent implements OnInit {
 	}
 
   mapClick(event: google.maps.MouseEvent) {
-    //console.log(event)
     this.marker.position.lat = event.latLng.toJSON().lat;
     this.marker.position.lng = event.latLng.toJSON().lng;
-    //console.log(event.latLng.toJSON());
     this.m.setPosition(event.latLng);
     this.center = {
       lat: this.marker.position.lat,
@@ -95,7 +105,6 @@ export class GoogleComponent implements OnInit {
 
 	exportMapImg() {
 	  var staticMapUrl = this.center.lat + "," + this.center.lng;
-    //console.warn(staticMapUrl);
   	this.imgMapEvent.emit(staticMapUrl);
 	}  
 }

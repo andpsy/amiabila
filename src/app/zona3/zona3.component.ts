@@ -36,7 +36,8 @@ export class Zona3Component implements OnInit {
     if(this.childForm.valid){
       this.Zona3.StepCompleted = true;
       //this.zoneCompleted.emit(true);
-      this.zoneCompleted.emit(this.Zona3);
+      if(step === this.CommonFunctions.step)
+        this.zoneCompleted.emit(this.Zona3);
     }
     CommonFunctions.showDiv(step, visibility);
   }

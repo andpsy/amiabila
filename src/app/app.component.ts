@@ -1,9 +1,12 @@
-import { Component, OnInit, Input, Inject, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, Inject, Output, ViewChild, EventEmitter, ViewEncapsulation, Pipe, PipeTransform } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+//import { Router } from '@angular/router';
+import {  Router, RoutesRecognized } from '@angular/router';
 import { CommonFunctions, Formular, Polita, Aditionale, GOOGLE_API_KEY } from './entities';
 import { MongoDbService } from './mongo-db.service';
 import { DOCUMENT } from '@angular/common';
-//import * as _ from 'lodash';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -17,17 +20,28 @@ export class AppComponent implements OnInit {
   public a: Aditionale = new Aditionale();
   public _cale_parts: string;
   public CommonFunctions = CommonFunctions;  
+  public externalGuid:string;
 
 	constructor(
+    private router: Router,
     @Inject(DOCUMENT) private doc: any, 
     private mongoDbSrv: MongoDbService, 
     public dialog: MatDialog) {
-
-    this.pas = 0;
-    this._cale_parts = CommonFunctions._cale_parts;
-  }
+      this.pas = 0;
+      this._cale_parts = CommonFunctions._cale_parts;
+    }
 
   ngOnInit(): void {
+    this.router.events.subscribe(val => {
+      if (val instanceof RoutesRecognized) {
+        if (val.state.root.firstChild && val.state.root.firstChild.params.id) {
+          //console.log(val.state.root.firstChild.params.id);
+          this.externalGuid = val.state.root.firstChild.params.id;
+          this.getFormular();
+        }          
+      }
+    });    
+
     this.setGTagManager();
     this.Formular = new Formular();
   }
@@ -46,7 +60,22 @@ export class AppComponent implements OnInit {
 
   //refreshProgressBar(zoneCompleted:boolean):void{
   refreshProgressBar(zona:any):void{
-
+    var tmp = 0;
+    for(var i=0;i<CommonFunctions.Steps.length;i++){
+      if(CommonFunctions.Steps[i].Step == CommonFunctions.step && CommonFunctions.Steps[i].zona == zona.constructor.name){
+        if(CommonFunctions.Steps[i].vehicul != null){
+          this.Formular["Vehicul"+CommonFunctions.Steps[i].vehicul][zona.constructor.name] = zona;
+          tmp += this.Formular["Vehicul"+CommonFunctions.Steps[i].vehicul][zona.constructor.name].StepCompleted ? 1 : 0;
+        }
+        else{
+          this.Formular[zona.constructor.name] = zona;
+          tmp += this.Formular[zona.constructor.name].StepCompleted ? 1 : 0;
+        }
+        break;
+      }
+    }
+    this.nextStep(zona.constructor.name);
+    /*
     if(this.CommonFunctions.step < 5 || this.CommonFunctions.step == 21 || this.CommonFunctions.step == 22)
       this.Formular[zona.constructor.name] = zona;
     else if(this.CommonFunctions.step >=5 && this.CommonFunctions.step <= 12)
@@ -54,7 +83,6 @@ export class AppComponent implements OnInit {
     else if(this.CommonFunctions.step >= 13 && this.CommonFunctions.step <= 20)
       this.Formular.VehiculB[zona.constructor.name] = zona;
     
-    var tmp = 0;
     tmp += this.Formular.Zona1.StepCompleted ? 1 : 0;
     tmp += this.Formular.Zona2.StepCompleted ? 1 : 0;  
     tmp += this.Formular.Zona3.StepCompleted ? 1 : 0;  
@@ -80,7 +108,8 @@ export class AppComponent implements OnInit {
 
     tmp += this.Formular.Zona12.StepCompleted ? 1 : 0;  
     tmp += this.Formular.Zona13.StepCompleted ? 1 : 0;  
-    this.pas = Math.round(tmp/22 * 100); 
+    */
+    this.pas = Math.round(tmp/CommonFunctions.Steps.length * 100); 
   }  
 
   private setGTagManager() {
@@ -93,26 +122,31 @@ export class AppComponent implements OnInit {
     head.appendChild(s);
   }  
 
-  public nextStep(){
+  public nextStep(zonaName:string){
     
     /*
     this.mongoDbSrv.getData().subscribe(data=>{
       console.warn(data);
     });
     */
-    
-    /*
+
     this.mongoDbSrv
      .upsertFormular(this.Formular)
      .subscribe(
-       formular => { //this.Formular = new Formular(formular); 
-         //this.Formular = Object.assign(this.Formular, formular);
-         this.Formular = _.cloneDeep(formular);
-         console.log(this.Formular);
-         console.warn(formular);
+       formular => { 
+         this.Formular = this.CommonFunctions.copyObj(formular, this.Formular);
        }
       ); 
-    */
+  }
+
+  getFormular(){
+    this.mongoDbSrv
+     .getFormular(this.externalGuid)
+     .subscribe(
+       formular => { 
+         this.Formular = this.CommonFunctions.copyObj(formular, this.Formular);
+       }
+      );    
   }
 
   populateFormularFromPolita(event:Polita, vehicul:string){
@@ -123,6 +157,11 @@ export class AppComponent implements OnInit {
       this.Formular.VehiculB.Polita = event;
       this.Formular.populateFormularFromPolita(vehicul);
     }
+  }
+
+  filesUploaded(event){
+    //this.Formular.Fisiere = event;
+    this.nextStep(null);
   }
 }
 

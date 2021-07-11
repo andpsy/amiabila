@@ -21,9 +21,14 @@ export class MongoDbService {
     return this.http.get(url);
   }
 
+  getFormular(id:string):Observable<Formular>{
+    let url = this.CommonFunctions.SRV_URL + 'MongoDb/' + id;
+    return this.http.get<Formular>(url, this.httpOptions);
+  }
+
   upsertFormular(formular: Formular): Observable<Formular>{
     var url = this.CommonFunctions.SRV_URL + 'MongoDb/Upsert';
-    console.warn(formular);
+    //console.warn(formular);
     return this.http.post<Formular>(url, formular, this.httpOptions).pipe(
       //tap((updatedFormular: Formular) => { console.log(updatedFormular) }),
       catchError(this.handleError('addData', formular)));

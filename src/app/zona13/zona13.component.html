@@ -57,7 +57,7 @@
 			  <mat-form-field fxFlex style="visibility: hidden;">
 			    <input matInput [(ngModel)]="Zona13.ImgMap" name="ImgMap" #ImgMap='ngModel' (ngModelChange)="setImgMap($event)" (change)="setImgMap($event)" >
 			  </mat-form-field>  
-			  <canvas id="canvasImg" class="mapCanvasDiv" style="display: none;"></canvas>	      
+			  <div id="canvasImg" class="mapCanvasDiv" style="display: none;"></div>	      
 			</mat-card-content>
 		  <mat-card-actions>
 		  	<mat-label *ngIf="this.Zona13.ImgMap == null">Pentru vizualizarea locului accidentului, selectati mai intai locatia in Rubrica 2 a formularului</mat-label>

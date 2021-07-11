@@ -4,7 +4,7 @@
 <app-gdpr *ngIf="Formular.Aditionale.DocumenteNecesare" [GDPR]="Formular.Aditionale.GDPR" [hidden]="Formular.Aditionale.GDPR" (confirmed)="Formular.Aditionale.GDPR = $event; nextStep()"></app-gdpr>
 <app-termeni-si-conditii *ngIf="Formular.Aditionale.GDPR" [TermeniSiConditii]="Formular.Aditionale.TermeniSiConditii" [hidden]="Formular.Aditionale.TermeniSiConditii" (confirmed)="Formular.Aditionale.TermeniSiConditii = $event; nextStep()"></app-termeni-si-conditii>
 -->
-<app-prerequisites [a]="a" [hidden]="Formular.getPrererquisites()" (confirmed)="Formular.Aditionale = $event; nextStep()"></app-prerequisites>
+<app-prerequisites [a]="a" [hidden]="Formular.getPrererquisites()" (confirmed)="Formular.Aditionale = $event; nextStep('aditionale')"></app-prerequisites>
 
 <div *ngIf="Formular.getPrererquisites()" class="content">
   <div class="progressBarDiv">
@@ -129,28 +129,28 @@
         <span class="vehicul_b">VEHICUL B</span>
         <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona6.StepCompleted">
           <img src="{{_cale_parts + '6B.png'}}" class="row4_b">   
-          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(13, true)">
+          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(14, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona6.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona6.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
             <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
         <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona7.StepCompleted">
           <img src="{{_cale_parts + '7B.png'}}" class="row4_b">   
-          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(14, true)">
+          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(15, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona7.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona7.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
             <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
         <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona9.StepCompleted">
           <img src="{{_cale_parts + '8B.png'}}" class="row4_b">   
-          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(15, true)">
+          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(16, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona8.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona8.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
             <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>               
         <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona9.StepCompleted">
           <img src="{{_cale_parts + '9B.png'}}" class="row4_b">   
-          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(16, true)">
+          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(17, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona9.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona9.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
             <span class="overlaySpan">Click pentru completare</span>
           </div> 
@@ -180,7 +180,7 @@
       <div fxLayout="column" fxFlex="60">
         <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.Zona13.StepCompleted">
           <img src="{{_cale_parts + '13_2.png'}}" class="row4">   
-          <div class="overlay row4" fxLayout="column" (click)="showDiv(22, true)">
+          <div class="overlay row4" fxLayout="column" (click)="showDiv(23, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.Zona13.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.Zona13.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>        
             <span class="overlaySpan">Click pentru completare</span>
           </div> 
@@ -190,14 +190,14 @@
       <div fxLayout="column" fxFlex="20" style="background-color: #F8D32D">
         <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona10.StepCompleted">
           <img src="{{_cale_parts + '10B.png'}}" class="row4_b">   
-          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(17, true)">
+          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(18, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona10.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona10.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>                
             <span class="overlaySpan">Click pentru completare</span>
           </div> 
         </div>
         <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona11.StepCompleted">
           <img src="{{_cale_parts + '11B.png'}}" class="row4_b">   
-          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(18, true)">
+          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(19, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona11.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona11.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>                
             <span class="overlaySpan">Click pentru completare</span>
           </div> 
@@ -228,7 +228,7 @@
       <div fxLayout="column" fxFlex="14">
         <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona15.StepCompleted">
           <img src="{{_cale_parts + '15B.png'}}" class="row4">   
-          <div class="overlay row4" fxLayout="column" (click)="showDiv(20, true)">
+          <div class="overlay row4" fxLayout="column" (click)="showDiv(21, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona15.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona15.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>                
             <span class="overlaySpan">Click pentru completare</span>
           </div> 
@@ -238,7 +238,7 @@
       <div fxLayout="column" fxFlex="36" style="background-color: #F8D32D">
         <div class="form_block" matBadge="&#10004;" [matBadgeHidden]="!Formular.VehiculB.Zona14.StepCompleted">
           <img src="{{_cale_parts + '14B.png'}}" class="row4_b">   
-          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(19, true)">
+          <div class="overlay row4_b" fxLayout="column" (click)="showDiv(20, true)">
             <mat-icon [ngStyle]= "{'color': !Formular.VehiculB.Zona14.StepCompleted ? 'red' : 'lightgreen' }" aria-hidden="false" aria-label="date incomplete">{{!Formular.VehiculB.Zona14.StepCompleted ? "unpublished" : "check_circle_outline"}}</mat-icon>                
             <span class="overlaySpan">Click pentru completare</span>
           </div> 
@@ -263,6 +263,7 @@
     <app-zona5 [Zona5]="Formular.Zona5" [step]="4" (zoneCompleted)=refreshProgressBar($event)></app-zona5>
   </div>
 
+  <!-- vehicul A -->
   <div *ngIf="CommonFunctions.step==5" id="{{getDivId(5)}}" class="mainDiv" fxFlexFill>
     <app-zona6 [Zona6]="Formular.VehiculA.Zona6" [Polita]="Formular.VehiculA.Polita" [step]="5" (zoneCompleted)="refreshProgressBar($event)" (politaFound)="populateFormularFromPolita($event, 'A')"></app-zona6>
   </div>
@@ -287,40 +288,50 @@
   <div  *ngIf="CommonFunctions.step==12" id="{{getDivId(12)}}" class="mainDiv" fxFlexFill>
     <app-zona15 [Zona15]="Formular.VehiculA.Zona15" [step]="12" (zoneCompleted)=refreshProgressBar($event)></app-zona15>
   </div>
-
-
   <div *ngIf="CommonFunctions.step==13" id="{{getDivId(13)}}" class="mainDiv" fxFlexFill>
-    <app-zona6 [Zona6]="Formular.VehiculB.Zona6" [Polita]="Formular.VehiculB.Polita" [step]="13" (zoneCompleted)="refreshProgressBar($event)" (politaFound)="populateFormularFromPolita($event, 'B')"></app-zona6>
+    <app-file-upload [ZonaFisiere]="Formular.VehiculA.ZonaFisiere" [Id]="Formular.Id" [step]="13" (zoneCompleted)="refreshProgressBar($event)" (filesUploaded)="filesUploaded($event)"></app-file-upload>
   </div>
-  <div  *ngIf="CommonFunctions.step==14" id="{{getDivId(14)}}" class="mainDiv" fxFlexFill>
-    <app-zona7 [Zona7]="Formular.VehiculB.Zona7" [step]="14" (zoneCompleted)=refreshProgressBar($event)></app-zona7>
+  <!-- end vehicul A -->
+
+
+  <!-- vehicul B -->
+  <div *ngIf="CommonFunctions.step==14" id="{{getDivId(14)}}" class="mainDiv" fxFlexFill>
+    <app-zona6 [Zona6]="Formular.VehiculB.Zona6" [Polita]="Formular.VehiculB.Polita" [step]="14" (zoneCompleted)="refreshProgressBar($event)" (politaFound)="populateFormularFromPolita($event, 'B')"></app-zona6>
   </div>
-  <div *ngIf="CommonFunctions.step==15" id="{{getDivId(15)}}" class="mainDiv" fxFlexFill>
-    <app-zona8 [Zona8]="Formular.VehiculB.Zona8" [step]="15" (zoneCompleted)=refreshProgressBar($event)></app-zona8>
+  <div  *ngIf="CommonFunctions.step==15" id="{{getDivId(15)}}" class="mainDiv" fxFlexFill>
+    <app-zona7 [Zona7]="Formular.VehiculB.Zona7" [step]="15" (zoneCompleted)=refreshProgressBar($event)></app-zona7>
   </div>
   <div *ngIf="CommonFunctions.step==16" id="{{getDivId(16)}}" class="mainDiv" fxFlexFill>
-    <app-zona9 [Zona9]="Formular.VehiculB.Zona9" [Zona6]="Formular.VehiculB.Zona6" [step]="16" (zoneCompleted)=refreshProgressBar($event)></app-zona9>
+    <app-zona8 [Zona8]="Formular.VehiculB.Zona8" [step]="16" (zoneCompleted)=refreshProgressBar($event)></app-zona8>
   </div>
-  <div  *ngIf="CommonFunctions.step==17" id="{{getDivId(17)}}" class="mainDiv" fxFlexFill>
-    <app-zona10 [Zona10]="Formular.VehiculB.Zona10" [tipVehicul]="Formular.VehiculB.Zona7.Motor.Tip" [step]="17" (zoneCompleted)=refreshProgressBar($event)></app-zona10>
+  <div *ngIf="CommonFunctions.step==17" id="{{getDivId(17)}}" class="mainDiv" fxFlexFill>
+    <app-zona9 [Zona9]="Formular.VehiculB.Zona9" [Zona6]="Formular.VehiculB.Zona6" [step]="17" (zoneCompleted)=refreshProgressBar($event)></app-zona9>
   </div>
-  <div *ngIf="CommonFunctions.step==18" id="{{getDivId(18)}}" class="mainDiv" fxFlexFill>
-    <app-zona11 [Zona11]="Formular.VehiculB.Zona11" [tipVehicul]="Formular.VehiculB.Zona7.Motor.Tip" [step]="18" (zoneCompleted)=refreshProgressBar($event)></app-zona11>
+  <div  *ngIf="CommonFunctions.step==18" id="{{getDivId(18)}}" class="mainDiv" fxFlexFill>
+    <app-zona10 [Zona10]="Formular.VehiculB.Zona10" [tipVehicul]="Formular.VehiculB.Zona7.Motor.Tip" [step]="18" (zoneCompleted)=refreshProgressBar($event)></app-zona10>
   </div>
   <div *ngIf="CommonFunctions.step==19" id="{{getDivId(19)}}" class="mainDiv" fxFlexFill>
-    <app-zona14 [Zona14]="Formular.VehiculB.Zona14" [step]="19" (zoneCompleted)=refreshProgressBar($event)></app-zona14>
+    <app-zona11 [Zona11]="Formular.VehiculB.Zona11" [tipVehicul]="Formular.VehiculB.Zona7.Motor.Tip" [step]="19" (zoneCompleted)=refreshProgressBar($event)></app-zona11>
   </div>
   <div *ngIf="CommonFunctions.step==20" id="{{getDivId(20)}}" class="mainDiv" fxFlexFill>
-    <app-zona15 [Zona15]="Formular.VehiculB.Zona15" [step]="20" (zoneCompleted)=refreshProgressBar($event)></app-zona15>
+    <app-zona14 [Zona14]="Formular.VehiculB.Zona14" [step]="20" (zoneCompleted)=refreshProgressBar($event)></app-zona14>
   </div>
-
-
   <div *ngIf="CommonFunctions.step==21" id="{{getDivId(21)}}" class="mainDiv" fxFlexFill>
-    <app-zona12 [Zona12]="Formular.Zona12" [Aditionale]="Formular.Aditionale" [Zona8A]="Formular.VehiculA.Zona8" [Zona8B]="Formular.VehiculB.Zona8" [step]="21" (zoneCompleted)=refreshProgressBar($event)></app-zona12>
+    <app-zona15 [Zona15]="Formular.VehiculB.Zona15" [step]="21" (zoneCompleted)=refreshProgressBar($event)></app-zona15>
   </div>
-  <div *ngIf="CommonFunctions.step==22" id="{{getDivId(22)}}" class="mainDiv" fxFlexFill>`
-    <app-zona13 [Zona13]="Formular.Zona13" [step]="22" (zoneCompleted)="refreshProgressBar($event)"></app-zona13>
+  <div *ngIf="CommonFunctions.step==22" id="{{getDivId(22)}}" class="mainDiv" fxFlexFill>
+    <app-file-upload [ZonaFisiere]="Formular.VehiculA.ZonaFisiere" [Id]="Formular.Id" [step]="22" (zoneCompleted)="refreshProgressBar($event)" (filesUploaded)="filesUploaded($event)"></app-file-upload>
   </div>
-</div>
+  <!-- end vehicul B -->
 
+  <div *ngIf="CommonFunctions.step==23" id="{{getDivId(23)}}" class="mainDiv" fxFlexFill>
+    <app-zona12 [Zona12]="Formular.Zona12" [Aditionale]="Formular.Aditionale" [Zona8A]="Formular.VehiculA.Zona8" [Zona8B]="Formular.VehiculB.Zona8" [step]="23" (zoneCompleted)=refreshProgressBar($event)></app-zona12>
+  </div>
+  <div *ngIf="CommonFunctions.step==24" id="{{getDivId(24)}}" class="mainDiv" fxFlexFill>
+    <app-zona13 [Zona13]="Formular.Zona13" [step]="24" (zoneCompleted)="refreshProgressBar($event)"></app-zona13>
+  </div>
+
+</div>
+<!--
 <router-outlet></router-outlet>
+-->

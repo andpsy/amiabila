@@ -42,7 +42,8 @@ export class Zona8Component implements OnInit {
     if(this.childForm.valid){
       this.Zona8.StepCompleted = true;
       //this.zoneCompleted.emit(true);
-      this.zoneCompleted.emit(this.Zona8);
+      if(step === this.CommonFunctions.step)
+        this.zoneCompleted.emit(this.Zona8);
     }
     CommonFunctions.showDiv(step, visibility);
   }

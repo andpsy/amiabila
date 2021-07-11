@@ -40,7 +40,8 @@ export class Zona6Component implements OnInit, AfterViewInit {
     if(this.childForm.valid){
       this.Zona6.StepCompleted = true;
       //this.zoneCompleted.emit(true);
-      this.zoneCompleted.emit(this.Zona6);
+      if(step === this.CommonFunctions.step)
+        this.zoneCompleted.emit(this.Zona6);
     }
     CommonFunctions.showDiv(step, visibility);
   }

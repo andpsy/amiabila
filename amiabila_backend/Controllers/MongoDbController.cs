@@ -17,10 +17,19 @@ namespace amiabila_backend.Controllers
   public class MongoDbController : ControllerBase
   {
     [HttpGet]
-    public void Get()
+    public List<Formular> GetAll()
     {
       MongoDbLayer db = new MongoDbLayer("Amiabila");
-      db.InsertRecord("Zona2", new Zona2 { Loc = "Bucuresti", Tara = "Romania", StepCompleted = false });
+      return db.LoadRecords<Formular>("Formulare");
+    }
+
+
+    [HttpGet("{id}")]
+    public Formular Get(string id)
+    {
+      Guid Id = new Guid(id);
+      MongoDbLayer db = new MongoDbLayer("Amiabila");
+      return db.LoadRecordById<Formular>("Formulare", Id);
     }
 
     [Route("~/api/[controller]/Upsert")]

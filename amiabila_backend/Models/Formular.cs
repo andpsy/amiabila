@@ -16,8 +16,7 @@ namespace amiabila_backend.Models
     public Vehicul VehiculA { get; set; }
     public Vehicul VehiculB { get; set; }
     public Zona12 Zona12 { get; set; }
-    public Zona13 Zona13 { get; set; }
-    
+    public Zona13 Zona13 { get; set; }    
     public Aditionale Aditionale { get; set; }
   }
 }

@@ -15,6 +15,6 @@
 
 		<h3>Pentru a continua, avem nevoie de acordul dumneavoastra pentru toate aspectele de mai sus</h3>
 
-		<button class="prerequisite_button" (click)="this.confirmed.emit(a);" [disabled]="!(a.Conditii && a.DocumenteNecesare && a.GDPR && a.TermeniSiConditii)"> Continua >> </button>
+		<button class="prerequisite_button" (click)="a.StepCompleted=true; this.confirmed.emit(a);" [disabled]="!(a.Conditii && a.DocumenteNecesare && a.GDPR && a.TermeniSiConditii)"> Continua >> </button>
 	</div>
 </div>

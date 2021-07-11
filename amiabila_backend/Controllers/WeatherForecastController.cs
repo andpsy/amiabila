@@ -13,6 +13,7 @@ using Xfinium.Pdf.Graphics;
 using Xfinium.Pdf.DigitalSignatures;
 using Xfinium.Pdf.Forms;
 using System.IO;
+using amiabila_backend.Models;
 
 namespace amiabila_backend.Controllers
 {
@@ -46,9 +47,8 @@ namespace amiabila_backend.Controllers
         }
         */
         [HttpGet]
-        public void Pdf()
+        public void Pdf(Formular f)
         {
-          /*
           try
           {
             string templateFileName = Path.Combine("formular.pdf");
@@ -62,7 +62,10 @@ namespace amiabila_backend.Controllers
               int n = fs.Read(bs, 0, (int)fs.Length);
               MemoryStream ms = new MemoryStream(bs);
               PdfFixedDocument poDocument = new PdfFixedDocument(ms);
-              poDocument.Form.Fields["1DATA"].Value = String.Format("{0}.{1}.{2}", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year);
+            //poDocument.Form.Fields["1DATA"].Value = String.Format("{0}.{1}.{2}", DateTime.Now.Day, DateTime.Now.Month, DateTime.Now.Year);
+              poDocument.Form.Fields["1DATA"].Value = f.Zona1.Data;
+              poDocument.Form.Fields["1ORA"].Value = f.Zona1.Ora;
+
               poDocument.Save(fs);
               fs.Flush();
               fs.Dispose();
@@ -71,7 +74,6 @@ namespace amiabila_backend.Controllers
             }
           }
           catch (Exception exp) { Console.Write(exp); }
-          */
         }
 
 

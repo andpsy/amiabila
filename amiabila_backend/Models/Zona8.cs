@@ -13,7 +13,8 @@ namespace amiabila_backend.Models
     public string DenumireSucursala { get; set; }
     public string Adresa { get; set; }
     public string Tara { get; set; }
-    public string TelefonEmail { get; set; }
+    public string Telefon { get; set; }
+    public string Email { get; set; }
     public bool Casco { get; set; }
     public bool StepCompleted { get; set; }
   }

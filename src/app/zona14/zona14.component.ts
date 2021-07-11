@@ -12,6 +12,7 @@ export class Zona14Component implements OnInit {
   @Input() Zona14: Zona14;  
   @Output() zoneCompleted = new EventEmitter();
   @Input() step: number;  
+  public CommonFunctions = CommonFunctions;  
 
   constructor() { 
   	//this.Zona14 = new Zona14();
@@ -24,7 +25,8 @@ export class Zona14Component implements OnInit {
     if(this.childForm.valid){
       this.Zona14.StepCompleted = true;
       //this.zoneCompleted.emit(true);
-      this.zoneCompleted.emit(this.Zona14);
+      if(step === this.CommonFunctions.step)
+        this.zoneCompleted.emit(this.Zona14);
     }
     CommonFunctions.showDiv(step, visibility);
   }

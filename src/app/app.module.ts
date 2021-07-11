@@ -46,6 +46,9 @@ import { PolitaComponent } from './polita/polita.component';
 import { PrerequisitesComponent } from './prerequisites/prerequisites.component';
 import { PagubaAutoComponent } from './paguba-auto/paguba-auto.component';
 import { PagubaObiectComponent } from './paguba-obiect/paguba-obiect.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { DndDirective } from './dnd.directive';
+import { ProgressComponent } from './progress/progress.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +80,10 @@ import { PagubaObiectComponent } from './paguba-obiect/paguba-obiect.component';
     PolitaComponent,
     PrerequisitesComponent,
     PagubaAutoComponent,
-    PagubaObiectComponent  
+    PagubaObiectComponent,
+    FileUploadComponent,
+    DndDirective,
+    ProgressComponent  
   ],
   imports: [
     AppRoutingModule,

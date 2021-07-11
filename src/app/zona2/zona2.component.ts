@@ -20,6 +20,8 @@ export class Zona2Component implements OnInit {
   public CommonFunctions = CommonFunctions;  
   adresa:string;
   public autocomplete;
+  public newPosition: google.maps.LatLngBounds = null;
+  public NewPlaceSelected;
 
   constructor() { 
   	//this.Zona2 = new Zona2();
@@ -31,19 +33,28 @@ export class Zona2Component implements OnInit {
     this.autocomplete = new google.maps.places.Autocomplete(
       document.getElementById("Loc") as HTMLInputElement,
       {
-        types:['geocode'],
+        types:['address'],
         componentRestrictions:{'country':['RO']},
-        fields:['place_id','geometry','name']
+        fields:['address_components','geometry']
       });
-    this.autocomplete.addListener('place_changed', this.onPlaceChanged);
+    //this.autocomplete.addListener('place_changed', this.onPlaceChanged);
+    this.autocomplete.addListener('place_changed', this.onPlaceChanged.bind(this));
+
   }
+  autocompleteSetBounds(){
+    if(this.newPosition != null){
+      this.autocomplete.setBounds(this.newPosition);
+    }
+  }
+
   onPlaceChanged(){
     var place = this.autocomplete.getPlace();
     if(!place.geometry){
       //user didn't select a place
       (document.getElementById("Loc") as HTMLInputElement).placeholder = "Selectati locatia";
     }else{
-      //to do something with the selected place
+      //this.Zona2.Loc = place.formatted_address; //.adr_address;
+      this.NewPlaceSelected = place;
     }
   }
   ngAfterViewInit() {
@@ -54,6 +65,7 @@ export class Zona2Component implements OnInit {
     if(this.Zona2.Tara == null){
       //this.filterText.setValue({name: 'ROMANIA'});
       this.Tara.control.value = this.Zona2.Tara = "ROMANIA";
+      console.log(this.Tara.control.value, this.Zona2.Tara);
     }
   }
 
@@ -61,7 +73,8 @@ export class Zona2Component implements OnInit {
     if(this.childForm.valid){
       this.Zona2.StepCompleted = true;
       //this.zoneCompleted.emit(true);
-      this.zoneCompleted.emit(this.Zona2);
+      if(step === this.CommonFunctions.step)
+        this.zoneCompleted.emit(this.Zona2);
     }
     CommonFunctions.showDiv(step, visibility);
   }

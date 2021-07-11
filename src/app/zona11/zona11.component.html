@@ -1,10 +1,9 @@
 <form #childForm="ngForm" autocomplete="off">
-	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
-		<span class="zona-title" [ngStyle]="{'margin-bottom':'10px', 'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
-			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
+	<div fxLayout="column" class="innerMainDiv" style="border-width: 6px; border-style:solid;" [ngStyle]="{'border-color': CommonFunctions.Steps[step].bgColor}">	
+		<span class="zona-title" [ngStyle]="{'background-color': CommonFunctions.Steps[step].bgColor, 'color': CommonFunctions.Steps[step].color }">
 			Rubrica 11 - Pagube vizibile la vehiculul {{step == 10 ? "A" : "B"}}
 		</span>	
-<!--
+		<!--
 		<mat-chip-list aria-label="pagube" fxFlex>
 		  <mat-chip *ngFor="let p of Zona11.Pagube; let i = index">{{p}}</mat-chip>
 		</mat-chip-list>
@@ -13,7 +12,7 @@
 		  <input matInput [(ngModel)]="newPaguba" name="newPaguba" (blur)="addPaguba()">
 		 	<mat-icon matSuffix *ngIf="!CommonFunctions.isNullOrWhiteSpaces(newPaguba)" (click)="addPaguba()">control_point</mat-icon>  
 		</mat-form-field>  
--->
+		-->
 
 		<mat-form-field fxFlex style="display:contents;">
 		  <mat-label>Pagube</mat-label>

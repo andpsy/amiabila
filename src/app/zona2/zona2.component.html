@@ -5,7 +5,7 @@
 			Rubrica 2 - Localizare
 		</span>	
 
-		<app-google [Zona2]="Zona2" (newItemEvent)="Zona2.Loc = $event" (imgMapEvent)="imgMapEvent.emit($event)"></app-google>
+		<app-google [Zona2]="Zona2" [NewPlaceSelected]="NewPlaceSelected" (newPositionSelectedEvent)="newPosition = $event; autocompleteSetBounds()" (newItemEvent)="Zona2.Loc = $event" (imgMapEvent)="imgMapEvent.emit($event)"></app-google>
 
 	  <mat-form-field fxFlex>
 	    <mat-label>Locul accidentului:</mat-label>

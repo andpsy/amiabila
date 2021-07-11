@@ -1,0 +1,59 @@
+<div fxLayout="column" class="innerMainDiv" style="border-width: 6px; border-style:solid;" [ngStyle]="{'border-color': CommonFunctions.Steps[step].bgColor}"> 
+  <span class="zona-title" [ngStyle]="{'background-color': CommonFunctions.Steps[step].bgColor,
+    'color': CommonFunctions.Steps[step].color }">
+    Incarcati documentele si imaginile pentru vehiculul {{step < 15  ? "A" : "B"}}
+  </span> 
+
+  <div style="display:flex;">
+    <div *ngFor="let poza of ZonaFisiere.Fisiere; let i = index" class="uploadedImgListThumb" [style.background-image]="'url(' + CommonFunctions.SRV_RESOURCES_URL + Id + '/' + poza.DenumireServer + ')'">
+      <div class="uploadedImgThumbTop">
+        <span>{{poza.Tip}}</span>
+      </div>
+
+      <div class="uploadedImgThumbBottom">
+        <mat-icon aria-hidden="false" aria-label="Delete file" class="delete uploadedThumbDelete" (click)="deleteFile(i)">delete</mat-icon>
+      </div>
+    </div>
+  </div>
+
+  <h4 *ngIf="tipPoza != null && tipPoza != undefined">{{tipPoza.name}}</h4>
+
+  <div [hidden]="tipPoza == null || tipPoza == undefined || ZonaFisiere.Fisiere.length>=7" class="container" appDnd (fileDropped)="onFileDropped($event)">
+    <input type="file" #fileDropRef id="fileDropRef" [multiple]="tipPoza != null && tipPoza != undefined && contor==2" (change)="fileBrowseHandler($event)" accept="image/*" />
+    <mat-icon aria-hidden="false" aria-label="Drag&Drop Files" class="dragDropIcon">file_upload</mat-icon>
+    <h3>Trageti fisierele aici</h3>
+    <h3>sau</h3>
+    <label for="fileDropRef">Selectati fisierele din dispozitiv</label>
+    <h3 *ngIf="tipPoza != null && tipPoza != undefined && contor==2">Maxim 5 imagini!</h3>
+  </div>
+
+  <div *ngIf="!ZonaFisiere.StepCompleted" class="files-list">
+    <div class="single-file" *ngFor="let file of files; let i = index" id="file_{{i}}">
+      <mat-icon aria-hidden="false" aria-label="File" class="dragDropIcon">description</mat-icon>
+      <div class="info">
+        <h4 class="name">
+          {{ file?.name }}
+        </h4>
+        <p class="size">
+          {{ formatBytes(file?.size) }}
+        </p>
+        <app-progress [progress]="file?.progress"></app-progress>
+        <mat-label matError *ngIf="file?.error">Nu am putut incarca fisierul!</mat-label>
+      </div>
+      <!--
+      <mat-icon aria-hidden="false" aria-label="Delete file" class="delete" (click)="deleteFile(i)">delete</mat-icon>
+      -->
+    </div>
+  </div>
+
+  <app-display-errors
+    class="form-error-container"
+    [style]="{'max-height': ZonaFisiere.hasError() != null ? '200px' : '0'}"
+    [errors]="ZonaFisiere.hasError()">
+  </app-display-errors>
+  <div fxFlex fxLayout="row" fxLayout.lt-md="column" class="ZonaButtonsContainer">
+    <button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
+    <button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
+    <button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && ZonaFisiere.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>
+  </div>  
+</div>
