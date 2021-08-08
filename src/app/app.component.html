@@ -18,31 +18,27 @@
     <app-zona6 [Zona6]="Formular.VehiculA.Zona6" [Polita]="Formular.VehiculA.Polita" [step]="5" (zoneCompleted)="refreshProgressBar($event)" (politaFound)="populateFormularFromPolita($event, 'A')"></app-zona6>
   </div>
 </div>
-
-<div *ngIf="Formular.getPrererquisites() && !use_form" class="content">
-  <div id="{{getDivId(14)}}" class="mainDiv" fxFlexFill [style]="{'position':use_form ? 'absolute' : 'relative'}">
-    <app-zona6 [Zona6]="Formular.VehiculB.Zona6" [Polita]="Formular.VehiculB.Polita" [step]="14" (zoneCompleted)="refreshProgressBar($event)" (politaFound)="populateFormularFromPolita($event, 'B')"></app-zona6>
-  </div>
-</div>
-
 <div *ngIf="Formular.getPrererquisites() && !use_form" class="content">
   <div id="{{getDivId(7)}}" class="mainDiv" fxFlexFill [style]="{'position':use_form ? 'absolute' : 'relative'}">
     <app-zona8 [Zona8]="Formular.VehiculA.Zona8" [step]="7" (zoneCompleted)=refreshProgressBar($event)></app-zona8>
   </div>
 </div>
-
-<div *ngIf="Formular.getPrererquisites() && !use_form" class="content">
-  <div id="{{getDivId(16)}}" class="mainDiv" fxFlexFill [style]="{'position':use_form ? 'absolute' : 'relative'}">
-    <app-zona8 [Zona8]="Formular.VehiculB.Zona8" [step]="16" (zoneCompleted)=refreshProgressBar($event)></app-zona8>
-  </div>
-</div>
-
 <div *ngIf="Formular.getPrererquisites() && !use_form" class="content">
   <div id="{{getDivId(13)}}" class="mainDiv" fxFlexFill [style]="{'position':use_form ? 'absolute' : 'relative'}">
     <app-file-upload [ZonaFisiere]="Formular.VehiculA.ZonaFisiere" [Id]="Formular.Id" [step]="13" (zoneCompleted)="refreshProgressBar($event)" (filesUploaded)="filesUploaded($event)"></app-file-upload>
   </div>
 </div>
 
+<div *ngIf="Formular.getPrererquisites() && !use_form" class="content">
+  <div id="{{getDivId(14)}}" class="mainDiv" fxFlexFill [style]="{'position':use_form ? 'absolute' : 'relative'}">
+    <app-zona6 [Zona6]="Formular.VehiculB.Zona6" [Polita]="Formular.VehiculB.Polita" [step]="14" (zoneCompleted)="refreshProgressBar($event)" (politaFound)="populateFormularFromPolita($event, 'B')"></app-zona6>
+  </div>
+</div>
+<div *ngIf="Formular.getPrererquisites() && !use_form" class="content">
+  <div id="{{getDivId(16)}}" class="mainDiv" fxFlexFill [style]="{'position':use_form ? 'absolute' : 'relative'}">
+    <app-zona8 [Zona8]="Formular.VehiculB.Zona8" [step]="16" (zoneCompleted)=refreshProgressBar($event)></app-zona8>
+  </div>
+</div>
 <div *ngIf="Formular.getPrererquisites() && !use_form" class="content">
   <div id="{{getDivId(22)}}" class="mainDiv" fxFlexFill [style]="{'position':use_form ? 'absolute' : 'relative'}">
     <app-file-upload [ZonaFisiere]="Formular.VehiculB.ZonaFisiere" [Id]="Formular.Id" [step]="22" (zoneCompleted)="refreshProgressBar($event)" (filesUploaded)="filesUploaded($event)"></app-file-upload>

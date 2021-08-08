@@ -1,9 +1,8 @@
-﻿namespace amiabila_backend.Models
+namespace amiabila_backend.Models
 {
   public class Fisier
   {
-    string Tip { get; set; }
-    string DenumireClient { get; set; }
-    string DenumireServer { get; set; }
+    public string DenumireClient { get; set; }
+    public string DenumireServer { get; set; }
   }
 }
