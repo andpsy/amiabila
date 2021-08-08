@@ -52,5 +52,29 @@ namespace amiabila_backend.Controllers
       }
     }
 
+    [HttpGet("{id}/{DenumireServer}")]
+    [Route("~/api/[controller]/Delete/{id}/{DenumireServer}")]
+    public IActionResult Delete(string id, string DenumireServer)
+    {
+      try
+      {
+        var fileName = Path.Combine("Resources", "Formulare", id, DenumireServer);
+        var pathToDelete = Path.Combine(Directory.GetCurrentDirectory(), fileName);
+        if(System.IO.File.Exists(pathToDelete))
+        {
+          System.IO.File.Delete(pathToDelete);
+          return Ok();
+        }
+        else
+        {
+          return BadRequest();
+        }
+      }
+      catch (Exception ex)
+      {
+        return StatusCode(500, $"Internal server error: {ex}");
+      }
+    }
+
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, AfterViewInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { CommonFunctions, Zona8, TariCarteVerde, SocietatiAsigurare } from '../entities';
+import { CommonFunctions, Zona8, TariCarteVerde, SocietatiAsigurare, USE_FORM } from '../entities';
 
 @Component({
   selector: 'app-zona8',
@@ -21,6 +21,9 @@ export class Zona8Component implements OnInit {
   public SocietatiCASCO: SocietatiAsigurare;
   public SocietatiCASCOTemp: SocietatiAsigurare;  
   public CommonFunctions = CommonFunctions;  
+  public use_form = USE_FORM;
+  public zonashow = null;
+  public icon = null;
 
   constructor() { 
   	//this.Zona8 = new Zona8();
@@ -33,6 +36,8 @@ export class Zona8Component implements OnInit {
   }
 
   ngOnInit(): void {
+    this.zonashow = this.step == 25 ? true : false;
+    this.icon = this.step == 25 ? 'expand_less' : 'expand_more';
     this.Tara.control.value = this.Zona8.Tara = "ROMANIA";
     this.SocietatiRCA.Societati = this.SocietatiRCA.Societati.filter(a => a.RCA == true);
     this.SocietatiRCATemp.Societati = this.SocietatiRCATemp.Societati.filter(a => a.RCA == true);
@@ -76,5 +81,9 @@ export class Zona8Component implements OnInit {
                                              .startsWith(event.toLowerCase())); 
       }
    }     
+  changeZona(){
+    this.zonashow = !this.zonashow;
+    this.icon = !this.zonashow ? 'expand_more' : 'expand_less'
+  }
   
 }

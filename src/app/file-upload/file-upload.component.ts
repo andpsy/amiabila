@@ -1,5 +1,5 @@
-import { Component, Input, Output, Inject, ViewChild, ElementRef, EventEmitter } from '@angular/core';
-import { CommonFunctions, ZonaFisiere, Fisier, Formular } from '../entities';
+import { Component, OnInit, Input, Output, Inject, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { CommonFunctions, ZonaFisiere, Dosar, Fisier, Formular, USE_FORM } from '../entities';
 import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { catchError, map, tap, finalize } from 'rxjs/operators';
 import { Subscription, Observable, forkJoin } from 'rxjs';
@@ -10,9 +10,10 @@ import { DOCUMENT } from '@angular/common';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css']
 })
-export class FileUploadComponent {
+export class FileUploadComponent implements OnInit {
 
   @ViewChild("fileDropRef", { static: false }) fileDropEl: ElementRef;
+  @ViewChild("uploadZone", { static: false }) uploadZone: HTMLElement;
   @Input() ZonaFisiere: ZonaFisiere;  
   @Input() Id: string;
   @Input() step: number;  
@@ -22,18 +23,51 @@ export class FileUploadComponent {
   //uploadSubs: Subscription[] = [];
   uploadSubs: Observable<any>[] = [];
   public CommonFunctions = CommonFunctions;  
-  public tipPoza = CommonFunctions.TipPoze[0];
-  public contor:number = 0;
+  //public tipPoza = CommonFunctions.TipPoze[0];
+  public tipPoza = null;
+  public indexPoza = null;
+  //public contor:number = 0;
+  public use_form = USE_FORM;
+  public zonashow = null;
+  public icon = null;
 
   constructor(private http:HttpClient, @Inject(DOCUMENT) private document: any, ) { }
+
+  ngOnInit(): void {
+    this.zonashow = this.step == 25 ? true : false;
+    this.icon = this.step == 25 ? 'expand_less' : 'expand_more';
+    //this.tipPoza = this.TipFisiere[0];
+    this.getSelectedTip();
+  } 
+
+  getSelectedTip(){
+    for(var i=0;i<this.ZonaFisiere.Fisiere.length;i++){
+      if(this.ZonaFisiere.Fisiere[i].Tip.selected){
+        this.tipPoza = this.ZonaFisiere.Fisiere[i].Tip;
+        this.indexPoza = i;
+        return;
+      }
+    }
+  }
+
+  changeSelectedTip(dosar){
+    var idx = this.ZonaFisiere.Fisiere.indexOf(dosar);
+    for(var i=0;i<this.ZonaFisiere.Fisiere.length;i++){
+      if(i == idx)
+        this.ZonaFisiere.Fisiere[i].Tip.selected = true;
+      else
+        this.ZonaFisiere.Fisiere[i].Tip.selected = false;
+    }
+    this.getSelectedTip();
+  }
 
   /**
    * on file drop handler
    */
   onFileDropped($event) {
     this.prepareFilesList($event);
-    this.tipPoza = CommonFunctions.TipPoze[this.contor];
-    this.contor++;
+    //this.tipPoza = CommonFunctions.TipPoze[this.contor];
+    //this.contor++;
   }
 
   /**
@@ -41,26 +75,25 @@ export class FileUploadComponent {
    */
   fileBrowseHandler(event) {
     this.prepareFilesList(event.target.files);
-    this.tipPoza = CommonFunctions.TipPoze[this.contor];
-    this.contor++;
+    //this.tipPoza = CommonFunctions.TipPoze[this.contor];
+    //this.contor++;
   }
 
-  /**
-   * Delete file from files list
-   * @param index (File index)
-   */
-  deleteFile(index: number) {
-    if (this.files[index].progress < 100) {
-      console.log("Upload in progress.");
-      return;
-    }
-    this.files.splice(index, 1);
+  deleteFile(dosar: Dosar, i: number) {
+    var url = this.CommonFunctions.SRV_URL + 'Upload/Delete/' + this.Id + '/' + dosar.Fisiere[i].DenumireServer;
+
+    var delete$ = this.http.get(url, { headers: new HttpHeaders({ 
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' })}); // as Observable<any>;
+    delete$.subscribe(response => {
+          dosar.Fisiere.splice(i, 1);
+        }, error => { console.warn(error) })    
   }
 
   prepareFilesList(files: Array<any>) {  
     var c=0;
     for (const file of files) {
-      if(c<5){ //maxim 5 fisiere
+      if((this.tipPoza.max_allowed == null && c<1) || (this.tipPoza.max_allowed != null && c<this.tipPoza.max_allowed)){ //maxim 5 fisiere
         this.files.push(file);
         const formData = new FormData();
         formData.append("id", this.Id);
@@ -85,9 +118,11 @@ export class FileUploadComponent {
                    this.document.getElementById(f).style.display = "none";
                 }, 2000);                                            
             }
-          }else if (event.type === HttpEventType.Response) {
-            var fisier = {'Tip':this.tipPoza.name, 'DenumireClient':event.body["fileName"], 'DenumireServer':event.body["fileName"]};
-            this.ZonaFisiere.Fisiere.push(fisier);
+          }else if (event.type === HttpEventType.Response) { //s-a incarcat fisierul
+            //var fisier = {'Tip':this.tipPoza.name, 'DenumireClient':event.body["fileName"], 'DenumireServer':event.body["fileName"]};
+            var fisier = {'DenumireClient':event.body["fileName"], 'DenumireServer':event.body["fileName"]};
+            //this.ZonaFisiere.Fisiere.push(fisier);
+            this.ZonaFisiere.Fisiere[this.indexPoza].Fisiere.push(fisier);            
           }
         }, error => { this.files[this.files.indexOf(file)].error = true; })
         this.uploadSubs.push(upload$);    
@@ -134,4 +169,10 @@ export class FileUploadComponent {
     }
     CommonFunctions.showDiv(step, visibility);
   }  
+
+  changeZona(){
+    this.zonashow = !this.zonashow;
+    this.icon = !this.zonashow ? 'expand_more' : 'expand_less'
+  }
+
 }

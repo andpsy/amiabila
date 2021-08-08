@@ -1,4 +1,5 @@
 export const GOOGLE_API_KEY = "AIzaSyBDS3LAPdSf1eV6wFFgxsjkn0qNJCuC2Eo";
+export const USE_FORM = false; //daca vrem sa folosim formularul sau trecem direct la incarcare documente (inclusiv amiabil)
 
 export const DD_MM_YYYY_Format = {
     parse: {
@@ -81,14 +82,20 @@ export class CommonFunctions{
     {"id":7, "zona":"dreapta"}, 
     {"id":8, "zona":"dreapta-fata"}];
 
-  public static DocumenteNecesare = [{"selected":false, "name":"CI soferi"}, 
+  public static DocumenteNecesare = [
+    {"selected":false, "name":"Constat Amiabil"}, //se va scoate cand folosim formularul
+    {"selected":false, "name":"CI soferi"}, 
     {"selected":false, "name":"Permise conducere soferi"}, 
     {"selected":false, "name":"Polite auto RCA"}, 
     {"selected":false, "name":"Alte acte"}];
 
-  public static TipPoze = [{"selected":false, "name":"1. Carte/Buletin de identitate:"}, 
-    {"selected":false, "name":"2. Permis de conducere:"},     
-    {"selected":false, "name":"3. Imagini avarii auto:"}];
+  public static TipPozeFaraFormular = [
+    {"selected":true, "name":"1. Constat Amiabil:", "multiple":false, "max_allowed":null}];
+
+  public static TipPozeCuFormular = [
+    {"selected":true, "name":"2. Carte/Buletin de identitate:", "multiple":false, "max_allowed":null}, 
+    {"selected":false, "name":"3. Permis de conducere:", "multiple":false, "max_allowed":null},     
+    {"selected":false, "name":"4. Imagini avarii auto:", "multiple":true, "max_allowed":5}];
 
   public static showDiv(step:number, visibility:boolean):void{
     /*
@@ -132,7 +139,9 @@ export class CommonFunctions{
       {'Step':22, 'DivId':'fisiereBDiv', 'vehicul':'B', 'zona':'ZonaFisiere', 'bgColor':'#F8D32D', 'color':'black'},
 
       {'Step':23, 'DivId':'zona12Div', 'vehicul':null, 'zona':'Zona12', 'bgColor':'lightgray', 'color':'navy'},
-      {'Step':24, 'DivId':'zona13Div', 'vehicul':null, 'zona':'Zona13', 'bgColor':'lightgray', 'color':'navy'}];
+      {'Step':24, 'DivId':'zona13Div', 'vehicul':null, 'zona':'Zona13', 'bgColor':'lightgray', 'color':'navy'},
+
+      {'Step':25, 'DivId':'zona0Div', 'vehicul':null, 'zona':'ZonaFisiere', 'bgColor':'lightgray', 'color':'navy'}];
 
   public static getPreviousStepDivId(idx:number):string{
     return idx < 1 ? null : CommonFunctions.Steps[idx-1].DivId;
@@ -152,6 +161,13 @@ export class CommonFunctions{
     }
     return target;
   }
+}
+
+export class TipFisier{
+  selected: boolean;
+  name: string;  
+  multiple: boolean;
+  max_allowed: number;
 }
 
 export class Polita{
@@ -645,6 +661,7 @@ export class Aditionale {
   DocumenteNecesare: boolean;
   GDPR: boolean;
   TermeniSiConditii: boolean; 
+  ZonaFisiere: ZonaFisiere; // aici vom stoca formularul (calea) amiabil scanat
 
   PagubitDecontareDirecta: boolean;
   //PagubitSocietateDecontareDirecta: string;
@@ -657,6 +674,7 @@ export class Aditionale {
     this.GDPR = true;
     this.TermeniSiConditii = false; 
     // mai sus true - pt. teste 
+    this.ZonaFisiere = new ZonaFisiere(CommonFunctions.TipPozeFaraFormular);
 
     this.PagubitDecontareDirecta = false;
     //this.PagubitSocietateDecontareDirecta = null;
@@ -667,15 +685,32 @@ export class Aditionale {
 }
 
 export class ZonaFisiere{
-  Fisiere: Fisier[] = [];
+  Fisiere: Dosar[] = [];
   StepCompleted: boolean;
+
+  constructor(tipuriFisiere){
+    for(var i=0; i<tipuriFisiere.length;i++){
+      var dosar = new Dosar();
+      dosar.Tip = tipuriFisiere[i];
+      dosar.Fisiere = [];
+      this.Fisiere.push(dosar);
+    }
+  }
 
   public hasError():string[]{
     var toReturn:string[] = [];
+    /*
     if(this.Fisiere.length < 3)
       toReturn.push("Incarcati documentele!");
     else if(this.Fisiere[0].Tip.indexOf("identitate")<0 && this.Fisiere[1].Tip.indexOf("conducere")<0 && this.Fisiere[2].Tip.indexOf("avarii")<0 ){
       toReturn.push("Incarcati documentele!");
+    }
+    */
+    for(var i=0;i<this.Fisiere.length;i++){
+      if(this.Fisiere[i].Fisiere.length == 0){
+        toReturn.push("Incarcati documentele!");
+        break;
+      }
     }
     return toReturn.length > 0? toReturn : null;
   }  
@@ -703,7 +738,7 @@ export class Vehicul {
     this.Zona11 = new Zona11();
     this.Zona14 = new Zona14();
     this.Zona15 = new Zona15();
-    this.ZonaFisiere = new ZonaFisiere();
+    this.ZonaFisiere = new ZonaFisiere(CommonFunctions.TipPozeCuFormular);
   }
 }
 
@@ -797,8 +832,12 @@ export class Zona13 {
 
 }
 
+export class Dosar{
+  Tip: TipFisier;
+  Fisiere: Fisier[];
+}
+
 export class Fisier{
-  Tip: string;
   DenumireClient: string;
   DenumireServer: string; 
 }

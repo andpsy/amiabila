@@ -128,6 +128,7 @@ body { height: 100%; min-height: 100%; margin: 0px; font-family: calibri, "Helve
 	margin: auto;
 	max-width: 800px;
 	background-color: white;
+	transition: 1s ease;
 }
 
 .mat-form-field {
@@ -159,6 +160,7 @@ body { height: 100%; min-height: 100%; margin: 0px; font-family: calibri, "Helve
 	margin: 7px 7px 0px 7px;
 }
 .zona-title{
+	display: flex;
 	padding: 5px;
 	/* border: 1px solid lightgray;	*/
 	/* border-radius: 10px; */
@@ -355,16 +357,27 @@ mat-dialog-container {
 }
 .uploadedImgListThumb{
 	position:relative;
-	max-width:100px;
-	width: 100px;
-	height: 100px;
-	background-position:center;
-	background-repeat:no-repeat;
-	background-size:contain;
+	max-width:150px;
+	width: 150px;
+	height: 150px;
 	margin: 5px 0px 5px 5px;
 	font-size: x-small;
 	text-align: center;
 	border: 1px dashed black;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+}
+.uploadedImgListThumbInner{
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:contain;
+	max-width: 150px;
+	max-height: 150px;
+	display: flex;
+	transition: 0.15s ease;
+	border: 1px gray solid;
+	margin: 1px;
 }
 .uploadedImgThumbTop{
 	position: absolute;
@@ -372,7 +385,7 @@ mat-dialog-container {
 	left:0px;
 	width:100%;
 	height: 50%;
-	background:rgba(211, 211, 211, 0.3);
+	/*background:rgba(211, 211, 211, 0.3);*/
 }
 .uploadedImgThumbBottom{
 	position: absolute;
@@ -380,10 +393,15 @@ mat-dialog-container {
 	left:0px;
 	width:100%;
 	height: 50%;
-	background:rgba(211, 211, 211, 0.3);
+	/*background:rgba(211, 211, 211, 0.3);*/
 }
 .uploadedThumbDelete{
+	cursor: pointer;
 	position: absolute;
+	display: flex !important;
+	align-self: flex-end;
+	/*
 	bottom: 3px;
 	right: 3px;
+	*/
 }

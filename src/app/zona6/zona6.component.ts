@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation, AfterViewInit  } from '@angular/core';
-import { CommonFunctions, Zona6, Polita, TariCarteVerde, TaraCarteVerde } from '../entities';
+import { CommonFunctions, Zona6, Polita, TariCarteVerde, TaraCarteVerde, USE_FORM } from '../entities';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {PolitaComponent} from '../polita/polita.component';
 
@@ -20,6 +20,9 @@ export class Zona6Component implements OnInit, AfterViewInit {
   public Tari: TariCarteVerde;
   public TariTemp: TariCarteVerde;  
   public CommonFunctions = CommonFunctions;  
+  public use_form = USE_FORM;
+  public zonashow = null;
+  public icon = null;
 
   constructor(public dialog: MatDialog) { 
   	//this.Zona6 = new Zona6();
@@ -28,11 +31,13 @@ export class Zona6Component implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.zonashow = this.step == 25 ? true : false;
+    this.icon = this.step == 25 ? 'expand_less' : 'expand_more';
     this.Tara.control.value = this.Zona6.Tara = "ROMANIA";
   } 
 
   ngAfterViewInit(): void {
-    if(this.Polita == null || Object.keys(this.Polita).length == 0)
+    if( (this.use_form || (!this.use_form && this.zonashow)) && (this.Polita == null || Object.keys(this.Polita).length == 0))
       this.openPolitaDialog();
   }
 
@@ -75,6 +80,12 @@ export class Zona6Component implements OnInit, AfterViewInit {
       if(result != null)
         this.politaFound.emit(result);
     });    
+  }
+
+  changeZona(){
+    this.zonashow = !this.zonashow;
+    this.icon = !this.zonashow ? 'expand_more' : 'expand_less'
+    this.ngAfterViewInit();
   }
   
 }

@@ -49,6 +49,7 @@ import { PagubaObiectComponent } from './paguba-obiect/paguba-obiect.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { DndDirective } from './dnd.directive';
 import { ProgressComponent } from './progress/progress.component';
+import { ZonaFisiereComponent } from './zona-fisiere/zona-fisiere.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { ProgressComponent } from './progress/progress.component';
     PagubaObiectComponent,
     FileUploadComponent,
     DndDirective,
-    ProgressComponent  
+    ProgressComponent,
+    ZonaFisiereComponent  
   ],
   imports: [
     AppRoutingModule,

@@ -1,9 +1,10 @@
 <form #childForm="ngForm" autocomplete="off">
-	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}">	
-		<span class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'overflow':'hidden', 'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}" [style]="{'max-height':zonashow?'800px':'45px'}">	
+		<div class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
 			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
-			Rubrica 8 - Societate de asigurare (vezi documentul de asigurare)
-		</span>		
+			<span style="width:100%;">Rubrica 8 - Societate de asigurare (vezi documentul de asigurare)</span>
+			<mat-icon *ngIf="!use_form" aria-hidden="false" aria-label="expand" (click)="changeZona()" style="cursor: pointer;color: black;background-color: white;border-radius: 3px;">{{icon}}</mat-icon>			
+		</div>		
 		<!--
 	  <mat-form-field fxFlex>
 	    <mat-label>DENUMIRE:</mat-label>
@@ -112,7 +113,7 @@
  	  	[errors]="Zona8.hasError()">
   	</app-display-errors>	
 
-  	<div fxFlex fxLayout="row" fxLayout.lt-md="column" class="ZonaButtonsContainer">
+  	<div *ngIf="use_form" fxFlex fxLayout="row" fxLayout.lt-md="column" class="ZonaButtonsContainer">
 	  	<button mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step-1, true)"> << Rubrica anterioara </button>
   		<button mat-raised-button (click)="showDiv(step, false)"> |< Inapoi la formular </button>
   		<button [disabled]="CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR && Zona8.hasError() != null" mat-raised-button color="primary" (click)="showDiv(step, false); showDiv(step+1, true)"> Rubrica urmatoare >> </button>

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Inject, Output, ViewChild, EventEmitter, View
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 //import { Router } from '@angular/router';
 import {  Router, RoutesRecognized } from '@angular/router';
-import { CommonFunctions, Formular, Polita, Aditionale, GOOGLE_API_KEY } from './entities';
+import { CommonFunctions, Formular, Polita, Aditionale, GOOGLE_API_KEY, USE_FORM } from './entities';
 import { MongoDbService } from './mongo-db.service';
 import { DOCUMENT } from '@angular/common';
 import { Observable, of } from 'rxjs';
@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
   public _cale_parts: string;
   public CommonFunctions = CommonFunctions;  
   public externalGuid:string;
+  public use_form = USE_FORM;
 
 	constructor(
     private router: Router,
