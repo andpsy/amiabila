@@ -1,3 +1,5 @@
+import { environment } from './../environments/environment';
+
 export const GOOGLE_API_KEY = "AIzaSyBDS3LAPdSf1eV6wFFgxsjkn0qNJCuC2Eo";
 export const USE_FORM = false; //daca vrem sa folosim formularul sau trecem direct la incarcare documente (inclusiv amiabil)
 
@@ -53,8 +55,10 @@ export class CommonFunctions{
   public static IMG_CAPTURE_SIZE = "300x300";
   public static IMG_MAP_ID = "roadmap";
 
-  public static SRV_URL = "https://localhost:44322/api/";
-  public static SRV_RESOURCES_URL = "https://localhost:44322/Resources/Formulare/";
+  //public static SRV_ROOT = "https://localhost:44322/";
+  public static SRV_ROOT = environment.apiUrl;
+  public static SRV_URL = CommonFunctions.SRV_ROOT + "api/";
+  public static SRV_RESOURCES_URL = CommonFunctions.SRV_ROOT + "Resources/Formulare/";
 
   public static isNullOrWhiteSpaces(str){
     return str === null || str.trim() === '';
@@ -695,6 +699,7 @@ export class ZonaFisiere{
       dosar.Fisiere = [];
       this.Fisiere.push(dosar);
     }
+    this.StepCompleted = false;
   }
 
   public hasError():string[]{

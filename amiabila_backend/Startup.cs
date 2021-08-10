@@ -19,6 +19,7 @@ namespace amiabila_backend
 {
     public class Startup
     {
+        //readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,7 +30,27 @@ namespace amiabila_backend
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          services.AddControllers().AddJsonOptions(options => {
+      
+      services.AddCors(options =>
+      {
+        options.AddPolicy("MyPolicy",
+                      builder =>
+                      {
+                        builder.WithOrigins("http://localhost:4200", "https://faragrija.ro")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                      });
+      });
+      
+      /*
+      services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+      {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+      }));
+      */
+      services.AddControllers().AddJsonOptions(options => {
             options.JsonSerializerOptions.PropertyNamingPolicy = null; // System.Text.Json.JsonNamingPolicy.CamelCase;
             options.JsonSerializerOptions.PropertyNameCaseInsensitive = false; } );
 
@@ -51,9 +72,13 @@ namespace amiabila_backend
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+      app.UseRouting();
 
-           //app.UseAuthorization();
+      //app.UseCors(s => s.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); // TO DO - ADD JTOKEN !!!
+      //app.UseCors(MyAllowSpecificOrigins);
+      app.UseCors("MyPolicy");
+
+      app.UseAuthorization();
 
             app.UseStaticFiles();
             app.UseStaticFiles(new StaticFileOptions()
@@ -62,9 +87,7 @@ namespace amiabila_backend
               RequestPath = new PathString("/Resources")
             });
 
-            app.UseCors(s => s.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); // TO DO - ADD JTOKEN !!!
-
-            app.UseEndpoints(endpoints =>
+      app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });

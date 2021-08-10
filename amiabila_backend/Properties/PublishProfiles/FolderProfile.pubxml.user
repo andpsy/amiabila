@@ -5,6 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>D:\amvast\amiabila\amiabila_backend\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
-    <History>True|2021-06-30T19:50:57.2356857Z;True|2021-06-30T21:16:45.5148029+03:00;True|2021-06-30T21:11:15.5474957+03:00;True|2021-06-30T21:06:08.7645145+03:00;</History>
+    <History>True|2021-08-10T19:00:45.1426060Z;True|2021-08-10T17:37:06.0298823+03:00;True|2021-06-30T22:50:57.2356857+03:00;True|2021-06-30T21:16:45.5148029+03:00;True|2021-06-30T21:11:15.5474957+03:00;True|2021-06-30T21:06:08.7645145+03:00;</History>
   </PropertyGroup>
 </Project>

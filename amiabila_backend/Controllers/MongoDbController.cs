@@ -8,10 +8,11 @@ using amiabila_backend.Models;
 using System;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Cors;
 
 namespace amiabila_backend.Controllers
 {
-
+  [EnableCors("MyPolicy")]
   [Route("api/[controller]")]
   [ApiController]
   public class MongoDbController : ControllerBase
@@ -36,11 +37,14 @@ namespace amiabila_backend.Controllers
     [HttpPost]
     public Formular Upsert([FromBody] Formular formular)
     {
-      //Formular f = JsonConvert.DeserializeObject<Formular>(formular.ToString());
-      //Formular f = formular.ToObject<Formular>();
-      MongoDbLayer db = new MongoDbLayer("Amiabila");
-      db.UpsertRecord("Formulare", formular);
-      return formular;
+      try
+      {
+        //Formular f = JsonConvert.DeserializeObject<Formular>(formular.ToString());
+        //Formular f = formular.ToObject<Formular>();
+        MongoDbLayer db = new MongoDbLayer("Amiabila");
+        db.UpsertRecord("Formulare", formular);
+        return formular;
+      }catch(Exception exp) { Console.Write(exp); return null; }
     }
   }
 }
