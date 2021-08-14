@@ -17,6 +17,7 @@ namespace amiabila_backend.Controllers
   [ApiController]
   public class MongoDbController : ControllerBase
   {
+    [Route("~/api/[controller]/GetAll")]
     [HttpGet]
     public List<Formular> GetAll()
     {
@@ -25,10 +26,12 @@ namespace amiabila_backend.Controllers
     }
 
 
+    [Route("~/api/[controller]/Get/{id}")]
     [HttpGet("{id}")]
     public Formular Get(string id)
     {
       Guid Id = new Guid(id);
+
       MongoDbLayer db = new MongoDbLayer("Amiabila");
       return db.LoadRecordById<Formular>("Formulare", Id);
     }

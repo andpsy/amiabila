@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, Inject, ViewChild, ElementRef, EventEmitter } from '@angular/core';
-import { CommonFunctions, ZonaFisiere, Dosar, Fisier, Formular, USE_FORM } from '../entities';
+import { Component, OnInit, OnDestroy, Input, Output, Inject, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { CommonFunctions, ZonaFisiere, Dosar, Fisier, Formular, USE_FORM, UPLOAD_FILE_THUMB_SIZE } from '../entities';
 import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { catchError, map, tap, finalize } from 'rxjs/operators';
 import { Subscription, Observable, forkJoin } from 'rxjs';
@@ -21,13 +21,15 @@ export class FileUploadComponent implements OnInit {
   @Output() zoneCompleted = new EventEmitter();
   public files: any[] = [];
   //uploadSubs: Subscription[] = [];
-  uploadSubs: Observable<any>[] = [];
+  //uploadSubs: Observable<any>[] = [];
+  z: Observable<any>;
   public CommonFunctions = CommonFunctions;  
   //public tipPoza = CommonFunctions.TipPoze[0];
   public tipPoza = null;
   public indexPoza = null;
   //public contor:number = 0;
   public use_form = USE_FORM;
+  public ufts = UPLOAD_FILE_THUMB_SIZE;
   public zonashow = null;
   public icon = null;
 
@@ -40,6 +42,8 @@ export class FileUploadComponent implements OnInit {
     this.getSelectedTip();
   } 
 
+  ngOnDestroy(): void {
+  }
   getSelectedTip(){
     for(var i=0;i<this.ZonaFisiere.Fisiere.length;i++){
       if(this.ZonaFisiere.Fisiere[i].Tip.selected){
@@ -51,6 +55,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   changeSelectedTip(dosar){
+    this.files = [];
     var idx = this.ZonaFisiere.Fisiere.indexOf(dosar);
     for(var i=0;i<this.ZonaFisiere.Fisiere.length;i++){
       if(i == idx)
@@ -61,22 +66,30 @@ export class FileUploadComponent implements OnInit {
     this.getSelectedTip();
   }
 
-  /**
-   * on file drop handler
-   */
   onFileDropped($event) {
-    this.prepareFilesList($event);
+    //this.prepareFilesList($event);
     //this.tipPoza = CommonFunctions.TipPoze[this.contor];
     //this.contor++;
+    this.prepareFilesList($event);/*.subscribe((response) => {
+      //this.uploadSubs.forEach((subscription) => subscription.unsubscribe());
+      if(this.ZonaFisiere.hasError() == null){
+        this.ZonaFisiere.StepCompleted = true;
+      }
+      this.filesUploaded.emit(this.ZonaFisiere); 
+    });*/
   }
 
-  /**
-   * handle file from browsing
-   */
   fileBrowseHandler(event) {
-    this.prepareFilesList(event.target.files);
+    //this.prepareFilesList(event.target.files);
     //this.tipPoza = CommonFunctions.TipPoze[this.contor];
     //this.contor++;
+    this.prepareFilesList(event.target.files);/*.subscribe((response) => {
+      //this.uploadSubs.forEach((subscription) => subscription.unsubscribe());
+      if(this.ZonaFisiere.hasError() == null){
+        this.ZonaFisiere.StepCompleted = true;
+      }
+      this.filesUploaded.emit(this.ZonaFisiere);
+    });*/
   }
 
   deleteFile(dosar: Dosar, i: number) {
@@ -86,7 +99,13 @@ export class FileUploadComponent implements OnInit {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' })}); // as Observable<any>;
     delete$.subscribe(response => {
+          this.files.splice(i, 1);
           dosar.Fisiere.splice(i, 1);
+          this.ZonaFisiere.StepCompleted = false;
+          if(this.ZonaFisiere.hasError() == null){
+            this.ZonaFisiere.StepCompleted = true;
+          }
+          this.filesUploaded.emit(this.ZonaFisiere);
         }, error => { console.warn(error) })    
   }
 
@@ -100,40 +119,53 @@ export class FileUploadComponent implements OnInit {
         formData.append("file", file);
         var url = this.CommonFunctions.SRV_URL + 'Upload/Upload';
 
-        var upload$ = this.http.post(url, formData, { headers: new HttpHeaders({ 
+        var upload = this.http.post(url, formData, { headers: new HttpHeaders({ 
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept' }), 
           reportProgress: true,
           observe: 'events'}); // as Observable<any>;
-        upload$.pipe(
+        /*
+        upload.pipe(
             finalize(() => this.reset())
         );
-        upload$.subscribe(event => {
+        */
+        var uploadSubscription$ = upload.subscribe(event => {
           if (event.type == HttpEventType.UploadProgress) {
             var progres = Math.round(100 * (event.loaded / event.total));
             this.files[this.files.indexOf(file)].progress = progres;
             if(progres == 100){
               var f = "file_" + this.files.indexOf(file);
-              setTimeout (() => {
+              try{
+                setTimeout (() => {
+                  try{
                    this.document.getElementById(f).style.display = "none";
+                  }catch(e){;}
                 }, 2000);                                            
+              }catch(e){;}
             }
           }else if (event.type === HttpEventType.Response) { //s-a incarcat fisierul
             //var fisier = {'Tip':this.tipPoza.name, 'DenumireClient':event.body["fileName"], 'DenumireServer':event.body["fileName"]};
             var fisier = {'DenumireClient':event.body["fileName"], 'DenumireServer':event.body["fileName"]};
             //this.ZonaFisiere.Fisiere.push(fisier);
-            this.ZonaFisiere.Fisiere[this.indexPoza].Fisiere.push(fisier);            
+            this.ZonaFisiere.Fisiere[this.indexPoza].Fisiere.push(fisier);   
+            this.refresh();         
           }
-        }, error => { this.files[this.files.indexOf(file)].error = true; })
-        this.uploadSubs.push(upload$);    
+        }, error => { this.files[this.files.indexOf(file)].error = true; });
+        //this.uploadSubs.push(upload); //uploadSubscription$);    
       }
       c++;
     }
 
+    /*
     Promise.all(this.uploadSubs).then(result => {
       //this.reset();
-      //this.filesUploaded.emit(this.files);
+      if(this.ZonaFisiere.hasError() == null){
+        this.ZonaFisiere.StepCompleted = true;
+      }
+      this.filesUploaded.emit(this.ZonaFisiere);
     });
+    */
+    //return forkJoin(this.uploadSubs);
   }
 /*
   cancelUpload() {
@@ -141,12 +173,20 @@ export class FileUploadComponent implements OnInit {
     this.reset();
   }
 */
+  refresh(){
+    if(this.ZonaFisiere.hasError() == null){
+      this.ZonaFisiere.StepCompleted = true;
+    }
+    this.filesUploaded.emit(this.ZonaFisiere);
+  }
+
   reset() {
     //this.uploadProgress = null;
     //this.contor++;
     //console.log(this.contor);
     //this.tipPoza = CommonFunctions.TipPoze[CommonFunctions.TipPoze.indexOf(this.tipPoza)+1];
     //this.uploadSubs = [];
+
   }  
 
   formatBytes(bytes, decimals = 2) {
@@ -175,4 +215,7 @@ export class FileUploadComponent implements OnInit {
     this.icon = !this.zonashow ? 'expand_more' : 'expand_less'
   }
 
+  calculateThumbWH(dosar){
+    return dosar.Fisiere.length==1? ((this.ufts-4)+'px') : dosar.Fisiere.length/2<=2? ((Math.round(this.ufts/2)-4)+'px') : ((Math.round(this.ufts/3)-4)+'px');
+  }
 }

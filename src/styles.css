@@ -129,6 +129,7 @@ body { height: 100%; min-height: 100%; margin: 0px; font-family: calibri, "Helve
 	max-width: 800px;
 	background-color: white;
 	transition: 1s ease;
+	margin-bottom: 1px;
 }
 
 .mat-form-field {
@@ -231,6 +232,9 @@ body { height: 100%; min-height: 100%; margin: 0px; font-family: calibri, "Helve
 
 mat-dialog-container {
    background: pink !important;
+}
+.mat-dialog-content {
+   overflow: visible !important;
 }
 .mat-checkbox-layout{
 	white-space: normal !important;
@@ -358,8 +362,11 @@ mat-dialog-container {
 .uploadedImgListThumb{
 	position:relative;
 	max-width:150px;
-	width: 150px;
-	height: 150px;
+	max-height: 150px;
+	
+	width: 100px;
+	height: 100px;
+
 	margin: 5px 0px 5px 5px;
 	font-size: x-small;
 	text-align: center;
@@ -404,4 +411,17 @@ mat-dialog-container {
 	bottom: 3px;
 	right: 3px;
 	*/
+}
+.zona6Polita{
+	flex: 1 1 1e-9px;
+	box-sizing: border-box;
+	background-color: dimgray;
+	padding: 1px 7px 1px 7px;
+	color: white;
+	margin-top: 1px;
+	font-size: medium;
+	font-weight: bold;
+}
+.radioButtonTrimitere{
+	margin: 0px 10px 10px 5px;
 }

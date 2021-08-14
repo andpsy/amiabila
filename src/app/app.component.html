@@ -44,6 +44,11 @@
     <app-file-upload [ZonaFisiere]="Formular.VehiculB.ZonaFisiere" [Id]="Formular.Id" [step]="22" (zoneCompleted)="refreshProgressBar($event)" (filesUploaded)="filesUploaded($event)"></app-file-upload>
   </div>
 </div>
+<div *ngIf="Formular.getPrererquisites() && !use_form" class="content">
+  <div id="{{getDivId(26)}}" class="mainDiv" fxFlexFill [style]="{'position':use_form ? 'absolute' : 'relative'}">
+    <app-trimitere [Formular]="Formular" [step]="26" (zoneCompleted)="refreshProgressBar($event)"></app-trimitere>
+  </div>
+</div>
 <!-- end zona FARA formular -->
 
 <!-- zona CU formular -->

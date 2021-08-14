@@ -37,8 +37,12 @@ export class Zona6Component implements OnInit, AfterViewInit {
   } 
 
   ngAfterViewInit(): void {
-    if( (this.use_form || (!this.use_form && this.zonashow)) && (this.Polita == null || Object.keys(this.Polita).length == 0))
+    if( (this.use_form || (!this.use_form && this.zonashow)) && (this.checkPolita()))
       this.openPolitaDialog();
+  }
+
+  checkPolita(){
+    return this.Polita == null || Object.keys(this.Polita).length == 0;
   }
 
   showDiv(step:number, visibility:boolean):void{

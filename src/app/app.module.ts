@@ -50,6 +50,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { DndDirective } from './dnd.directive';
 import { ProgressComponent } from './progress/progress.component';
 import { ZonaFisiereComponent } from './zona-fisiere/zona-fisiere.component';
+import { TrimitereComponent } from './trimitere/trimitere.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { ZonaFisiereComponent } from './zona-fisiere/zona-fisiere.component';
     FileUploadComponent,
     DndDirective,
     ProgressComponent,
-    ZonaFisiereComponent  
+    ZonaFisiereComponent,
+    TrimitereComponent  
   ],
   imports: [
     AppRoutingModule,

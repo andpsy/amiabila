@@ -1,8 +1,8 @@
 <form #childForm="ngForm" autocomplete="off">
-	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'overflow':'hidden', 'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}" [style]="{'max-height':zonashow?'800px':'45px'}">	
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'overflow':'hidden', 'border': (step > 4 && step < 13) ? '6px solid #1D3885' : ((step > 12 && step < 21)  ? '6px solid 	#F8D32D' : '6px solid lightgray')}" [style]="{'max-height': use_form? '1000px' : (zonashow?'1000px':'45px')}">	
 		<div class="zona-title" [ngStyle]="{'background-color': (step > 4 && step < 13) ? '#1D3885' : ((step > 12 && step < 21)  ? '#F8D32D' : 'lightgray'),
 			'color': (step > 4 && step < 13) ? 'white' : ((step > 13 && step < 21)  ? 'black' : 'navyy') }">
-			<span style="width:100%;">Rubrica 8 - Societate de asigurare (vezi documentul de asigurare)</span>
+			<span style="width:100%;">{{use_form ? "Rubrica 8 - Societate de asigurare (vezi documentul de asigurare)" : "Societate de asigurare"}}</span>
 			<mat-icon *ngIf="!use_form" aria-hidden="false" aria-label="expand" (click)="changeZona()" style="cursor: pointer;color: black;background-color: white;border-radius: 3px;">{{icon}}</mat-icon>			
 		</div>		
 		<!--
@@ -80,7 +80,7 @@
 	  </mat-form-field> 	  
 
     <mat-label class="mat-label-no-field">Daunele materiale ale vehiculului sunt acoperite printr-o polita CASCO?</mat-label>
-		<mat-slide-toggle [(ngModel)]="Zona8.Casco"></mat-slide-toggle>
+		<mat-slide-toggle [(ngModel)]="Zona8.Casco" name="Casco" #Casco='ngModel'></mat-slide-toggle>
 	  <!--
 	  <span>Daunele materiale ale vehiculului sunt acoperite printr-o polita CASCO?</span>
 		<div fxLayout="row" style="justify-content: center;">
@@ -104,7 +104,7 @@
 	    </mat-autocomplete>
 	  </mat-form-field>
     <mat-label class="mat-label-no-field">Polita RCA are clauza de decontare directa?</mat-label>
-		<mat-slide-toggle [(ngModel)]="Zona8.DecontareDirecta"></mat-slide-toggle>
+		<mat-slide-toggle [(ngModel)]="Zona8.DecontareDirecta" name="DecontareDirecta" #DecontareDirecta='ngModel'></mat-slide-toggle>
 
 
  	  <app-display-errors

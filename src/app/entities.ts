@@ -2,6 +2,7 @@ import { environment } from './../environments/environment';
 
 export const GOOGLE_API_KEY = "AIzaSyBDS3LAPdSf1eV6wFFgxsjkn0qNJCuC2Eo";
 export const USE_FORM = false; //daca vrem sa folosim formularul sau trecem direct la incarcare documente (inclusiv amiabil)
+export const UPLOAD_FILE_THUMB_SIZE = 100;
 
 export const DD_MM_YYYY_Format = {
     parse: {
@@ -145,7 +146,9 @@ export class CommonFunctions{
       {'Step':23, 'DivId':'zona12Div', 'vehicul':null, 'zona':'Zona12', 'bgColor':'lightgray', 'color':'navy'},
       {'Step':24, 'DivId':'zona13Div', 'vehicul':null, 'zona':'Zona13', 'bgColor':'lightgray', 'color':'navy'},
 
-      {'Step':25, 'DivId':'zona0Div', 'vehicul':null, 'zona':'ZonaFisiere', 'bgColor':'lightgray', 'color':'navy'}];
+      {'Step':25, 'DivId':'zona0Div', 'vehicul':null, 'zona':'ZonaFisiere', 'bgColor':'lightgray', 'color':'navy'},
+      {'Step':26, 'DivId':'trimitereDiv', 'vehicul':null, 'zona':null, 'bgColor':'lightgray', 'color':'navy'}
+      ];
 
   public static getPreviousStepDivId(idx:number):string{
     return idx < 1 ? null : CommonFunctions.Steps[idx-1].DivId;
@@ -158,8 +161,17 @@ export class CommonFunctions{
     const props = Object.keys(source);
     for (const prop of props) {
       var objVal = source[prop];
-      if(typeof objVal === 'object' && objVal !== null)
-        target[prop] = CommonFunctions.copyObj(objVal, target[prop]);
+      if(typeof objVal === 'object' && objVal !== null){
+        //console.log(prop + " - " + Array.isArray(objVal));
+        if(Array.isArray(objVal)){
+          target[prop] = [];
+          for(var i=0;i<objVal.length;i++){
+            target[prop].push(objVal[i]);
+          }
+        }
+        else
+          target[prop] = CommonFunctions.copyObj(objVal, target[prop]);
+      }
       else
         target[prop]=objVal;
     }
@@ -172,6 +184,13 @@ export class TipFisier{
   name: string;  
   multiple: boolean;
   max_allowed: number;
+
+  constructor(){
+    this.selected = false;
+    this.name = null;
+    this.multiple = false;
+    this.max_allowed = null;
+  }
 }
 
 export class Polita{
@@ -745,6 +764,22 @@ export class Vehicul {
     this.Zona15 = new Zona15();
     this.ZonaFisiere = new ZonaFisiere(CommonFunctions.TipPozeCuFormular);
   }
+
+  public hasError():string[]{
+    var toReturn:string[] = [];
+    if(this.Zona6.hasError() || this.Zona7.hasError() || this.Zona8.hasError() || 
+      this.Zona9.hasError() || this.Zona10.hasError() || this.Zona11.hasError() ||
+      this.Zona15.hasError())
+      toReturn.push("Cel putin una dintre rubrici contine erori!");
+    return toReturn.length > 0? toReturn : null;
+  }   
+
+  public hasErrorFaraFromular():string[]{
+    var toReturn:string[] = [];
+    if(this.Zona6.hasError() || this.Zona8.hasError() || this.ZonaFisiere.hasError())
+      toReturn.push("Cel putin una dintre rubrici contine erori!");
+    return toReturn.length > 0? toReturn : null;
+  }  
 }
 
 export class Zona12 {
@@ -840,11 +875,21 @@ export class Zona13 {
 export class Dosar{
   Tip: TipFisier;
   Fisiere: Fisier[];
+
+  constructor(){
+    this.Tip = new TipFisier();
+    this.Fisiere = [];
+  }
 }
 
 export class Fisier{
   DenumireClient: string;
   DenumireServer: string; 
+
+  constructor(){
+    this.DenumireClient = null;
+    this.DenumireServer = null;
+  }
 }
 
 export class Formular {
@@ -886,6 +931,23 @@ export class Formular {
       this.Zona13 = Object.assign(this.Zona13, f.Zona13);
       this.Aditionale = Object.assign(this.Aditionale, f.Aditionale);
     }
+  }
+
+  public hasError():string[]{
+    var toReturn:string[] = [];
+    if(this.Zona1.hasError() || this.Zona2.hasError() || this.Zona3.hasError() ||
+      this.Zona4.hasError() || this.Zona5.hasError() || this.VehiculA.hasError() ||
+      this.VehiculB.hasError() || this.Zona12.hasError() || this.Zona13.hasError())
+      toReturn.push("Cel putin una dintre rubrici contine erori!");
+    return toReturn.length > 0? toReturn : null;
+  }
+
+  public hasErrorFaraFormular():string[]{
+    var toReturn:string[] = [];
+    if(this.Aditionale.ZonaFisiere.hasError() || this.VehiculA.hasErrorFaraFromular() ||
+      this.VehiculB.hasErrorFaraFromular())
+      toReturn.push("Cel putin una dintre rubrici contine erori!");
+    return toReturn.length > 0? toReturn : null;
   }
 
   public populateFormularFromPolita(vehicul:string){

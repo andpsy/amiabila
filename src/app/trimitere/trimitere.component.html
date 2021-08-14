@@ -1,0 +1,57 @@
+<form #childForm="ngForm" autocomplete="off">
+	<div fxLayout="column" class="innerMainDiv" [ngStyle]="{'overflow':'hidden', 'border':'6px solid lightgray'}" [style]="{'max-height': use_form? '1000px' : (zonashow?'1000px':'45px')}">	
+		<div class="zona-title" [ngStyle]="{'background-color': 'lightgray', 'color': 'navyy'}">
+			<span style="width:100%;">{{"Trimitere"}}</span>
+			<mat-icon *ngIf="!use_form" aria-hidden="false" aria-label="expand" (click)="changeZona()" style="cursor: pointer;color: black;background-color: white;border-radius: 3px;">{{icon}}</mat-icon>			
+		</div>	
+
+	  <div style="display:flex;">
+	  	<table style="width:100%;">
+	  		<tr>
+	  			<td colspan="2">
+	  				<span>Selectati adresa de email sau telefonul unde doriti sa primiti informatiile</span><br>
+	  				<span style="font-size:x-small;">Atentie! Acesta va fi folosit in continuare in relatia cu noi si ca element de autentificare!</span>
+	  			</td>
+	  		</tr>
+	  		<tr>
+	  			<td style="background-color: #1D3885; width: 50%;">
+						<mat-radio-group aria-label="Select an option" style="display: flex;flex-direction: column;">
+						  <mat-radio-button class="radioButtonTrimitere" value="Formular.VehiculA.Zona6.Email" [checked]=true><!-- {{Formular.VehiculA.Zona6.Email}} -->
+				    	  <mat-form-field fxFlex>
+									<mat-label>Email:</mat-label>
+						  		<input matInput [(ngModel)]="Formular.VehiculA.Zona6.Email" name="EmailA" #EmailA='ngModel'>
+						  	</mat-form-field>
+						  </mat-radio-button>
+						  <mat-radio-button class="radioButtonTrimitere" value="Formular.VehiculA.Zona6.Telefon" [disabled]=true>
+						  	{{Formular.VehiculA.Zona6.Telefon + ' (momentan indisponibil)'}}
+						  </mat-radio-button>
+						</mat-radio-group>
+	  			</td>
+	  			<td style="background-color: #F8D32D; width: 50%;">
+						<mat-radio-group aria-label="Select an option" style="display: flex;flex-direction: column;">
+						  <mat-radio-button class="radioButtonTrimitere" value="Formular.VehiculB.Zona6.Email" [checked]=true><!-- {{Formular.VehiculB.Zona6.Email}} -->
+				    	  <mat-form-field fxFlex>
+							    <mat-label>Email:</mat-label>
+							  	<input matInput [(ngModel)]="Formular.VehiculB.Zona6.Email" name="EmailB" #EmailB='ngModel'>
+							  </mat-form-field>
+						  </mat-radio-button>
+						  <mat-radio-button class="radioButtonTrimitere" value="Formular.VehiculB.Zona6.Telefon" [disabled]=true>
+						  	{{Formular.VehiculB.Zona6.Telefon + ' (momentan indisponibil)'}}
+						  </mat-radio-button>
+						</mat-radio-group>	  				
+	  			</td>
+	  		</tr>
+	  		<tr>
+	  			<td colspan="2">
+				 	  <app-display-errors
+				 	  	class="form-error-container"
+				 	  	[style]="{'max-height': Formular.hasErrorFaraFormular() != null && childForm.touched ? '200px' : '0'}"
+				 	  	[errors]="Formular.hasErrorFaraFormular()">
+				  	</app-display-errors>		  				
+						<button id="BtnTrimite" mat-raised-button color="primary" [disabled]="Formular.hasErrorFaraFormular() != null">Trimite</button>
+	  			</td>
+	  		</tr>
+	  	</table>
+	  </div>
+	</div>
+</form>

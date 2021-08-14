@@ -135,6 +135,7 @@ export class AppComponent implements OnInit {
      .upsertFormular(this.Formular)
      .subscribe(
        formular => { 
+         //console.log(formular);
          this.Formular = this.CommonFunctions.copyObj(formular, this.Formular);
        }
       ); 
@@ -158,9 +159,14 @@ export class AppComponent implements OnInit {
       this.Formular.VehiculB.Polita = event;
       this.Formular.populateFormularFromPolita(vehicul);
     }
+    if(!this.use_form){
+      this.nextStep(null);
+    }
   }
 
   filesUploaded(event){
+    //console.log(event);
+    //console.warn(this.Formular);
     //this.Formular.Fisiere = event;
     this.nextStep(null);
   }

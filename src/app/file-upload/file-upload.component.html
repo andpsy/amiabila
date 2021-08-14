@@ -1,7 +1,7 @@
-<div fxLayout="column" class="innerMainDiv" style="border-width: 6px; border-style:solid;" [ngStyle]="{'overflow':'hidden', 'border-color': CommonFunctions.Steps[step].bgColor}" [style]="{'max-height':zonashow?'800px':'45px'}"> 
+<div fxLayout="column" class="innerMainDiv" style="border-width: 6px; border-style:solid;" [ngStyle]="{'overflow':'hidden', 'border-color': CommonFunctions.Steps[step].bgColor}" [style]="{'max-height':use_form? '800px' : (zonashow?'800px':'45px')}"> 
   <div class="zona-title" [ngStyle]="{'background-color': CommonFunctions.Steps[step].bgColor,
     'color': CommonFunctions.Steps[step].color }">
-    <span *ngIf="step != 25" style="width:100%;">Incarcati documentele si imaginile pentru vehiculul {{step < 15  ? "A" : "B"}}</span>
+    <span *ngIf="step != 25" style="width:100%;">{{use_form ? ("Incarcati documentele si imaginile pentru vehiculul" + (step < 15  ? "A" : "B")) : "Documente si imagini"}}</span>
     <span *ngIf="step == 25" style="width:100%;">Incarcati imaginea Constatului Amiabil</span>
     <mat-icon *ngIf="!use_form" aria-hidden="false" aria-label="expand" (click)="changeZona()" style="cursor: pointer;color: black;background-color: white;border-radius: 3px;">{{icon}}</mat-icon>     
   </div> 
@@ -11,7 +11,7 @@
       <div class="uploadedImgThumbTop">
         <span>{{dosar.Tip.name}}</span>
       </div>
-      <div *ngFor="let fisier of dosar.Fisiere; let i = index" class="uploadedImgListThumbInner" [style.background-image]="'url(' + CommonFunctions.SRV_RESOURCES_URL + Id + '/' + fisier.DenumireServer + ')'" [style]="{'width':dosar.Fisiere.length==1?'146px':dosar.Fisiere.length/2<=2?'71px':'46px', 'height':dosar.Fisiere.length==1?'146px':dosar.Fisiere.length/2<=2?'71px':'46px'}">  
+      <div *ngFor="let fisier of dosar.Fisiere; let i = index" class="uploadedImgListThumbInner" [style.background-image]="'url(' + CommonFunctions.SRV_RESOURCES_URL + Id + '/' + fisier.DenumireServer + ')'" [style]="{'width':calculateThumbWH(dosar), 'height':calculateThumbWH(dosar)}">  
         <!-- div class="uploadedImgThumbBottom" -->
           <mat-icon aria-hidden="false" aria-label="Delete file" class="uploadedThumbDelete" (click)="deleteFile(dosar, i)">delete</mat-icon>
         <!-- /div -->
@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div id="uploadZone" #uploadZone style="width:100%">
+  <div *ngIf="!ZonaFisiere.StepCompleted" id="uploadZone" #uploadZone style="width:100%">
     <h4 *ngIf="tipPoza != null && tipPoza != undefined">{{tipPoza.name}}</h4>
     <div [hidden]="tipPoza == null || tipPoza == undefined" class="container" appDnd (fileDropped)="onFileDropped($event)">
       <input type="file" #fileDropRef id="fileDropRef" [multiple]="tipPoza.multiple" (change)="fileBrowseHandler($event)" accept="image/*" />

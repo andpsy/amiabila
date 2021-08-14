@@ -60,7 +60,21 @@
                   "maximumError": "4kb"
                 }
               ]
+            },
+
+            "dev2": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev2.ts"
+                }
+              ],              
+              "optimization": false,
+              "sourceMap": true,
+              "buildOptimizer": false,
+              "serviceWorker": true
             }
+
           }
         },
         "serve": {
@@ -71,7 +85,11 @@
           "configurations": {
             "production": {
               "browserTarget": "amiabila:build:production"
-            }         
+            },
+            "dev2": {
+              "browserTarget": "amiabila:build:dev2"
+            }
+
           }
         },
         "extract-i18n": {
