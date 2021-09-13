@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation, TemplateRef } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { CommonFunctions, Zona3 } from '../entities';
-import {VatamariComponent} from '../vatamari/vatamari.component';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Zona3 } from '../entities';
+import { VatamariComponent } from '../vatamari/vatamari.component';
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona3',

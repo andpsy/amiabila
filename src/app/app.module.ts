@@ -32,7 +32,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
 import { Zona14Component } from './zona14/zona14.component';
 import { Zona13Component } from './zona13/zona13.component';
 import { Zona11Component } from './zona11/zona11.component';
-import { DD_MM_YYYY_Format } from './entities';
+import { DD_MM_YYYY_Format } from './commonfunctions';
 import { VatamariComponent } from './vatamari/vatamari.component';
 import { AditionaleComponent } from './aditionale/aditionale.component';
 import { DisplayErrorsComponent } from './display-errors/display-errors.component';
@@ -51,6 +51,8 @@ import { DndDirective } from './dnd.directive';
 import { ProgressComponent } from './progress/progress.component';
 import { ZonaFisiereComponent } from './zona-fisiere/zona-fisiere.component';
 import { TrimitereComponent } from './trimitere/trimitere.component';
+import { LoginComponent } from './login/login.component';
+import { AftersendComponent } from './aftersend/aftersend.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +89,9 @@ import { TrimitereComponent } from './trimitere/trimitere.component';
     DndDirective,
     ProgressComponent,
     ZonaFisiereComponent,
-    TrimitereComponent  
+    TrimitereComponent,
+    LoginComponent,
+    AftersendComponent  
   ],
   imports: [
     AppRoutingModule,

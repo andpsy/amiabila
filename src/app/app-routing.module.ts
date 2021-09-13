@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ConditiiComponent } from './conditii/conditii.component';
 
-const routes: Routes = [{ path: ':id', component: AppComponent },
+const routes: Routes = [
+  { path: ':id', component: AppComponent },
+  { path: ':litera/:id', component: AppComponent },
   { path: 'conditii', component: ConditiiComponent }]; 
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { CommonFunctions, Aditionale } from '../entities';
+import { Aditionale } from '../entities';
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-prerequisites',

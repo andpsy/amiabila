@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation, AfterViewInit  } from '@angular/core';
-import { CommonFunctions, Zona13, ImgMapList } from '../entities';
-import { GOOGLE_API_KEY } from '../entities';
+import { Zona13, ImgMapList } from '../entities';
 import { SignaturePad } from 'angular2-signaturepad';
 //import html2canvas from 'html2canvas';
 import domtoimage from 'dom-to-image';
+import { CommonFunctions, GOOGLE_API_KEY } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona13',

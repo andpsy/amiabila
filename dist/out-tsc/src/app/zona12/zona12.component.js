@@ -12,7 +12,9 @@ let Zona12Component = class Zona12Component {
     showDiv(step, visibility) {
         if (this.childForm.valid) {
             this.Zona12.StepCompleted = true;
-            this.zoneCompleted.emit(true);
+            //this.zoneCompleted.emit(true);
+            if (step === this.CommonFunctions.step)
+                this.zoneCompleted.emit(this.Zona12);
         }
         CommonFunctions.showDiv(step, visibility);
     }
@@ -33,6 +35,12 @@ __decorate([
 __decorate([
     Input()
 ], Zona12Component.prototype, "Aditionale", void 0);
+__decorate([
+    Input()
+], Zona12Component.prototype, "Zona8A", void 0);
+__decorate([
+    Input()
+], Zona12Component.prototype, "Zona8B", void 0);
 __decorate([
     Output()
 ], Zona12Component.prototype, "zoneCompleted", void 0);

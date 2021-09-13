@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, Inject, ViewChild, ElementRef, EventEmitter } from '@angular/core';
-import { CommonFunctions, ZonaFisiere, Dosar, Fisier, Formular, USE_FORM, UPLOAD_FILE_THUMB_SIZE } from '../entities';
+import { ZonaFisiere, Dosar, Fisier, Formular } from '../entities';
+import { CommonFunctions, USE_FORM, UPLOAD_FILE_THUMB_SIZE } from '../commonfunctions';
+
 import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { catchError, map, tap, finalize } from 'rxjs/operators';
 import { Subscription, Observable, forkJoin } from 'rxjs';

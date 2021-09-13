@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CommonFunctions, PagubaAuto } from '../entities';
+import { PagubaAuto } from '../entities';
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-paguba-auto',

@@ -21,7 +21,9 @@ let Zona11Component = class Zona11Component {
     showDiv(step, visibility) {
         if (this.childForm.valid) {
             this.Zona11.StepCompleted = true;
-            this.zoneCompleted.emit(true);
+            //this.zoneCompleted.emit(true);
+            if (step === this.CommonFunctions.step)
+                this.zoneCompleted.emit(this.Zona11);
         }
         CommonFunctions.showDiv(step, visibility);
     }

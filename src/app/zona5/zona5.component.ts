@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { CommonFunctions, Zona5, Martor } from '../entities';
+import { Zona5, Martor } from '../entities';
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona5',

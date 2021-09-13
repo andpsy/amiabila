@@ -19,7 +19,9 @@ let Zona3Component = class Zona3Component {
     showDiv(step, visibility) {
         if (this.childForm.valid) {
             this.Zona3.StepCompleted = true;
-            this.zoneCompleted.emit(true);
+            //this.zoneCompleted.emit(true);
+            if (step === this.CommonFunctions.step)
+                this.zoneCompleted.emit(this.Zona3);
         }
         CommonFunctions.showDiv(step, visibility);
     }
@@ -34,13 +36,25 @@ let Zona3Component = class Zona3Component {
         });
         dialogRef.afterClosed().subscribe(result => {
             this.Zona3.Confirma112 = result;
-            console.log('The dialog was closed');
+            var dg = result ? this.dialog1 : this.dialog2;
+            const dialogRef2 = this.dialog.open(dg, {
+                disableClose: true
+            });
+            dialogRef2.afterClosed().subscribe(result => {
+                console.log(result);
+            });
         });
     }
 };
 __decorate([
     ViewChild("childForm", { static: true })
 ], Zona3Component.prototype, "childForm", void 0);
+__decorate([
+    ViewChild('dialog1', { static: true })
+], Zona3Component.prototype, "dialog1", void 0);
+__decorate([
+    ViewChild('dialog2', { static: true })
+], Zona3Component.prototype, "dialog2", void 0);
 __decorate([
     Input()
 ], Zona3Component.prototype, "Zona3", void 0);

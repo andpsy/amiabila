@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { HttpClientModule } from '@angular/common/http';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS, } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Zona1Component } from './zona1/zona1.component';
@@ -32,6 +33,20 @@ import { AditionaleComponent } from './aditionale/aditionale.component';
 import { DisplayErrorsComponent } from './display-errors/display-errors.component';
 import { MartorComponent } from './martor/martor.component';
 import { GoogleComponent } from './google/google.component';
+import { ConditiiComponent } from './conditii/conditii.component';
+import { DocumenteNecesareComponent } from './documente-necesare/documente-necesare.component';
+import { GDPRComponent } from './gdpr/gdpr.component';
+import { TermeniSiConditiiComponent } from './termeni-si-conditii/termeni-si-conditii.component';
+import { PolitaComponent } from './polita/polita.component';
+import { PrerequisitesComponent } from './prerequisites/prerequisites.component';
+import { PagubaAutoComponent } from './paguba-auto/paguba-auto.component';
+import { PagubaObiectComponent } from './paguba-obiect/paguba-obiect.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { DndDirective } from './dnd.directive';
+import { ProgressComponent } from './progress/progress.component';
+import { ZonaFisiereComponent } from './zona-fisiere/zona-fisiere.component';
+import { TrimitereComponent } from './trimitere/trimitere.component';
+import { LoginComponent } from './login/login.component';
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -57,7 +72,21 @@ AppModule = __decorate([
             AditionaleComponent,
             DisplayErrorsComponent,
             MartorComponent,
-            GoogleComponent
+            GoogleComponent,
+            ConditiiComponent,
+            DocumenteNecesareComponent,
+            GDPRComponent,
+            TermeniSiConditiiComponent,
+            PolitaComponent,
+            PrerequisitesComponent,
+            PagubaAutoComponent,
+            PagubaObiectComponent,
+            FileUploadComponent,
+            DndDirective,
+            ProgressComponent,
+            ZonaFisiereComponent,
+            TrimitereComponent,
+            LoginComponent
         ],
         imports: [
             AppRoutingModule,
@@ -67,7 +96,8 @@ AppModule = __decorate([
             FormsModule,
             ReactiveFormsModule,
             SignaturePadModule,
-            GoogleMapsModule
+            GoogleMapsModule,
+            HttpClientModule
         ],
         providers: [
             { provide: MAT_DATE_LOCALE, useValue: 'ro-RO' },
@@ -76,7 +106,7 @@ AppModule = __decorate([
                 useClass: MomentDateAdapter,
                 deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
             },
-            { provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format },
+            { provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format }
         ],
         bootstrap: [AppComponent]
     })

@@ -15,7 +15,9 @@ let Zona9Component = class Zona9Component {
     showDiv(step, visibility) {
         if (this.childForm.valid) {
             this.Zona9.StepCompleted = true;
-            this.zoneCompleted.emit(true);
+            //this.zoneCompleted.emit(true);
+            if (step === this.CommonFunctions.step)
+                this.zoneCompleted.emit(this.Zona9);
         }
         CommonFunctions.showDiv(step, visibility);
     }
@@ -35,7 +37,8 @@ let Zona9Component = class Zona9Component {
             this.Zona9.Prenume = this.Zona6.Prenume;
             this.Zona9.Adresa = this.Zona6.Adresa;
             this.Zona9.Tara = this.Zona6.Tara;
-            this.Zona9.TelefonEmail = this.Zona6.TelefonEmail;
+            this.Zona9.Telefon = this.Zona6.Telefon;
+            this.Zona9.Email = this.Zona6.Email;
         }
         else {
             this.Zona9 = new Zona9();

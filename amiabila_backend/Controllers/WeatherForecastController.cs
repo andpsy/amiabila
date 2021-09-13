@@ -32,7 +32,7 @@ namespace amiabila_backend.Controllers
         {
             _logger = logger;
         }
-        /*
+        
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -45,7 +45,7 @@ namespace amiabila_backend.Controllers
             })
             .ToArray();
         }
-        */
+        /*
         [HttpGet]
         public void Pdf(Formular f)
         {
@@ -75,7 +75,7 @@ namespace amiabila_backend.Controllers
           }
           catch (Exception exp) { Console.Write(exp); }
         }
-
+        */
 
   }
 }

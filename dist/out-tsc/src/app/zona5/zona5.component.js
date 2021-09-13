@@ -12,11 +12,24 @@ let Zona5Component = class Zona5Component {
     showDiv(step, visibility) {
         if (this.childForm.valid) {
             this.Zona5.StepCompleted = true;
-            this.zoneCompleted.emit(true);
+            //this.zoneCompleted.emit(true);
+            if (step === this.CommonFunctions.step)
+                this.zoneCompleted.emit(this.Zona5);
         }
         CommonFunctions.showDiv(step, visibility);
     }
+    existaMartori() {
+        if (this.Zona5.ExistaMartori) {
+            var m = new Martor();
+            this.Zona5.Martori.push(m);
+        }
+        else {
+            this.Zona5.Martori = [];
+        }
+    }
     AddMartor() {
+        if (this.Zona5.Martori[this.Zona5.Martori.length - 1].hasError())
+            return;
         var newMartor = new Martor();
         this.Zona5.Martori.push(newMartor);
     }

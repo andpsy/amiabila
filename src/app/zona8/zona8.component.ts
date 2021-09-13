@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, AfterViewInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { CommonFunctions, Zona8, TariCarteVerde, SocietatiAsigurare, USE_FORM } from '../entities';
+import { Zona8, TariCarteVerde, SocietatiAsigurare } from '../entities';
+import { CommonFunctions, USE_FORM } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona8',

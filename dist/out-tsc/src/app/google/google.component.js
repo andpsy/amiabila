@@ -1,5 +1,5 @@
 import { __decorate } from "tslib";
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { CommonFunctions, Marker } from '../entities';
 import { GoogleMap } from '@angular/google-maps';
@@ -7,6 +7,7 @@ let GoogleComponent = class GoogleComponent {
     constructor() {
         this.newItemEvent = new EventEmitter();
         this.imgMapEvent = new EventEmitter();
+        this.newPositionSelectedEvent = new EventEmitter();
         this.CommonFunctions = CommonFunctions;
         //public adresa:string;
         this.zoom = 12;
@@ -43,15 +44,25 @@ let GoogleComponent = class GoogleComponent {
             this.getAddress();
         });
     }
+    ngOnChanges(changes) {
+        if (changes.NewPlaceSelected.currentValue) {
+            var place = changes.NewPlaceSelected.currentValue.geometry.location;
+            this.marker.position.lat = place.lat();
+            this.marker.position.lng = place.lng();
+            this.center = { lat: place.lat(), lng: place.lng() };
+            //this.map.panTo(new google.maps.LatLng(place.lat(), place.lng()));
+            this.m.setPosition(new google.maps.LatLng(place.lat(), place.lng()));
+            this.exportMapImg();
+        }
+    }
     getAddress() {
+        this.newPositionSelectedEvent.emit(new google.maps.LatLngBounds(this.center));
         const geocoder = new google.maps.Geocoder();
         //const infowindow = new google.maps.InfoWindow();
-        //console.log(this.marker.position);
         geocoder.geocode({ location: { 'lat': this.marker.position.lat, 'lng': this.marker.position.lng } }, (results, status) => {
             if (status === "OK") {
                 if (results[0]) {
                     this.newItemEvent.emit(results[0].formatted_address);
-                    //console.log('adresa: ' + this.adresa);
                     //infowindow.setContent(results[0].formatted_address);
                     //infowindow.open(this.map, this.marker);
                     this.exportMapImg();
@@ -66,10 +77,8 @@ let GoogleComponent = class GoogleComponent {
         });
     }
     mapClick(event) {
-        //console.log(event)
         this.marker.position.lat = event.latLng.toJSON().lat;
         this.marker.position.lng = event.latLng.toJSON().lng;
-        //console.log(event.latLng.toJSON());
         this.m.setPosition(event.latLng);
         this.center = {
             lat: this.marker.position.lat,
@@ -83,11 +92,20 @@ let GoogleComponent = class GoogleComponent {
     }
 };
 __decorate([
+    Input()
+], GoogleComponent.prototype, "Zona2", void 0);
+__decorate([
+    Input()
+], GoogleComponent.prototype, "NewPlaceSelected", void 0);
+__decorate([
     Output()
 ], GoogleComponent.prototype, "newItemEvent", void 0);
 __decorate([
     Output()
 ], GoogleComponent.prototype, "imgMapEvent", void 0);
+__decorate([
+    Output()
+], GoogleComponent.prototype, "newPositionSelectedEvent", void 0);
 __decorate([
     ViewChild(GoogleMap, { static: false })
 ], GoogleComponent.prototype, "map", void 0);

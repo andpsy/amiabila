@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { CommonFunctions, Zona10 } from '../entities';
+import { Zona10 } from '../entities';
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona10',

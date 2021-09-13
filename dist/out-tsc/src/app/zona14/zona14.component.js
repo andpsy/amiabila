@@ -4,6 +4,7 @@ import { CommonFunctions } from '../entities';
 let Zona14Component = class Zona14Component {
     constructor() {
         this.zoneCompleted = new EventEmitter();
+        this.CommonFunctions = CommonFunctions;
         //this.Zona14 = new Zona14();
     }
     ngOnInit() {
@@ -11,7 +12,9 @@ let Zona14Component = class Zona14Component {
     showDiv(step, visibility) {
         if (this.childForm.valid) {
             this.Zona14.StepCompleted = true;
-            this.zoneCompleted.emit(true);
+            //this.zoneCompleted.emit(true);
+            if (step === this.CommonFunctions.step)
+                this.zoneCompleted.emit(this.Zona14);
         }
         CommonFunctions.showDiv(step, visibility);
     }

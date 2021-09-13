@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { CommonFunctions, Zona4, Pagube, PagubaAuto, PagubaObiect } from '../entities';
+import { Zona4, Pagube, PagubaAuto, PagubaObiect } from '../entities';
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona4',

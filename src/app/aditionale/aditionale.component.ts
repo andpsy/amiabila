@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { CommonFunctions, Zona12, Aditionale, Zona8 } from '../entities'; // SocietatiAsigurare
+import { Zona12, Aditionale, Zona8 } from '../entities'; // SocietatiAsigurare
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-aditionale',

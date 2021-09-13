@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, AfterViewInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { CommonFunctions, Zona9, Zona6, TariCarteVerde, TaraCarteVerde } from '../entities';
+import { Zona9, Zona6, TariCarteVerde, TaraCarteVerde } from '../entities';
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona9',

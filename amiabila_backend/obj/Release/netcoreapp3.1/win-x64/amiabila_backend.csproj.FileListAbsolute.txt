@@ -34,3 +34,10 @@ D:\amvast\amiabila\amiabila_backend\obj\Release\netcoreapp3.1\win-x64\amiabila_b
 D:\amvast\amiabila\amiabila_backend\obj\Release\netcoreapp3.1\win-x64\amiabila_backend.dll
 D:\amvast\amiabila\amiabila_backend\obj\Release\netcoreapp3.1\win-x64\amiabila_backend.pdb
 D:\amvast\amiabila\amiabila_backend\obj\Release\netcoreapp3.1\win-x64\amiabila_backend.genruntimeconfig.cache
+D:\amvast\amiabila\amiabila_backend\bin\Release\netcoreapp3.1\win-x64\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\amvast\amiabila\amiabila_backend\bin\Release\netcoreapp3.1\win-x64\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\amvast\amiabila\amiabila_backend\bin\Release\netcoreapp3.1\win-x64\Microsoft.IdentityModel.Logging.dll
+D:\amvast\amiabila\amiabila_backend\bin\Release\netcoreapp3.1\win-x64\Microsoft.IdentityModel.Protocols.dll
+D:\amvast\amiabila\amiabila_backend\bin\Release\netcoreapp3.1\win-x64\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\amvast\amiabila\amiabila_backend\bin\Release\netcoreapp3.1\win-x64\Microsoft.IdentityModel.Tokens.dll
+D:\amvast\amiabila\amiabila_backend\bin\Release\netcoreapp3.1\win-x64\System.IdentityModel.Tokens.Jwt.dll

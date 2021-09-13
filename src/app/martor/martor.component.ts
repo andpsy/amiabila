@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CommonFunctions, Martor } from '../entities';
+import { Martor } from '../entities';
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-martor',

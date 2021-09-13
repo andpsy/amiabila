@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation, AfterViewInit  } from '@angular/core';
-import { CommonFunctions, Zona15 } from '../entities';
+import { Zona15 } from '../entities';
 import { SignaturePad } from 'angular2-signaturepad';
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona15',

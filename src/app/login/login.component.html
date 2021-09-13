@@ -1,0 +1,16 @@
+<form #childForm="ngForm" autocomplete="off" novalidate>
+	<div fxLayout="column" class="innerMainDiv">
+	  <span ngIf="true" class="zona6Polita">
+	    Introduceti Codul de verificare trimis la adresa de email introdusa la completarea formularului amiabil ({{Email}})
+	  </span>  
+	  <span ngIf="false" class="zona6Polita">
+	    Introduceti Codul de verificare trimis prin SMS la numarul de telefon introdus la completarea formularului amiabil ({{Telefon}})
+	  </span>  
+	  <mat-form-field fxFlex>
+    	<mat-label>COD:</mat-label>
+	    <input matInput [(ngModel)]="COD" name="CodVerificare" #CodVerificare='ngModel' required>
+	  </mat-form-field>  
+		<button id="BtnCod" mat-raised-button color="primary">Login</button>
+
+	</div>
+</form>

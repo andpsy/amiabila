@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation, AfterViewInit } from '@angular/core';
-import { CommonFunctions, Zona2, TariCarteVerde, TaraCarteVerde } from '../entities';
+import { Zona2, TariCarteVerde, TaraCarteVerde } from '../entities';
 import { GoogleMap } from '@angular/google-maps'
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona2',

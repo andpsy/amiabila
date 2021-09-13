@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, AfterViewInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { CommonFunctions, Zona7, Motor, Remorca, MarciAuto, MarcaAuto, TariCarteVerde } from '../entities';
+import { Zona7, Motor, Remorca, MarciAuto, MarcaAuto, TariCarteVerde } from '../entities';
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona7',

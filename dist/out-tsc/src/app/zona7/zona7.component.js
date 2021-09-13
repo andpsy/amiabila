@@ -20,7 +20,9 @@ let Zona7Component = class Zona7Component {
     showDiv(step, visibility) {
         if (this.childForm.valid) {
             this.Zona7.StepCompleted = true;
-            this.zoneCompleted.emit(true);
+            //this.zoneCompleted.emit(true);
+            if (step === this.CommonFunctions.step)
+                this.zoneCompleted.emit(this.Zona7);
         }
         CommonFunctions.showDiv(step, visibility);
     }

@@ -1,7 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ViewChild } from '@angular/core';
-import { CommonFunctions, Marker, Zona2 } from '../entities';
+import { Marker, Zona2 } from '../entities';
 import { GoogleMap } from '@angular/google-maps'
+import { CommonFunctions } from '../commonfunctions';
 
 
 @Component({

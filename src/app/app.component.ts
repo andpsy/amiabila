@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Inject, Output, ViewChild, EventEmitter, View
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 //import { Router } from '@angular/router';
 import {  Router, RoutesRecognized } from '@angular/router';
-import { CommonFunctions, Formular, Polita, Aditionale, GOOGLE_API_KEY, USE_FORM } from './entities';
+import { Formular, Polita, Aditionale } from './entities';
+import { CommonFunctions, GOOGLE_API_KEY, USE_FORM } from './commonfunctions';
 import { MongoDbService } from './mongo-db.service';
 import { DOCUMENT } from '@angular/common';
 import { Observable, of } from 'rxjs';
@@ -21,7 +22,9 @@ export class AppComponent implements OnInit {
   public _cale_parts: string;
   public CommonFunctions = CommonFunctions;  
   public externalGuid:string;
+  public externalLetter:string;
   public use_form = USE_FORM;
+  public sendCompleted = false;
 
 	constructor(
     private router: Router,
@@ -33,18 +36,19 @@ export class AppComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.Formular = new Formular();
     this.router.events.subscribe(val => {
       if (val instanceof RoutesRecognized) {
-        if (val.state.root.firstChild && val.state.root.firstChild.params.id) {
-          //console.log(val.state.root.firstChild.params.id);
-          this.externalGuid = val.state.root.firstChild.params.id;
+        if (val.state.root.firstChild){
+          if(val.state.root.firstChild.params.id)
+            this.externalGuid = val.state.root.firstChild.params.id;
+          if(val.state.root.firstChild.params.litera)
+            this.externalLetter = val.state.root.firstChild.params.litera;
           this.getFormular();
         }          
       }
     });    
-
     this.setGTagManager();
-    this.Formular = new Formular();
   }
 
   showDiv(step: number, visibility:boolean):void{
@@ -60,7 +64,7 @@ export class AppComponent implements OnInit {
   }
 
   //refreshProgressBar(zoneCompleted:boolean):void{
-  refreshProgressBar(zona:any):void{
+  refreshProgressBar(zona:any):void{    
     var tmp = 0;
     for(var i=0;i<CommonFunctions.Steps.length;i++){
       if(CommonFunctions.Steps[i].Step == CommonFunctions.step && CommonFunctions.Steps[i].zona == zona.constructor.name){
@@ -136,7 +140,11 @@ export class AppComponent implements OnInit {
      .subscribe(
        formular => { 
          //console.log(formular);
-         this.Formular = this.CommonFunctions.copyObj(formular, this.Formular);
+         //this.Formular = this.CommonFunctions.copyObj(formular, this.Formular); // nu merge uploadul
+         
+         if(formular.Id != null && this.Formular.Id == null)
+           this.Formular.Id = formular.Id;
+         
        }
       ); 
   }
@@ -146,7 +154,10 @@ export class AppComponent implements OnInit {
      .getFormular(this.externalGuid)
      .subscribe(
        formular => { 
-         this.Formular = this.CommonFunctions.copyObj(formular, this.Formular);
+         //this.Formular = this.CommonFunctions.copyObj(formular, this.Formular);
+         //this.Formular = this.CommonFunctions.copyObjI(formular, this.Formular);
+         //this.Formular = this.CommonFunctions.copyObj(formular);
+         this.Formular = new Formular(formular);
        }
       );    
   }
@@ -169,6 +180,10 @@ export class AppComponent implements OnInit {
     //console.warn(this.Formular);
     //this.Formular.Fisiere = event;
     this.nextStep(null);
+  }
+
+  updateSendStatus(event){
+    this.sendCompleted = event[0];
   }
 }
 

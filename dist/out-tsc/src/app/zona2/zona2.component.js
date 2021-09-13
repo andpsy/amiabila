@@ -6,18 +6,52 @@ let Zona2Component = class Zona2Component {
         this.zoneCompleted = new EventEmitter();
         this.imgMapEvent = new EventEmitter();
         this.CommonFunctions = CommonFunctions;
+        this.newPosition = null;
         //this.Zona2 = new Zona2();
         this.Tari = new TariCarteVerde();
         this.TariTemp = new TariCarteVerde();
     }
+    initAutocomplete() {
+        this.autocomplete = new google.maps.places.Autocomplete(document.getElementById("Loc"), {
+            types: ['address'],
+            componentRestrictions: { 'country': ['RO'] },
+            fields: ['address_components', 'geometry']
+        });
+        //this.autocomplete.addListener('place_changed', this.onPlaceChanged);
+        this.autocomplete.addListener('place_changed', this.onPlaceChanged.bind(this));
+    }
+    autocompleteSetBounds() {
+        if (this.newPosition != null) {
+            this.autocomplete.setBounds(this.newPosition);
+        }
+    }
+    onPlaceChanged() {
+        var place = this.autocomplete.getPlace();
+        if (!place.geometry) {
+            //user didn't select a place
+            document.getElementById("Loc").placeholder = "Selectati locatia";
+        }
+        else {
+            //this.Zona2.Loc = place.formatted_address; //.adr_address;
+            this.NewPlaceSelected = place;
+        }
+    }
+    ngAfterViewInit() {
+        this.initAutocomplete();
+    }
     ngOnInit() {
-        //this.filterText.setValue({name: 'ROMANIA'});
-        this.Tara.control.value = this.Zona2.Tara = "ROMANIA";
+        if (this.Zona2.Tara == null) {
+            //this.filterText.setValue({name: 'ROMANIA'});
+            this.Tara.control.value = this.Zona2.Tara = "ROMANIA";
+            console.log(this.Tara.control.value, this.Zona2.Tara);
+        }
     }
     showDiv(step, visibility) {
         if (this.childForm.valid) {
             this.Zona2.StepCompleted = true;
-            this.zoneCompleted.emit(true);
+            //this.zoneCompleted.emit(true);
+            if (step === this.CommonFunctions.step)
+                this.zoneCompleted.emit(this.Zona2);
         }
         CommonFunctions.showDiv(step, visibility);
     }
@@ -26,7 +60,7 @@ let Zona2Component = class Zona2Component {
             this.Tari.Tari = this.TariTemp.Tari;
         } // when nothing has typed*/   
         if (typeof event === 'string') {
-            console.log(event);
+            //console.log(event);
             this.Tari.Tari = this.TariTemp.Tari.filter(a => a.Denumire.toLowerCase()
                 .startsWith(event.toLowerCase()));
         }

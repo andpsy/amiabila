@@ -1,7 +1,8 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
-import { CommonFunctions, Zona11 } from '../entities';
+import { Zona11 } from '../entities';
 import {MatChipInputEvent} from '@angular/material/chips';
+import { CommonFunctions } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona11',

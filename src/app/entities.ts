@@ -1,20 +1,4 @@
-import { environment } from './../environments/environment';
-
-export const GOOGLE_API_KEY = "AIzaSyBDS3LAPdSf1eV6wFFgxsjkn0qNJCuC2Eo";
-export const USE_FORM = false; //daca vrem sa folosim formularul sau trecem direct la incarcare documente (inclusiv amiabil)
-export const UPLOAD_FILE_THUMB_SIZE = 100;
-
-export const DD_MM_YYYY_Format = {
-    parse: {
-        dateInput: 'LL',
-    },
-    display: {
-        dateInput: 'DD/MM/YYYY',
-        monthYearLabel: 'MMM YYYY',
-        dateA11yLabel: 'LL',
-        monthYearA11yLabel: 'MMMM YYYY',
-    },
-};
+import { CommonFunctions } from './commonfunctions';
 
 export class ImgMapList{
   "Id":string;
@@ -49,135 +33,6 @@ export class Marker {
   }
 }; 
 
-export class CommonFunctions{
-  public static DISABLE_BUTTONS_ON_VALIDATION_ERROR = false;
-  // public static GOOGLE_API_KEY = "AIzaSyCgXPkbiFYrV2Na-_XmGN0sUjAUq3WVKCs";
-  public static IMG_CAPTURE_ZOOM = 20;
-  public static IMG_CAPTURE_SIZE = "300x300";
-  public static IMG_MAP_ID = "roadmap";
-
-  //public static SRV_ROOT = "https://localhost:44322/";
-  public static SRV_ROOT = environment.apiUrl;
-  public static SRV_URL = CommonFunctions.SRV_ROOT + "api/";
-  public static SRV_RESOURCES_URL = CommonFunctions.SRV_ROOT + "Resources/Formulare/";
-
-  public static isNullOrWhiteSpaces(str){
-    return str === null || str.trim() === '';
-  } 
-
-  public static step:number = null;
-
-  public static addZero(i) {
-    if (i < 10) {
-      i = "0" + i;
-    }
-    return i;
-  }
-
-  public static _cale_parts = "assets/_parts_small/";
-
-  public static TipVehicul = ["autoturism", "motocicleta", "camion", "altul"];
-
-  public static ZoneImpact = [{"id":1, "zona":"fata"}, 
-    {"id":2, "zona":"stanga-fata"}, 
-    {"id":3, "zona":"stanga"}, 
-    {"id":4, "zona":"stanga-spate"}, 
-    {"id":5, "zona":"spate"},     
-    {"id":6, "zona":"dreapta-spate"}, 
-    {"id":7, "zona":"dreapta"}, 
-    {"id":8, "zona":"dreapta-fata"}];
-
-  public static DocumenteNecesare = [
-    {"selected":false, "name":"Constat Amiabil"}, //se va scoate cand folosim formularul
-    {"selected":false, "name":"CI soferi"}, 
-    {"selected":false, "name":"Permise conducere soferi"}, 
-    {"selected":false, "name":"Polite auto RCA"}, 
-    {"selected":false, "name":"Alte acte"}];
-
-  public static TipPozeFaraFormular = [
-    {"selected":true, "name":"1. Constat Amiabil:", "multiple":false, "max_allowed":null}];
-
-  public static TipPozeCuFormular = [
-    {"selected":true, "name":"2. Carte/Buletin de identitate:", "multiple":false, "max_allowed":null}, 
-    {"selected":false, "name":"3. Permis de conducere:", "multiple":false, "max_allowed":null},     
-    {"selected":false, "name":"4. Imagini avarii auto:", "multiple":true, "max_allowed":5}];
-
-  public static showDiv(step:number, visibility:boolean):void{
-    /*
-    var divId = CommonFunctions.Steps[step].DivId;
-    var div = document.querySelector("#"+divId) as HTMLElement;
-    //div.style.visibility = visibility ? "visible" : "hidden";
-    //div.style.width = visibility ? "90%" : "0px";
-    div.style.left = visibility ? "0px" : "-100%";
-    var mainDiv = document.querySelector("#mainDiv") as HTMLElement;
-    mainDiv.style.visibility = visibility ? 'hidden' : 'visible';
-    mainDiv.style.overflow = visibility ? 'hidden' : 'auto';   
-    */
-    CommonFunctions.step = visibility ? step : null;
-  }  
-
-  public static Steps = [
-      {'Step':0, 'DivId':'zona1Div', 'vehicul':null, 'zona':'Zona1', 'bgColor':'lightgray', 'color':'navy'},
-      {'Step':1, 'DivId':'zona2Div', 'vehicul':null, 'zona':'Zona2', 'bgColor':'lightgray', 'color':'navy'},
-      {'Step':2, 'DivId':'zona3Div', 'vehicul':null, 'zona':'Zona3', 'bgColor':'lightgray', 'color':'navy'},
-      {'Step':3, 'DivId':'zona4Div', 'vehicul':null, 'zona':'Zona4', 'bgColor':'lightgray', 'color':'navy'},
-      {'Step':4, 'DivId':'zona5Div', 'vehicul':null, 'zona':'Zona5', 'bgColor':'lightgray', 'color':'navy'},
-
-      {'Step':5, 'DivId':'zona6ADiv', 'vehicul':'A', 'zona':'Zona6', 'bgColor':'#1D3885', 'color':'white'},
-      {'Step':6, 'DivId':'zona7ADiv', 'vehicul':'A', 'zona':'Zona7', 'bgColor':'#1D3885', 'color':'white'},
-      {'Step':7, 'DivId':'zona8ADiv', 'vehicul':'A', 'zona':'Zona8', 'bgColor':'#1D3885', 'color':'white'},
-      {'Step':8, 'DivId':'zona9ADiv', 'vehicul':'A', 'zona':'Zona9', 'bgColor':'#1D3885', 'color':'white'},
-      {'Step':9, 'DivId':'zona10ADiv', 'vehicul':'A', 'zona':'Zona10', 'bgColor':'#1D3885', 'color':'white'},
-      {'Step':10, 'DivId':'zona11ADiv', 'vehicul':'A', 'zona':'Zona11', 'bgColor':'#1D3885', 'color':'white'},
-      {'Step':11, 'DivId':'zona14ADiv', 'vehicul':'A', 'zona':'Zona14', 'bgColor':'#1D3885', 'color':'white'},
-      {'Step':12, 'DivId':'zona15ADiv', 'vehicul':'A', 'zona':'Zona15', 'bgColor':'#1D3885', 'color':'white'},
-      {'Step':13, 'DivId':'fisiereADiv', 'vehicul':'A', 'zona':'ZonaFisiere', 'bgColor':'#1D3885', 'color':'white'},
-
-      {'Step':14, 'DivId':'zona6BDiv', 'vehicul':'B', 'zona':'Zona6', 'bgColor':'#F8D32D', 'color':'black'},
-      {'Step':15, 'DivId':'zona7BDiv', 'vehicul':'B', 'zona':'Zona7', 'bgColor':'#F8D32D', 'color':'black'},
-      {'Step':16, 'DivId':'zona8BDiv', 'vehicul':'B', 'zona':'Zona8', 'bgColor':'#F8D32D', 'color':'black'},
-      {'Step':17, 'DivId':'zona9BDiv', 'vehicul':'B', 'zona':'Zona9', 'bgColor':'#F8D32D', 'color':'black'},
-      {'Step':18, 'DivId':'zona10BDiv', 'vehicul':'B', 'zona':'Zona10', 'bgColor':'#F8D32D', 'color':'black'},
-      {'Step':19, 'DivId':'zona11BDiv', 'vehicul':'B', 'zona':'Zona11', 'bgColor':'#F8D32D', 'color':'black'},
-      {'Step':20, 'DivId':'zona14BDiv', 'vehicul':'B', 'zona':'Zona14', 'bgColor':'#F8D32D', 'color':'black'},
-      {'Step':21, 'DivId':'zona15BDiv', 'vehicul':'B', 'zona':'Zona15', 'bgColor':'#F8D32D', 'color':'black'},
-      {'Step':22, 'DivId':'fisiereBDiv', 'vehicul':'B', 'zona':'ZonaFisiere', 'bgColor':'#F8D32D', 'color':'black'},
-
-      {'Step':23, 'DivId':'zona12Div', 'vehicul':null, 'zona':'Zona12', 'bgColor':'lightgray', 'color':'navy'},
-      {'Step':24, 'DivId':'zona13Div', 'vehicul':null, 'zona':'Zona13', 'bgColor':'lightgray', 'color':'navy'},
-
-      {'Step':25, 'DivId':'zona0Div', 'vehicul':null, 'zona':'ZonaFisiere', 'bgColor':'lightgray', 'color':'navy'},
-      {'Step':26, 'DivId':'trimitereDiv', 'vehicul':null, 'zona':null, 'bgColor':'lightgray', 'color':'navy'}
-      ];
-
-  public static getPreviousStepDivId(idx:number):string{
-    return idx < 1 ? null : CommonFunctions.Steps[idx-1].DivId;
-  }
-  public static getNextStepDivId(idx:number):string{
-    return idx > CommonFunctions.Steps.length - 2 ? null : CommonFunctions.Steps[idx+1].DivId;
-  }  
-
-  public static copyObj(source:any, target:any){
-    const props = Object.keys(source);
-    for (const prop of props) {
-      var objVal = source[prop];
-      if(typeof objVal === 'object' && objVal !== null){
-        //console.log(prop + " - " + Array.isArray(objVal));
-        if(Array.isArray(objVal)){
-          target[prop] = [];
-          for(var i=0;i<objVal.length;i++){
-            target[prop].push(objVal[i]);
-          }
-        }
-        else
-          target[prop] = CommonFunctions.copyObj(objVal, target[prop]);
-      }
-      else
-        target[prop]=objVal;
-    }
-    return target;
-  }
-}
 
 export class TipFisier{
   selected: boolean;
@@ -185,11 +40,18 @@ export class TipFisier{
   multiple: boolean;
   max_allowed: number;
 
-  constructor(){
-    this.selected = false;
-    this.name = null;
-    this.multiple = false;
-    this.max_allowed = null;
+  constructor(source?:TipFisier){
+    if(source == null){
+      this.selected = false;
+      this.name = null;
+      this.multiple = false;
+      this.max_allowed = null;
+    }else{
+      this.selected = source.selected;
+      this.name = source.name;
+      this.multiple = source.multiple;
+      this.max_allowed = source.max_allowed;
+    }
   }
 }
 
@@ -213,6 +75,30 @@ export class Polita{
   EmailAsigurat: string;
   ValabilDeLa: Date;
   ValabilPanaLa: Date;  
+
+  constructor(source?:Polita){
+    if(source != null){
+      this.Serie = source.Serie;
+      this.Numar = source.Numar;
+      this.DenumireAsigurator = source.DenumireAsigurator;
+      this.AgentieAsigurator = source.AgentieAsigurator;
+      this.DenumireBrokerAgent = source.DenumireBrokerAgent;
+      this.NrAuto = source.NrAuto;
+      this.NrSasiuAuto = source.NrSasiuAuto;
+      this.TipAuto = source.TipAuto;
+      this.MarcaAuto = source.MarcaAuto;
+      this.DenumireAsiguratProprietar = source.DenumireAsiguratProprietar;
+      this.CuiAsiguratProprietar = source.CuiAsiguratProprietar;
+      this.DenumireAsiguratUtilizator = source.DenumireAsiguratUtilizator;
+      this.CuiAsiguratUtilizator = source.CuiAsiguratUtilizator;
+      this.AdresaAsigurat = source.AdresaAsigurat;
+      this.TaraAsigurat = source.TaraAsigurat;
+      this.TelefonAsigurat = source.TelefonAsigurat;
+      this.EmailAsigurat = source.EmailAsigurat;
+      this.ValabilDeLa = source.ValabilDeLa;
+      this.ValabilPanaLa = source.ValabilPanaLa;
+    }
+  }
 }
 
 export class Polite{
@@ -275,10 +161,16 @@ export class Martor {
   Adresa: string;
   Telefon: string;
 
-  constructor(){
-    this.Nume = null;
-    this.Adresa = null;
-    this.Telefon = null;
+  constructor(source?:Martor){
+    if(source==null){
+      this.Nume = null;
+      this.Adresa = null;
+      this.Telefon = null;
+    }else{     
+      this.Nume = source.Nume;
+      this.Adresa = source.Adresa;
+      this.Telefon = source.Telefon;
+    }
   }  
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -297,10 +189,16 @@ export class Zona1 {
   Ora: string;
   StepCompleted: boolean;
 
-  constructor(){
-    this.Data = null;
-    this.Ora = null;
-    this.StepCompleted = false;
+  constructor(source?:Zona1){
+    if(source==null){
+      this.Data = null;
+      this.Ora = null;
+      this.StepCompleted = false;
+    }else{
+      this.Data = source.Data;
+      this.Ora = source.Ora;
+      this.StepCompleted = source.StepCompleted;     
+    }
   }  
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -323,10 +221,16 @@ export class Zona2 {
   Loc: string;
   Tara: string;
   StepCompleted: boolean;
-  constructor(){
-    this.Loc = null;
-    this.Tara = null;
-    this.StepCompleted = false;
+  constructor(source?:Zona2){
+    if(source==null){
+      this.Loc = null;
+      this.Tara = null;
+      this.StepCompleted = false;
+    }else{
+      this.Loc = source.Loc;
+      this.Tara = source.Tara;
+      this.StepCompleted = source.StepCompleted;      
+    }
   }  
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -342,11 +246,18 @@ export class Zona3 {
   VatamariNu: boolean;
   StepCompleted: boolean;
   Confirma112: boolean;
-  constructor(){
-    this.VatamariDa = false;
-    this.VatamariNu = false;
-    this.StepCompleted = false;
-    this.Confirma112 = false;
+  constructor(source?:Zona3){
+    if(source==null){
+      this.VatamariDa = false;
+      this.VatamariNu = false;
+      this.StepCompleted = false;
+      this.Confirma112 = false;
+    }else{
+      this.VatamariDa = source.VatamariDa;
+      this.VatamariNu = source.VatamariNu;
+      this.StepCompleted = source.StepCompleted;
+      this.Confirma112 = source.Confirma112;      
+    }
   }  
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -362,11 +273,18 @@ export class Zona4 {
   PagubeAlteObiecte: boolean;
   Pagube: Pagube;
   StepCompleted: boolean;
-  constructor(){
-    this.PagubeAlteVehicule = false;
-    this.PagubeAlteObiecte = false;
-    this.Pagube = new Pagube();
-    this.StepCompleted = false;
+  constructor(source?:Zona4){
+    if(source==null){
+      this.PagubeAlteVehicule = false;
+      this.PagubeAlteObiecte = false;
+      this.Pagube = new Pagube();
+      this.StepCompleted = false;
+    }else{
+      this.PagubeAlteVehicule = source.PagubeAlteVehicule;
+      this.PagubeAlteObiecte = source.PagubeAlteObiecte;
+      this.Pagube = new Pagube(source.Pagube);
+      this.StepCompleted = source.StepCompleted;      
+    }
   }  
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -401,12 +319,18 @@ export class Zona5 {
   ExistaMartori: boolean;
   Martori: Martor[];
   StepCompleted: boolean;
-  constructor(){
-    this.ExistaMartori = false;
-    this.Martori = [];
-    //var m = new Martor();
-    //this.Martori.push(m);
-    this.StepCompleted = false;
+  constructor(source?:Zona5){
+    if(source==null){
+      this.ExistaMartori = false;
+      this.Martori = [];
+      //var m = new Martor();
+      //this.Martori.push(m);
+      this.StepCompleted = false;
+    }else{
+      this.ExistaMartori = source.ExistaMartori;
+      this.Martori = Object.assign(source.Martori);
+      this.StepCompleted = source.StepCompleted;
+    }
   }
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -434,15 +358,26 @@ export class Zona6 {
   Telefon: string;
   Email: string;
   StepCompleted: boolean;
-  constructor(){
-    this.Nume = null;
-    this.Prenume = null;
-    this.Adresa = null;
-    this.CodPostal = null;
-    this.Tara = null;
-    this.Telefon = null;
-    this.Email = null;
-    this.StepCompleted = false;
+  constructor(source?:Zona6){
+    if(source==null){
+      this.Nume = null;
+      this.Prenume = null;
+      this.Adresa = null;
+      this.CodPostal = null;
+      this.Tara = null;
+      this.Telefon = null;
+      this.Email = null;
+      this.StepCompleted = false;
+    }else{
+      this.Nume = source.Nume;
+      this.Prenume = source.Prenume;
+      this.Adresa = source.Adresa;
+      this.CodPostal = source.CodPostal;
+      this.Tara = source.Tara;
+      this.Telefon = source.Telefon;
+      this.Email = source.Email;
+      this.StepCompleted = source.StepCompleted;      
+    }
   }
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -466,12 +401,20 @@ export class Motor {
   TipAltul: string;
   NrInmatriculare: string;
   TaraInmatriculare: string;
-  constructor(){
-    this.Marca = null;
-    this.Tip = null;
-    this.TipAltul = null;
-    this.NrInmatriculare = null;
-    this.TaraInmatriculare = null;
+  constructor(source?:Motor){
+    if(source==null){
+      this.Marca = null;
+      this.Tip = null;
+      this.TipAltul = null;
+      this.NrInmatriculare = null;
+      this.TaraInmatriculare = null;
+    }else{
+      this.Marca = source.Marca;
+      this.Tip = source.Tip;
+      this.TipAltul = source.TipAltul;
+      this.NrInmatriculare = source.NrInmatriculare;
+      this.TaraInmatriculare = source.TaraInmatriculare;      
+    }
   }
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -492,9 +435,14 @@ export class Motor {
 export class Remorca {
   NrInmatriculare: string;
   TaraInmatriculare: string;
-  constructor(){
-    this.NrInmatriculare = null;
-    this.TaraInmatriculare = null;
+  constructor(source?:Remorca){
+    if(source==null){
+      this.NrInmatriculare = null;
+      this.TaraInmatriculare = null;
+    }else{
+      this.NrInmatriculare = source.NrInmatriculare;
+      this.TaraInmatriculare = source.TaraInmatriculare;      
+    }
   }
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -509,10 +457,16 @@ export class Zona7 {
   Motor: Motor;
   Remorca: Remorca;
   StepCompleted: boolean;
-  constructor(){
-    this.Motor = new Motor();
-    this.Remorca = new Remorca();
-    this.StepCompleted = false;
+  constructor(source?:Zona7){
+    if(source==null){
+      this.Motor = new Motor();
+      this.Remorca = new Remorca();
+      this.StepCompleted = false;
+    }else{
+      this.Motor = new Motor(source.Motor);
+      this.Remorca = new Remorca(source.Remorca);
+      this.StepCompleted = source.StepCompleted;      
+    }
   }
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -544,23 +498,42 @@ export class Zona8 {
   StepCompleted: boolean;
   DenumireCasco: string;
   NrPolitaCasco: string;
-  constructor(){
-    this.Denumire = null;
-    this.PolitaNr = null;
-    this.CarteVerdeNr = null;
-    this.ValabilDeLa = null;
-    this.ValabilPanaLa = null;
-    this.Sucursala = null;
-    this.DenumireSucursala = null;
-    this.Adresa = null;
-    this.Tara = null;
-    this.Telefon = null;
-    this.Email = null;
-    this.Casco = false;
-    this.DecontareDirecta = false;
-    this.DenumireCasco = null;
-    this.NrPolitaCasco = null;
-    this.StepCompleted = false;
+  constructor(source?:Zona8){
+    if(source==null){
+      this.Denumire = null;
+      this.PolitaNr = null;
+      this.CarteVerdeNr = null;
+      this.ValabilDeLa = null;
+      this.ValabilPanaLa = null;
+      this.Sucursala = null;
+      this.DenumireSucursala = null;
+      this.Adresa = null;
+      this.Tara = null;
+      this.Telefon = null;
+      this.Email = null;
+      this.Casco = false;
+      this.DecontareDirecta = false;
+      this.DenumireCasco = null;
+      this.NrPolitaCasco = null;
+      this.StepCompleted = false;
+    }else{
+      this.Denumire = source.Denumire;
+      this.PolitaNr = source.PolitaNr;
+      this.CarteVerdeNr = source.CarteVerdeNr;
+      this.ValabilDeLa = source.ValabilDeLa;
+      this.ValabilPanaLa = source.ValabilPanaLa;
+      this.Sucursala = source.Sucursala;
+      this.DenumireSucursala = source.DenumireSucursala;
+      this.Adresa = source.Adresa;
+      this.Tara = source.Tara;
+      this.Telefon = source.Telefon;
+      this.Email = source.Email;
+      this.Casco = source.Casco;
+      this.DecontareDirecta = source.DecontareDirecta;
+      this.DenumireCasco = source.DenumireCasco;
+      this.NrPolitaCasco = source.NrPolitaCasco;
+      this.StepCompleted = source.StepCompleted;      
+    }
   }
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -588,19 +561,34 @@ export class Zona9 {
   Categoria: string;
   ValabilPanaLa: Date;
   StepCompleted: boolean;
-  constructor(){
-    this.IdenticCuAsiguratul = false;
-    this.Nume = null;
-    this.Prenume = null;
-    this.DataNasterii = null;
-    this.Adresa = null;
-    this.Tara = null;
-    this.Telefon = null;
-    this.Email = null;
-    this.PermisConducereNr = null;
-    this.Categoria = null;
-    this.ValabilPanaLa = null;    
-    this.StepCompleted = false;
+  constructor(source?:Zona9){
+    if(source==null){
+      this.IdenticCuAsiguratul = false;
+      this.Nume = null;
+      this.Prenume = null;
+      this.DataNasterii = null;
+      this.Adresa = null;
+      this.Tara = null;
+      this.Telefon = null;
+      this.Email = null;
+      this.PermisConducereNr = null;
+      this.Categoria = null;
+      this.ValabilPanaLa = null;    
+      this.StepCompleted = false;
+    }else{
+      this.IdenticCuAsiguratul = source.IdenticCuAsiguratul;
+      this.Nume = source.Nume;
+      this.Prenume = source.Prenume;
+      this.DataNasterii = source.DataNasterii;
+      this.Adresa = source.Adresa;
+      this.Tara = source.Tara;
+      this.Telefon = source.Telefon;
+      this.Email = source.Email;
+      this.PermisConducereNr = source.PermisConducereNr;
+      this.Categoria = source.Categoria;
+      this.ValabilPanaLa = source.ValabilPanaLa;    
+      this.StepCompleted = source.StepCompleted;      
+    }
   }
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -631,9 +619,14 @@ export class Zona9 {
 export class Zona10 {
   PunctImpact: string;
   StepCompleted: boolean;
-  constructor(){
-    this.PunctImpact = null;
-    this.StepCompleted = false;
+  constructor(source?:Zona10){
+    if(source==null){
+      this.PunctImpact = null;
+      this.StepCompleted = false;
+    }else{
+      this.PunctImpact = source.PunctImpact;
+      this.StepCompleted = source.StepCompleted;     
+    }
   }
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -645,9 +638,14 @@ export class Zona10 {
 export class Zona11 {
   Pagube: string[];
   StepCompleted: boolean;
-  constructor(){
-    this.Pagube = [];
-    this.StepCompleted = false;
+  constructor(source?:Zona11){
+    if(source==null){
+      this.Pagube = [];
+      this.StepCompleted = false;
+    }else{
+      this.Pagube = Object.assign(source.Pagube);
+      this.StepCompleted = source.StepCompleted;      
+    }
   }
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -659,17 +657,27 @@ export class Zona11 {
 export class Zona14 {
   Observatii: string;
   StepCompleted: boolean;
-  constructor(){
-    this.Observatii = null;
-    this.StepCompleted = false;   
+  constructor(source?:Zona14){
+    if(source==null){
+      this.Observatii = null;
+      this.StepCompleted = false;   
+    }else{
+      this.Observatii = source.Observatii;
+      this.StepCompleted = source.StepCompleted;         
+    }
   }
 }
 export class Zona15 {
   CaleSemnatura: string;
   StepCompleted: boolean;
-  constructor(){
-    this.CaleSemnatura = null;
-    this.StepCompleted = false;    
+  constructor(source?:Zona15){
+    if(source==null){
+      this.CaleSemnatura = null;
+      this.StepCompleted = false;    
+    }else{
+      this.CaleSemnatura = source.CaleSemnatura;
+      this.StepCompleted = source.StepCompleted;          
+    }
   }
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -685,25 +693,40 @@ export class Aditionale {
   GDPR: boolean;
   TermeniSiConditii: boolean; 
   ZonaFisiere: ZonaFisiere; // aici vom stoca formularul (calea) amiabil scanat
-
   PagubitDecontareDirecta: boolean;
   //PagubitSocietateDecontareDirecta: string;
   VinovatCasco: boolean;
   //VinovatSocietateCasco: string;
   StepCompleted: boolean;
-  constructor(){
-    this.Conditii = true;
-    this.DocumenteNecesare = true;
-    this.GDPR = true;
-    this.TermeniSiConditii = false; 
-    // mai sus true - pt. teste 
-    this.ZonaFisiere = new ZonaFisiere(CommonFunctions.TipPozeFaraFormular);
 
-    this.PagubitDecontareDirecta = false;
-    //this.PagubitSocietateDecontareDirecta = null;
-    this.VinovatCasco = false;
-    //this.VinovatSocietateCasco = null;
-    this.StepCompleted = false;    
+  constructor(source?:Aditionale){
+    if(source==null){
+      this.Conditii = true;
+      this.DocumenteNecesare = true;
+      this.GDPR = true;
+      this.TermeniSiConditii = false; 
+      // mai sus true - pt. teste 
+      this.ZonaFisiere = new ZonaFisiere(CommonFunctions.TipPozeFaraFormular);
+
+      this.PagubitDecontareDirecta = false;
+      //this.PagubitSocietateDecontareDirecta = null;
+      this.VinovatCasco = false;
+      //this.VinovatSocietateCasco = null;
+      this.StepCompleted = false;    
+    }else{
+      this.Conditii = source.Conditii;
+      this.DocumenteNecesare = source.DocumenteNecesare;
+      this.GDPR = source.GDPR;
+      this.TermeniSiConditii = source.TermeniSiConditii; 
+      // mai sus true - pt. teste 
+      this.ZonaFisiere = new ZonaFisiere(source.ZonaFisiere);
+
+      this.PagubitDecontareDirecta = source.PagubitDecontareDirecta;
+      //this.PagubitSocietateDecontareDirecta = source.PagubitSocietateDecontareDirecta;
+      this.VinovatCasco = source.VinovatCasco;
+      //this.VinovatSocietateCasco = source.VinovatSocietateCasco;
+      this.StepCompleted = source.StepCompleted;          
+    }
   }
 }
 
@@ -711,14 +734,22 @@ export class ZonaFisiere{
   Fisiere: Dosar[] = [];
   StepCompleted: boolean;
 
-  constructor(tipuriFisiere){
-    for(var i=0; i<tipuriFisiere.length;i++){
-      var dosar = new Dosar();
-      dosar.Tip = tipuriFisiere[i];
-      dosar.Fisiere = [];
-      this.Fisiere.push(dosar);
+  constructor(source:any){
+    if(source.constructor.toString().indexOf('Array') > 0){      
+      for(var i=0; i<source.length;i++){
+        var dosar = new Dosar();
+        dosar.Tip = source[i];
+        dosar.Fisiere = [];
+        this.Fisiere.push(dosar);
+      }
+      this.StepCompleted = false;
+    }else{
+      this.Fisiere = new Array(source.Fisiere.length);
+      for(var i=0; i<source.Fisiere.length;i++){
+        this.Fisiere[i] = new Dosar(source.Fisiere[i]);
+      }
+      this.StepCompleted = source.StepCompleted;
     }
-    this.StepCompleted = false;
   }
 
   public hasError():string[]{
@@ -752,17 +783,30 @@ export class Vehicul {
   Zona15: Zona15;
   ZonaFisiere: ZonaFisiere;
 
-  constructor(){
-    this.Polita = new Polita();
-    this.Zona6 = new Zona6();
-    this.Zona7 = new Zona7();
-    this.Zona8 = new Zona8();
-    this.Zona9 = new Zona9();
-    this.Zona10 = new Zona10();
-    this.Zona11 = new Zona11();
-    this.Zona14 = new Zona14();
-    this.Zona15 = new Zona15();
-    this.ZonaFisiere = new ZonaFisiere(CommonFunctions.TipPozeCuFormular);
+  constructor(source?:Vehicul){
+    if(source==null){
+      this.Polita = new Polita();
+      this.Zona6 = new Zona6();
+      this.Zona7 = new Zona7();
+      this.Zona8 = new Zona8();
+      this.Zona9 = new Zona9();
+      this.Zona10 = new Zona10();
+      this.Zona11 = new Zona11();
+      this.Zona14 = new Zona14();
+      this.Zona15 = new Zona15();
+      this.ZonaFisiere = new ZonaFisiere(CommonFunctions.TipPozeCuFormular);
+    }else{
+      this.Polita = new Polita(source.Polita);
+      this.Zona6 = new Zona6(source.Zona6);
+      this.Zona7 = new Zona7(source.Zona7);
+      this.Zona8 = new Zona8(source.Zona8);
+      this.Zona9 = new Zona9(source.Zona9);
+      this.Zona10 = new Zona10(source.Zona10);
+      this.Zona11 = new Zona11(source.Zona11);
+      this.Zona14 = new Zona14(source.Zona14);
+      this.Zona15 = new Zona15(source.Zona15);
+      this.ZonaFisiere = new ZonaFisiere(source.ZonaFisiere);      
+    }
   }
 
   public hasError():string[]{
@@ -789,12 +833,24 @@ export class Zona12 {
   StepCompleted: boolean;
   VinovatEstimat: string;
   VinovatSelectat: string;
-  constructor(){
-    this.Imprejurari = new ImprejurariProducereAccident();
-    this.CasuteA = 0;
-    this.CasuteB = 0;
-    this.StepCompleted = false;
+  constructor(source?:Zona12){
+    if(source==null){
+      this.Imprejurari = new ImprejurariProducereAccident();
+      this.CasuteA = 0;
+      this.CasuteB = 0;
+      this.StepCompleted = false;
+      this.VinovatEstimat = null;
+      this.VinovatSelectat = null;
+    }else{
+      this.Imprejurari = Object.assign(source.Imprejurari);
+      this.CasuteA = source.CasuteA;
+      this.CasuteB = source.CasuteB;
+      this.StepCompleted = source.StepCompleted;
+      this.VinovatEstimat = source.VinovatEstimat;
+      this.VinovatSelectat = source.VinovatSelectat;      
+    }
   }
+
   public hasError():string[]{
     var toReturn:string[] = [];
     if(this.CasuteA == 0 || this.CasuteB == 0)
@@ -858,10 +914,16 @@ export class Zona13 {
   CaleSchita: string;
   ImgMap: string;
   StepCompleted: boolean;
-  constructor(){
-    this.CaleSchita = null;
-    this.ImgMap = null;
-    this.StepCompleted = false;    
+  constructor(source?:Zona13){
+    if(source==null){
+      this.CaleSchita = null;
+      this.ImgMap = null;
+      this.StepCompleted = false;    
+    }else{
+      this.CaleSchita = source.CaleSchita;
+      this.ImgMap = source.ImgMap;
+      this.StepCompleted = source.StepCompleted;          
+    }
   }
   public hasError():string[]{
     var toReturn:string[] = [];
@@ -874,11 +936,16 @@ export class Zona13 {
 
 export class Dosar{
   Tip: TipFisier;
-  Fisiere: Fisier[];
+  Fisiere: Fisier[] = [];
 
-  constructor(){
-    this.Tip = new TipFisier();
-    this.Fisiere = [];
+  constructor(source?:Dosar){
+    if(source==null){
+      this.Tip = new TipFisier();
+      this.Fisiere = [];
+    }else{
+      this.Tip = source.Tip;
+      this.Fisiere = Object.assign(source.Fisiere);
+    }
   }
 }
 
@@ -886,9 +953,39 @@ export class Fisier{
   DenumireClient: string;
   DenumireServer: string; 
 
-  constructor(){
-    this.DenumireClient = null;
-    this.DenumireServer = null;
+  constructor(source?:Fisier){
+    if(source==null){
+      this.DenumireClient = null;
+      this.DenumireServer = null;
+    }else{
+      this.DenumireClient = source.DenumireClient;
+      this.DenumireServer = source.DenumireServer;
+    }
+  }
+}
+
+export class Utilizator{
+  Email: string;
+  Telefon: string;
+  Litera: string;
+
+  constructor(source?:Utilizator){
+    if(source==null){
+      this.Email = null;
+      this.Telefon = null;
+      this.Litera = null;
+    }else{
+      this.Email = source.Email;
+      this.Telefon = source.Telefon;
+      this.Litera = source.Litera;      
+    }
+  }
+
+  public hasError():string[]{
+    var toReturn:string[] = [];
+    if(CommonFunctions.isNullOrWhiteSpaces(this.Email) && CommonFunctions.isNullOrWhiteSpaces(this.Telefon))
+      toReturn.push("Completati adresa de email sau telefonul!");
+    return toReturn.length > 0? toReturn : null;
   }
 }
 
@@ -904,6 +1001,7 @@ export class Formular {
   Zona12: Zona12;
   Zona13: Zona13;
   Aditionale: Aditionale;
+  Utilizatori: Utilizator[] = [];
 
   constructor(f?:Formular){
     if(f == null){
@@ -918,18 +1016,36 @@ export class Formular {
       this.Zona12 = new Zona12();
       this.Zona13 = new Zona13();    
       this.Aditionale = new Aditionale();
+      this.Utilizatori = []; 
+      this.Utilizatori.push(new Utilizator());
+      this.Utilizatori.push(new Utilizator());
     }else{
       this.Id = f.Id;
-      this.Zona1 = Object.assign(this.Zona1, f.Zona1);
-      this.Zona2 = Object.assign(this.Zona2, f.Zona2);
-      this.Zona3 = Object.assign(this.Zona3, f.Zona3);
-      this.Zona4 = Object.assign(this.Zona4, f.Zona4);
-      this.Zona5 = Object.assign(this.Zona5, f.Zona5);
-      this.VehiculA = Object.assign(this.VehiculA, f.VehiculA);
-      this.VehiculB = Object.assign(this.VehiculB, f.VehiculB);
-      this.Zona12 = Object.assign(this.Zona12, f.Zona12);
-      this.Zona13 = Object.assign(this.Zona13, f.Zona13);
-      this.Aditionale = Object.assign(this.Aditionale, f.Aditionale);
+      this.Zona1 = new Zona1(f.Zona1);
+      //this.Zona1 = Object.assign(this.Zona1, f.Zona1);
+      this.Zona2 = new Zona2(f.Zona2);
+      //this.Zona2 = Object.assign(this.Zona2, f.Zona2);
+      this.Zona3 = new Zona3(f.Zona3);
+      //this.Zona3 = Object.assign(this.Zona3, f.Zona3);
+      this.Zona4 = new Zona4(f.Zona4);
+      //this.Zona4 = Object.assign(this.Zona4, f.Zona4);
+      this.Zona5 = new Zona5(f.Zona5);
+      //this.Zona5 = Object.assign(this.Zona5, f.Zona5);
+      this.VehiculA = new Vehicul(f.VehiculA);
+      //this.VehiculA = Object.assign(this.VehiculA, f.VehiculA);
+      this.VehiculB = new Vehicul(f.VehiculB);
+      //this.VehiculB = Object.assign(this.VehiculB, f.VehiculB);
+      this.Zona12 = new Zona12(f.Zona12);
+      //this.Zona12 = Object.assign(this.Zona12, f.Zona12);
+      this.Zona13 = new Zona13(f.Zona13);
+      //this.Zona13 = Object.assign(this.Zona13, f.Zona13);
+      this.Aditionale = new Aditionale(f.Aditionale);
+      //this.Aditionale = Object.assign(this.Aditionale, f.Aditionale);
+      this.Utilizatori = new Array(f.Utilizatori.length);
+      for(var i=0;i<f.Utilizatori.length;i++){
+        this.Utilizatori[i] = new Utilizator(f.Utilizatori[i]);
+      }
+      //this.Utilizatori = Object.assign(this.Utilizatori, f.Utilizatori);
     }
   }
 
@@ -947,6 +1063,14 @@ export class Formular {
     if(this.Aditionale.ZonaFisiere.hasError() || this.VehiculA.hasErrorFaraFromular() ||
       this.VehiculB.hasErrorFaraFromular())
       toReturn.push("Cel putin una dintre rubrici contine erori!");
+    else{
+      for(var i=0;i<this.Utilizatori.length;i++){
+        if(this.Utilizatori[i].hasError()){
+          toReturn.push("Cel putin unul dintre utilizatori contine erori!");
+          break;
+        }
+      }
+    }
     return toReturn.length > 0? toReturn : null;
   }
 
@@ -1083,9 +1207,14 @@ export class PagubaObiect{
 export class Pagube{
   PagubeAuto: PagubaAuto[];
   PagubeObiecte: PagubaObiect[];
-  constructor(){
-    this.PagubeAuto = [];
-    this.PagubeObiecte = [];
+  constructor(source?:Pagube){
+    if(source==null){
+      this.PagubeAuto = [];
+      this.PagubeObiecte = [];
+    }else{
+      this.PagubeAuto = Object.assign(source.PagubeAuto);
+      this.PagubeObiecte = Object.assign(source.PagubeObiecte);
+    }
   }
 }
 

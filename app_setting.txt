@@ -1,0 +1,5 @@
+AwsNotificariUser	"avizari_rca@compensaredirecta.ro"
+AwsCereriUser	"regres.rca@compensaredirecta.ro"
+AwsSESServer	"email-smtp.eu-west-1.amazonaws.com"
+AwsSESUser	"AKIAJ4JUGCXZFH7D76XA"
+AwsSESPassword	"AqyBno64mR1NzcMuh9wXYFEoBQ+fIijF9//s3HN5lfiv"

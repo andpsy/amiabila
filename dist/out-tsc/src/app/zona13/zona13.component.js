@@ -1,12 +1,19 @@
 import { __decorate } from "tslib";
 import { Component, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 import { CommonFunctions } from '../entities';
+import { GOOGLE_API_KEY } from '../entities';
+//import html2canvas from 'html2canvas';
+import domtoimage from 'dom-to-image';
 let Zona13Component = class Zona13Component {
-    //canvas:any;
     constructor() {
         this.zoneCompleted = new EventEmitter();
         this.CommonFunctions = CommonFunctions;
         this.putCarAB = null;
+        //canvas:any;
+        this.ImgLst = [];
+        this.selectedImgId = null;
+        this.zoom = this.CommonFunctions.IMG_CAPTURE_ZOOM;
+        this.idIndex = 0;
         //this.Zona13 = new Zona13();
     }
     ngOnInit() {
@@ -27,7 +34,9 @@ let Zona13Component = class Zona13Component {
     showDiv(step, visibility) {
         if (this.childForm.valid) {
             this.Zona13.StepCompleted = true;
-            this.zoneCompleted.emit(true);
+            //this.zoneCompleted.emit(true);
+            if (step === this.CommonFunctions.step)
+                this.zoneCompleted.emit(this.Zona13);
         }
         CommonFunctions.showDiv(step, visibility);
     }
@@ -35,77 +44,164 @@ let Zona13Component = class Zona13Component {
         //this.signaturePad.clear();
     }
     setImgMap(event) {
+        //console.log(this.Zona13.ImgMap);
         if (this.Zona13.ImgMap) {
-            console.log(this.canvasDiv);
-            console.log(this.canvasDiv.style);
             var staticMapUrl = "https://maps.googleapis.com/maps/api/staticmap?";
-            staticMapUrl += "key=" + this.CommonFunctions.GOOGLE_API_KEY;
+            staticMapUrl += "key=" + GOOGLE_API_KEY;
             staticMapUrl += "&center=" + this.Zona13.ImgMap;
             //staticMapUrl += "&size=" + this.CommonFunctions.IMG_CAPTURE_SIZE;
             //staticMapUrl += "&size=" + this.canvas.width + "x" + this.canvas.height;
             staticMapUrl += "&size=" + this.canvasDiv.clientWidth + "x" + this.canvasDiv.clientHeight;
-            staticMapUrl += "&zoom=" + this.CommonFunctions.IMG_CAPTURE_ZOOM;
+            staticMapUrl += "&zoom=" + this.zoom;
             staticMapUrl += "&maptype=" + this.CommonFunctions.IMG_MAP_ID;
-            /*
-            var ctx = this.canvas.getContext("2d");
-            var img = new Image();
-            img.onload = function() {
-                ctx.drawImage(img, 0, 0);
-            };
-            img.src = staticMapUrl;
-            */
             this.canvasDiv.style.backgroundImage = "url('" + staticMapUrl + "')";
         }
     }
     putCar(event) {
-        /*
-        var ctx = this.canvas.getContext("2d");
-        const rect = this.canvas.getBoundingClientRect();
-        var img = new Image();
-        img.onload = function() {
-          //console.log(event);
-          //console.log(event.clientX + ' - ' + event.layerX);
-          //ctx.drawImage(img, event.clientX, event.clientY, 30, 50);
-          //ctx.drawImage(img, event.layerX, event.layerY, 30, 50);
-          ctx.drawImage(img, event.clientX-rect.left, event.clientY-rect.top, 20, 33);
-        };
-        switch (this.putCarAB) {
-          case "A":
-            img.src = "../assets/As.png";
-            break;
-          case "B":
-            img.src = "../assets/Bs.png";
-            break;
-          default:
-            break;
+        //console.log(event);
+        if (this.selectedImgId != null && event.srcElement.id == "canvas") {
+            document.getElementById(this.selectedImgId).style.border = "0px solid gray";
+            this.selectedImgId = null;
         }
-        this.putCarAB = null;
-        */
-        if (!this.putCarAB)
+        if (this.putCarAB == null)
             return;
         const rect = this.canvasDiv.getBoundingClientRect();
-        var elem = document.createElement("img");
+        var type = null;
+        switch (this.putCarAB) {
+            case "A":
+            case "B":
+                type = "img";
+                break;
+            default:
+                type = "input";
+                break;
+        }
+        var elem = document.createElement(type);
         switch (this.putCarAB) {
             case "A":
                 elem.src = "../assets/As.png";
+                elem.id = "As"; // + this.idIndex; // daca vrem sa putem pune mai multe masini pe desem
+                elem.style.height = "33px";
+                elem.style.width = "20px";
+                // this.idIndex++; // daca vrem sa putem pune mai multe masini pe desem
                 break;
             case "B":
                 elem.src = "../assets/Bs.png";
+                elem.id = "Bs"; // + this.idIndex; // daca vrem sa putem pune mai multe masini pe desem
+                elem.style.height = "33px";
+                elem.style.width = "20px";
+                // this.idIndex++; // daca vrem sa putem pune mai multe masini pe desem
+                break;
+            case "T":
+                elem.setAttribute("type", "text");
+                elem.id = "Ts" + this.idIndex;
+                elem.className = "imgText";
+                this.idIndex++;
                 break;
             default:
                 break;
         }
-        elem.style.height = "33px";
-        elem.style.width = "20px";
         elem.style.position = "absolute";
-        //console.log(event.clientX + '-' + event.clientY);
-        //console.log((event.clientX-rect.left) + '-' + (event.clientY-rect.top));
-        elem.style.left = event.clientX - (rect.left + 10) + 'px';
-        elem.style.top = event.clientY - (rect.top + 16.5) + 'px';
+        elem.style.cursor = "pointer";
+        elem.style.left = event.clientX - rect.left + 10 + 'px';
+        elem.style.top = event.clientY - rect.top + 33 + 'px';
+        elem.style.border = "1px solid gray";
         document.getElementById("canvas").appendChild(elem);
+        elem.addEventListener('click', this.onClick.bind(this));
+        this.ImgLst.push({ 'Id': elem.id, 'RotateStep': 0, 'MoveStepX': 0, "MoveStepY": 0 });
         this.putCarAB = null;
+        this.selectedImgId = elem.id;
     }
-    rotateImg() {
+    getImgById(id) {
+        return this.ImgLst.find(x => x.Id === id);
+    }
+    onClick(event) {
+        //console.log(event);
+        if (this.selectedImgId != null) {
+            document.getElementById(this.selectedImgId).style.border = "0px solid gray";
+        }
+        this.selectedImgId = event.srcElement.id;
+        document.getElementById(this.selectedImgId).style.border = "1px solid gray";
+    }
+    rotateImg(direction) {
+        if (this.selectedImgId != null) {
+            var idx = this.getImg(this.selectedImgId);
+            if (idx >= 0) {
+                this.ImgLst[idx].RotateStep += direction;
+                document.getElementById(this.selectedImgId).style.transform = "rotate(" + this.ImgLst[idx].RotateStep * 15 + "deg)";
+            }
+        }
+    }
+    moveXImg(direction) {
+        if (this.selectedImgId != null) {
+            var idx = this.getImg(this.selectedImgId);
+            if (idx >= 0) {
+                this.ImgLst[idx].MoveStepX = direction;
+                document.getElementById(this.selectedImgId).style.left = Number.parseInt(document.getElementById(this.selectedImgId).style.left.replace("px", "")) +
+                    (this.ImgLst[idx].MoveStepX * 5) + "px";
+            }
+        }
+    }
+    moveYImg(direction) {
+        if (this.selectedImgId != null) {
+            var idx = this.getImg(this.selectedImgId);
+            if (idx >= 0) {
+                this.ImgLst[idx].MoveStepY = direction;
+                document.getElementById(this.selectedImgId).style.top = Number.parseInt(document.getElementById(this.selectedImgId).style.top.replace("px", "")) +
+                    (this.ImgLst[idx].MoveStepY * 5) + "px";
+            }
+        }
+    }
+    deleteImg() {
+        if (this.selectedImgId != null) {
+            var idx = this.getImg(this.selectedImgId);
+            if (idx >= 0) {
+                var parentElement = document.getElementById(this.selectedImgId).parentNode;
+                parentElement.removeChild(document.getElementById(this.selectedImgId));
+                this.selectedImgId = null;
+            }
+        }
+    }
+    getImg(id) {
+        for (var i = 0; i < this.ImgLst.length; i++) {
+            if (id === this.ImgLst[i].Id) {
+                return i;
+            }
+        }
+        return null;
+    }
+    saveImgMap() {
+        /*
+        var canvasImg = document.getElementById('canvasImg') as HTMLCanvasElement;
+        html2canvas(this.canvasDiv, {allowTaint:true, useCORS:true, canvas:canvasImg, logging:false,
+          scrollX: -window.scrollX,
+          scrollY: -window.scrollY,
+          windowWidth: document.documentElement.offsetWidth,
+          windowHeight: document.documentElement.offsetHeight }).then(function(canvas) {
+          //document.body.appendChild(canvas);
+          canvasImg.style.display = 'block';
+        });
+        */
+        domtoimage.toPng(this.canvasDiv)
+            .then(function (dataUrl) {
+            var img = new Image();
+            img.src = dataUrl;
+            //document.body.appendChild(img);
+            var canvasImg = document.getElementById('canvasImg');
+            canvasImg.appendChild(img);
+            canvasImg.style.display = 'block';
+        })
+            .catch(function (error) {
+            console.error('oops, something went wrong!', error);
+        });
+    }
+    mapZoomIn() {
+        this.zoom += 1;
+        this.setImgMap(null);
+    }
+    mapZoomOut() {
+        this.zoom -= 1;
+        this.setImgMap(null);
     }
 };
 __decorate([

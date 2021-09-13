@@ -18,5 +18,6 @@ namespace amiabila_backend.Models
     public Zona12 Zona12 { get; set; }
     public Zona13 Zona13 { get; set; }    
     public Aditionale Aditionale { get; set; }
+    public Utilizator[] Utilizatori { get; set; }
   }
 }

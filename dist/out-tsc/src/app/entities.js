@@ -1,3 +1,7 @@
+import { environment } from './../environments/environment';
+export const GOOGLE_API_KEY = "AIzaSyBDS3LAPdSf1eV6wFFgxsjkn0qNJCuC2Eo";
+export const USE_FORM = false; //daca vrem sa folosim formularul sau trecem direct la incarcare documente (inclusiv amiabil)
+export const UPLOAD_FILE_THUMB_SIZE = 100;
 export const DD_MM_YYYY_Format = {
     parse: {
         dateInput: 'LL',
@@ -9,6 +13,8 @@ export const DD_MM_YYYY_Format = {
         monthYearA11yLabel: 'MMMM YYYY',
     },
 };
+export class ImgMapList {
+}
 export class Marker {
     constructor() {
         this.position = {
@@ -35,14 +41,17 @@ export class CommonFunctions {
         return i;
     }
     static showDiv(step, visibility) {
+        /*
         var divId = CommonFunctions.Steps[step].DivId;
-        var div = document.querySelector("#" + divId);
+        var div = document.querySelector("#"+divId) as HTMLElement;
         //div.style.visibility = visibility ? "visible" : "hidden";
         //div.style.width = visibility ? "90%" : "0px";
         div.style.left = visibility ? "0px" : "-100%";
-        var mainDiv = document.querySelector("#mainDiv");
+        var mainDiv = document.querySelector("#mainDiv") as HTMLElement;
         mainDiv.style.visibility = visibility ? 'hidden' : 'visible';
         mainDiv.style.overflow = visibility ? 'hidden' : 'auto';
+        */
+        CommonFunctions.step = visibility ? step : null;
     }
     static getPreviousStepDivId(idx) {
         return idx < 1 ? null : CommonFunctions.Steps[idx - 1].DivId;
@@ -50,12 +59,84 @@ export class CommonFunctions {
     static getNextStepDivId(idx) {
         return idx > CommonFunctions.Steps.length - 2 ? null : CommonFunctions.Steps[idx + 1].DivId;
     }
+    static copyObj(source, target) {
+        if (Array.isArray(source)) {
+            if (source.length > 0) {
+                if (!Array.isArray(target) || (Array.isArray(target) && target.length != source.length))
+                    target = new Array(source.length);
+                for (var i = 0; i < source.length; i++) {
+                    if (typeof source[i] === 'object' && source[i] !== null) {
+                        target[i] = CommonFunctions.copyObj(source[i], target[i]);
+                    }
+                    else
+                        target[i] = source[i];
+                }
+                //target = source.slice();
+            }
+            else {
+                target = [];
+            }
+        }
+        else {
+            const props = Object.keys(source);
+            for (const prop of props) {
+                //console.log(prop);
+                var objVal = source[prop];
+                if (typeof objVal === 'object' && objVal !== null) {
+                    try {
+                        /*
+                        if(Array.isArray(objVal)){
+                          if(objVal.length > 0){
+                            if(!Array.isArray(target[prop]) || (Array.isArray(target[prop]) && target[prop].length != objVal.length))
+                              target[prop] = new Array(objVal.length);
+                            for(var i=0;i<objVal.length;i++){
+                              target[prop][i] = CommonFunctions.copyObj(objVal[i], target[prop][i]);
+                            }
+                          }
+                          else{
+                            target[prop] = [];
+                          }
+                        }
+                        else
+                          target[prop] = CommonFunctions.copyObj(objVal, target[prop]);
+                        */
+                        if (Array.isArray(objVal)) {
+                            //target[prop] = objVal.slice();
+                            target[prop] = [...objVal];
+                        }
+                        else
+                            target[prop] = CommonFunctions.copyObj(objVal, target[prop]);
+                    }
+                    catch (e) {
+                        console.log(prop);
+                        console.error(e);
+                    }
+                }
+                else {
+                    try {
+                        target[prop] = objVal;
+                    }
+                    catch (e) {
+                        console.log(prop);
+                        console.error(e);
+                    }
+                }
+            }
+        }
+        //target = _.cloneDeep(source);
+        return target;
+    }
 }
 CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR = false;
-CommonFunctions.GOOGLE_API_KEY = "AIzaSyCgXPkbiFYrV2Na-_XmGN0sUjAUq3WVKCs";
-CommonFunctions.IMG_CAPTURE_ZOOM = "18";
+// public static GOOGLE_API_KEY = "AIzaSyCgXPkbiFYrV2Na-_XmGN0sUjAUq3WVKCs";
+CommonFunctions.IMG_CAPTURE_ZOOM = 20;
 CommonFunctions.IMG_CAPTURE_SIZE = "300x300";
 CommonFunctions.IMG_MAP_ID = "roadmap";
+//public static SRV_ROOT = "https://localhost:44322/";
+CommonFunctions.SRV_ROOT = environment.apiUrl;
+CommonFunctions.SRV_URL = CommonFunctions.SRV_ROOT + "api/";
+CommonFunctions.SRV_RESOURCES_URL = CommonFunctions.SRV_ROOT + "Resources/Formulare/";
+CommonFunctions.step = null;
 CommonFunctions._cale_parts = "assets/_parts_small/";
 CommonFunctions.TipVehicul = ["autoturism", "motocicleta", "camion", "altul"];
 CommonFunctions.ZoneImpact = [{ "id": 1, "zona": "fata" },
@@ -66,29 +147,111 @@ CommonFunctions.ZoneImpact = [{ "id": 1, "zona": "fata" },
     { "id": 6, "zona": "dreapta-spate" },
     { "id": 7, "zona": "dreapta" },
     { "id": 8, "zona": "dreapta-fata" }];
-CommonFunctions.Steps = [{ 'Step': 0, 'DivId': 'zona1Div' },
-    { 'Step': 1, 'DivId': 'zona2Div' },
-    { 'Step': 2, 'DivId': 'zona3Div' },
-    { 'Step': 3, 'DivId': 'zona4Div' },
-    { 'Step': 4, 'DivId': 'zona5Div' },
-    { 'Step': 5, 'DivId': 'zona6ADiv' },
-    { 'Step': 6, 'DivId': 'zona7ADiv' },
-    { 'Step': 7, 'DivId': 'zona8ADiv' },
-    { 'Step': 8, 'DivId': 'zona9ADiv' },
-    { 'Step': 9, 'DivId': 'zona10ADiv' },
-    { 'Step': 10, 'DivId': 'zona11ADiv' },
-    { 'Step': 11, 'DivId': 'zona14ADiv' },
-    { 'Step': 12, 'DivId': 'zona15ADiv' },
-    { 'Step': 13, 'DivId': 'zona6BDiv' },
-    { 'Step': 14, 'DivId': 'zona7BDiv' },
-    { 'Step': 15, 'DivId': 'zona8BDiv' },
-    { 'Step': 16, 'DivId': 'zona9BDiv' },
-    { 'Step': 17, 'DivId': 'zona10BDiv' },
-    { 'Step': 18, 'DivId': 'zona11BDiv' },
-    { 'Step': 19, 'DivId': 'zona14BDiv' },
-    { 'Step': 20, 'DivId': 'zona15BDiv' },
-    { 'Step': 21, 'DivId': 'zona12Div' },
-    { 'Step': 22, 'DivId': 'zona13Div' }];
+CommonFunctions.DocumenteNecesare = [
+    { "selected": false, "name": "Constat Amiabil" },
+    { "selected": false, "name": "CI soferi" },
+    { "selected": false, "name": "Permise conducere soferi" },
+    { "selected": false, "name": "Polite auto RCA" },
+    { "selected": false, "name": "Alte acte" }
+];
+CommonFunctions.TipPozeFaraFormular = [
+    { "selected": true, "name": "1. Constat Amiabil:", "multiple": false, "max_allowed": null }
+];
+CommonFunctions.TipPozeCuFormular = [
+    { "selected": true, "name": "2. Carte/Buletin de identitate:", "multiple": false, "max_allowed": null },
+    { "selected": false, "name": "3. Permis de conducere:", "multiple": false, "max_allowed": null },
+    { "selected": false, "name": "4. Imagini avarii auto:", "multiple": true, "max_allowed": 5 }
+];
+CommonFunctions.Steps = [
+    { 'Step': 0, 'DivId': 'zona1Div', 'vehicul': null, 'zona': 'Zona1', 'bgColor': 'lightgray', 'color': 'navy' },
+    { 'Step': 1, 'DivId': 'zona2Div', 'vehicul': null, 'zona': 'Zona2', 'bgColor': 'lightgray', 'color': 'navy' },
+    { 'Step': 2, 'DivId': 'zona3Div', 'vehicul': null, 'zona': 'Zona3', 'bgColor': 'lightgray', 'color': 'navy' },
+    { 'Step': 3, 'DivId': 'zona4Div', 'vehicul': null, 'zona': 'Zona4', 'bgColor': 'lightgray', 'color': 'navy' },
+    { 'Step': 4, 'DivId': 'zona5Div', 'vehicul': null, 'zona': 'Zona5', 'bgColor': 'lightgray', 'color': 'navy' },
+    { 'Step': 5, 'DivId': 'zona6ADiv', 'vehicul': 'A', 'zona': 'Zona6', 'bgColor': '#1D3885', 'color': 'white' },
+    { 'Step': 6, 'DivId': 'zona7ADiv', 'vehicul': 'A', 'zona': 'Zona7', 'bgColor': '#1D3885', 'color': 'white' },
+    { 'Step': 7, 'DivId': 'zona8ADiv', 'vehicul': 'A', 'zona': 'Zona8', 'bgColor': '#1D3885', 'color': 'white' },
+    { 'Step': 8, 'DivId': 'zona9ADiv', 'vehicul': 'A', 'zona': 'Zona9', 'bgColor': '#1D3885', 'color': 'white' },
+    { 'Step': 9, 'DivId': 'zona10ADiv', 'vehicul': 'A', 'zona': 'Zona10', 'bgColor': '#1D3885', 'color': 'white' },
+    { 'Step': 10, 'DivId': 'zona11ADiv', 'vehicul': 'A', 'zona': 'Zona11', 'bgColor': '#1D3885', 'color': 'white' },
+    { 'Step': 11, 'DivId': 'zona14ADiv', 'vehicul': 'A', 'zona': 'Zona14', 'bgColor': '#1D3885', 'color': 'white' },
+    { 'Step': 12, 'DivId': 'zona15ADiv', 'vehicul': 'A', 'zona': 'Zona15', 'bgColor': '#1D3885', 'color': 'white' },
+    { 'Step': 13, 'DivId': 'fisiereADiv', 'vehicul': 'A', 'zona': 'ZonaFisiere', 'bgColor': '#1D3885', 'color': 'white' },
+    { 'Step': 14, 'DivId': 'zona6BDiv', 'vehicul': 'B', 'zona': 'Zona6', 'bgColor': '#F8D32D', 'color': 'black' },
+    { 'Step': 15, 'DivId': 'zona7BDiv', 'vehicul': 'B', 'zona': 'Zona7', 'bgColor': '#F8D32D', 'color': 'black' },
+    { 'Step': 16, 'DivId': 'zona8BDiv', 'vehicul': 'B', 'zona': 'Zona8', 'bgColor': '#F8D32D', 'color': 'black' },
+    { 'Step': 17, 'DivId': 'zona9BDiv', 'vehicul': 'B', 'zona': 'Zona9', 'bgColor': '#F8D32D', 'color': 'black' },
+    { 'Step': 18, 'DivId': 'zona10BDiv', 'vehicul': 'B', 'zona': 'Zona10', 'bgColor': '#F8D32D', 'color': 'black' },
+    { 'Step': 19, 'DivId': 'zona11BDiv', 'vehicul': 'B', 'zona': 'Zona11', 'bgColor': '#F8D32D', 'color': 'black' },
+    { 'Step': 20, 'DivId': 'zona14BDiv', 'vehicul': 'B', 'zona': 'Zona14', 'bgColor': '#F8D32D', 'color': 'black' },
+    { 'Step': 21, 'DivId': 'zona15BDiv', 'vehicul': 'B', 'zona': 'Zona15', 'bgColor': '#F8D32D', 'color': 'black' },
+    { 'Step': 22, 'DivId': 'fisiereBDiv', 'vehicul': 'B', 'zona': 'ZonaFisiere', 'bgColor': '#F8D32D', 'color': 'black' },
+    { 'Step': 23, 'DivId': 'zona12Div', 'vehicul': null, 'zona': 'Zona12', 'bgColor': 'lightgray', 'color': 'navy' },
+    { 'Step': 24, 'DivId': 'zona13Div', 'vehicul': null, 'zona': 'Zona13', 'bgColor': 'lightgray', 'color': 'navy' },
+    { 'Step': 25, 'DivId': 'zona0Div', 'vehicul': null, 'zona': 'ZonaFisiere', 'bgColor': 'lightgray', 'color': 'navy' },
+    { 'Step': 26, 'DivId': 'trimitereDiv', 'vehicul': null, 'zona': null, 'bgColor': 'lightgray', 'color': 'navy' }
+];
+export class TipFisier {
+    constructor() {
+        this.selected = false;
+        this.name = null;
+        this.multiple = false;
+        this.max_allowed = null;
+    }
+}
+export class Polita {
+}
+export class Polite {
+    constructor() {
+        this.Polite = [{ "Serie": "RO/22/P22/HI",
+                "Numar": "014320853",
+                "DenumireAsigurator": "OMNIASIG VIENNA INSURANCE GROUP SA",
+                "AgentieAsigurator": "Titulescu",
+                "DenumireBrokerAgent": "ILEANA VASILE",
+                "NrAuto": "B65LNO",
+                "NrSasiuAuto": "UU1HSDADG52730748",
+                "TipAuto": "autoturism",
+                "MarcaAuto": "DACIA",
+                "DenumireAsiguratProprietar": "TERMODINAMIC SRL",
+                "CuiAsiguratProprietar": "10078376",
+                "DenumireAsiguratUtilizator": "TERMODINAMIC SRL",
+                "CuiAsiguratUtilizator": "10078376",
+                "AdresaAsigurat": "Moise Nicoara, nr.36, bl.D2, sc.A, ap.34, Bucuresti, Sector 3",
+                "TaraAsigurat": "ROMANIA",
+                "TelefonAsigurat": "0724000880",
+                "EmailAsigurat": null,
+                "ValabilDeLa": new Date('2021-05-10T00:00:00'),
+                "ValabilPanaLa": new Date('2022-05-09T00:00:00') },
+            { "Serie": "RO/22/P22/HI",
+                "Numar": "014110114",
+                "DenumireAsigurator": "OMNIASIG VIENNA INSURANCE GROUP SA",
+                "AgentieAsigurator": "Titulescu",
+                "DenumireBrokerAgent": "ILEANA VASILE",
+                "NrAuto": "B14HJG",
+                "NrSasiuAuto": "MALBA51BP9M058077",
+                "TipAuto": "autoturism",
+                "MarcaAuto": "HYUNDAI",
+                "DenumireAsiguratProprietar": "ELENA LIXANDRU",
+                "CuiAsiguratProprietar": "2570702400088",
+                "DenumireAsiguratUtilizator": "ELENA LIXANDRU",
+                "CuiAsiguratUtilizator": "2570702400088",
+                "AdresaAsigurat": "Splaiul Unirii, nr.35, bl.M7, sc.1, ap.1, Bucuresti, Sector 3",
+                "TaraAsigurat": "ROMANIA",
+                "TelefonAsigurat": "0724000880",
+                "EmailAsigurat": null,
+                "ValabilDeLa": new Date('2020-09-23T00:00:00'),
+                "ValabilPanaLa": new Date('2021-09-22T00:00:00') }
+        ];
+    }
+    findPolita(numar) {
+        for (var i = 0; i < this.Polite.length; i++) {
+            if (this.Polite[i].Numar == numar) {
+                return this.Polite[i];
+            }
+        }
+        return null;
+    }
+}
 export class Martor {
     constructor() {
         this.Nume = null;
@@ -148,10 +311,10 @@ export class Zona2 {
 }
 export class Zona3 {
     constructor() {
-        this.VatamariDa = null;
-        this.VatamariNu = null;
+        this.VatamariDa = false;
+        this.VatamariNu = false;
         this.StepCompleted = false;
-        this.Confirma112 = null;
+        this.Confirma112 = false;
     }
     hasError() {
         var toReturn = [];
@@ -164,36 +327,56 @@ export class Zona3 {
 }
 export class Zona4 {
     constructor() {
-        this.PagubeAlteVehiculeDa = null;
-        this.PagubeAlteVehiculeNu = null;
-        this.PagubeAlteObiecteDa = null;
-        this.PagubeAlteObiecteNu = null;
+        this.PagubeAlteVehicule = false;
+        this.PagubeAlteObiecte = false;
+        this.Pagube = new Pagube();
         this.StepCompleted = false;
     }
     hasError() {
         var toReturn = [];
-        if (!(this.PagubeAlteVehiculeDa || this.PagubeAlteVehiculeNu))
-            toReturn.push("Selectati daca exista sau nu pagube la alte vehicule!");
-        if (!(this.PagubeAlteObiecteDa || this.PagubeAlteObiecteNu))
-            toReturn.push("Selectati daca exista sau nu pagube la alte obiecte!");
+        if (this.PagubeAlteVehicule) {
+            if (this.Pagube.PagubeAuto.length > 0) {
+                for (var i = 0; i < this.Pagube.PagubeAuto.length; i++) {
+                    var err = this.Pagube.PagubeAuto[i].hasError();
+                    if (err != null && err.length > 0) {
+                        for (var j = 0; j < err.length; j++)
+                            toReturn.push('Paguba auto ' + (i + 1) + ': ' + err[j]);
+                    }
+                }
+            }
+        }
+        if (this.PagubeAlteObiecte) {
+            if (this.Pagube.PagubeObiecte.length > 0) {
+                for (var i = 0; i < this.Pagube.PagubeObiecte.length; i++) {
+                    var err = this.Pagube.PagubeObiecte[i].hasError();
+                    if (err != null && err.length > 0) {
+                        for (var j = 0; j < err.length; j++)
+                            toReturn.push('Paguba obiect ' + (i + 1) + ': ' + err[j]);
+                    }
+                }
+            }
+        }
         return toReturn.length > 0 ? toReturn : null;
     }
 }
 export class Zona5 {
     constructor() {
+        this.ExistaMartori = false;
         this.Martori = [];
-        var m = new Martor();
-        this.Martori.push(m);
+        //var m = new Martor();
+        //this.Martori.push(m);
         this.StepCompleted = false;
     }
     hasError() {
         var toReturn = [];
-        if (this.Martori.length > 0) {
-            for (var i = 0; i < this.Martori.length; i++) {
-                var err = this.Martori[i].hasError();
-                if (err != null && err.length > 0) {
-                    for (var j = 0; j < err.length; j++)
-                        toReturn.push('Martor ' + (i + 1) + ': ' + err[j]);
+        if (this.ExistaMartori) {
+            if (this.Martori.length > 0) {
+                for (var i = 0; i < this.Martori.length; i++) {
+                    var err = this.Martori[i].hasError();
+                    if (err != null && err.length > 0) {
+                        for (var j = 0; j < err.length; j++)
+                            toReturn.push('Martor ' + (i + 1) + ': ' + err[j]);
+                    }
                 }
             }
         }
@@ -207,7 +390,8 @@ export class Zona6 {
         this.Adresa = null;
         this.CodPostal = null;
         this.Tara = null;
-        this.TelefonEmail = null;
+        this.Telefon = null;
+        this.Email = null;
         this.StepCompleted = false;
     }
     hasError() {
@@ -220,7 +404,7 @@ export class Zona6 {
             toReturn.push("Adresa asiguratului este obligatorie!");
         if (CommonFunctions.isNullOrWhiteSpaces(this.Tara))
             toReturn.push("Tara asiguratului este obligatorie!");
-        if (CommonFunctions.isNullOrWhiteSpaces(this.TelefonEmail))
+        if (CommonFunctions.isNullOrWhiteSpaces(this.Telefon) && CommonFunctions.isNullOrWhiteSpaces(this.Email))
             toReturn.push("Telefonul sau emailul asiguratului este obligatoriu!");
         return toReturn.length > 0 ? toReturn : null;
     }
@@ -292,8 +476,12 @@ export class Zona8 {
         this.DenumireSucursala = null;
         this.Adresa = null;
         this.Tara = null;
-        this.TelefonEmail = null;
+        this.Telefon = null;
+        this.Email = null;
         this.Casco = false;
+        this.DecontareDirecta = false;
+        this.DenumireCasco = null;
+        this.NrPolitaCasco = null;
         this.StepCompleted = false;
     }
     hasError() {
@@ -311,13 +499,14 @@ export class Zona8 {
 }
 export class Zona9 {
     constructor() {
-        this.IdenticCuAsiguratul = null;
+        this.IdenticCuAsiguratul = false;
         this.Nume = null;
         this.Prenume = null;
         this.DataNasterii = null;
         this.Adresa = null;
         this.Tara = null;
-        this.TelefonEmail = null;
+        this.Telefon = null;
+        this.Email = null;
         this.PermisConducereNr = null;
         this.Categoria = null;
         this.ValabilPanaLa = null;
@@ -393,15 +582,51 @@ export class Zona15 {
 }
 export class Aditionale {
     constructor() {
+        this.Conditii = true;
+        this.DocumenteNecesare = true;
+        this.GDPR = true;
+        this.TermeniSiConditii = false;
+        // mai sus true - pt. teste 
+        this.ZonaFisiere = new ZonaFisiere(CommonFunctions.TipPozeFaraFormular);
         this.PagubitDecontareDirecta = false;
-        this.PagubitSocietateDecontareDirecta = null;
+        //this.PagubitSocietateDecontareDirecta = null;
         this.VinovatCasco = false;
-        this.VinovatSocietateCasco = null;
+        //this.VinovatSocietateCasco = null;
         this.StepCompleted = false;
+    }
+}
+export class ZonaFisiere {
+    constructor(tipuriFisiere) {
+        this.Fisiere = [];
+        for (var i = 0; i < tipuriFisiere.length; i++) {
+            var dosar = new Dosar();
+            dosar.Tip = tipuriFisiere[i];
+            dosar.Fisiere = [];
+            this.Fisiere.push(dosar);
+        }
+        this.StepCompleted = false;
+    }
+    hasError() {
+        var toReturn = [];
+        /*
+        if(this.Fisiere.length < 3)
+          toReturn.push("Incarcati documentele!");
+        else if(this.Fisiere[0].Tip.indexOf("identitate")<0 && this.Fisiere[1].Tip.indexOf("conducere")<0 && this.Fisiere[2].Tip.indexOf("avarii")<0 ){
+          toReturn.push("Incarcati documentele!");
+        }
+        */
+        for (var i = 0; i < this.Fisiere.length; i++) {
+            if (this.Fisiere[i].Fisiere.length == 0) {
+                toReturn.push("Incarcati documentele!");
+                break;
+            }
+        }
+        return toReturn.length > 0 ? toReturn : null;
     }
 }
 export class Vehicul {
     constructor() {
+        this.Polita = new Polita();
         this.Zona6 = new Zona6();
         this.Zona7 = new Zona7();
         this.Zona8 = new Zona8();
@@ -410,6 +635,21 @@ export class Vehicul {
         this.Zona11 = new Zona11();
         this.Zona14 = new Zona14();
         this.Zona15 = new Zona15();
+        this.ZonaFisiere = new ZonaFisiere(CommonFunctions.TipPozeCuFormular);
+    }
+    hasError() {
+        var toReturn = [];
+        if (this.Zona6.hasError() || this.Zona7.hasError() || this.Zona8.hasError() ||
+            this.Zona9.hasError() || this.Zona10.hasError() || this.Zona11.hasError() ||
+            this.Zona15.hasError())
+            toReturn.push("Cel putin una dintre rubrici contine erori!");
+        return toReturn.length > 0 ? toReturn : null;
+    }
+    hasErrorFaraFromular() {
+        var toReturn = [];
+        if (this.Zona6.hasError() || this.Zona8.hasError() || this.ZonaFisiere.hasError())
+            toReturn.push("Cel putin una dintre rubrici contine erori!");
+        return toReturn.length > 0 ? toReturn : null;
     }
 }
 export class Zona12 {
@@ -418,6 +658,8 @@ export class Zona12 {
         this.CasuteA = 0;
         this.CasuteB = 0;
         this.StepCompleted = false;
+        this.VinovatEstimat = null;
+        this.VinovatSelectat = null;
     }
     hasError() {
         var toReturn = [];
@@ -499,51 +741,148 @@ export class Zona13 {
         return toReturn.length > 0 ? toReturn : null;
     }
 }
-export class Formular {
+export class Dosar {
     constructor() {
-        this.Zona1 = new Zona1();
-        this.Zona2 = new Zona2();
-        this.Zona3 = new Zona3();
-        this.Zona4 = new Zona4();
-        this.Zona5 = new Zona5();
-        this.VehiculA = new Vehicul();
-        this.VehiculB = new Vehicul();
-        this.Zona12 = new Zona12();
-        this.Zona13 = new Zona13();
-        this.Aditionale = new Aditionale();
+        this.Tip = new TipFisier();
+        this.Fisiere = [];
+    }
+}
+export class Fisier {
+    constructor() {
+        this.DenumireClient = null;
+        this.DenumireServer = null;
+    }
+}
+export class Utilizator {
+    constructor() {
+        this.Email = null;
+        this.Telefon = null;
+        this.Litera = null;
+    }
+    hasError() {
+        var toReturn = [];
+        if (CommonFunctions.isNullOrWhiteSpaces(this.Email) && CommonFunctions.isNullOrWhiteSpaces(this.Telefon))
+            toReturn.push("Completati adresa de email sau telefonul!");
+        return toReturn.length > 0 ? toReturn : null;
+    }
+}
+export class Formular {
+    constructor(f) {
+        if (f == null) {
+            this.Id = null;
+            this.Zona1 = new Zona1();
+            this.Zona2 = new Zona2();
+            this.Zona3 = new Zona3();
+            this.Zona4 = new Zona4();
+            this.Zona5 = new Zona5();
+            this.VehiculA = new Vehicul();
+            this.VehiculB = new Vehicul();
+            this.Zona12 = new Zona12();
+            this.Zona13 = new Zona13();
+            this.Aditionale = new Aditionale();
+            this.Utilizatori = [];
+            this.Utilizatori.push(new Utilizator());
+            this.Utilizatori.push(new Utilizator());
+        }
+        else {
+            this.Id = f.Id;
+            this.Zona1 = Object.assign(this.Zona1, f.Zona1);
+            this.Zona2 = Object.assign(this.Zona2, f.Zona2);
+            this.Zona3 = Object.assign(this.Zona3, f.Zona3);
+            this.Zona4 = Object.assign(this.Zona4, f.Zona4);
+            this.Zona5 = Object.assign(this.Zona5, f.Zona5);
+            this.VehiculA = Object.assign(this.VehiculA, f.VehiculA);
+            this.VehiculB = Object.assign(this.VehiculB, f.VehiculB);
+            this.Zona12 = Object.assign(this.Zona12, f.Zona12);
+            this.Zona13 = Object.assign(this.Zona13, f.Zona13);
+            this.Aditionale = Object.assign(this.Aditionale, f.Aditionale);
+            this.Utilizatori = Object.assign(this.Utilizatori, f.Utilizatori);
+        }
+    }
+    hasError() {
+        var toReturn = [];
+        if (this.Zona1.hasError() || this.Zona2.hasError() || this.Zona3.hasError() ||
+            this.Zona4.hasError() || this.Zona5.hasError() || this.VehiculA.hasError() ||
+            this.VehiculB.hasError() || this.Zona12.hasError() || this.Zona13.hasError())
+            toReturn.push("Cel putin una dintre rubrici contine erori!");
+        return toReturn.length > 0 ? toReturn : null;
+    }
+    hasErrorFaraFormular() {
+        var toReturn = [];
+        if (this.Aditionale.ZonaFisiere.hasError() || this.VehiculA.hasErrorFaraFromular() ||
+            this.VehiculB.hasErrorFaraFromular())
+            toReturn.push("Cel putin una dintre rubrici contine erori!");
+        else {
+            for (var i = 0; i < this.Utilizatori.length; i++) {
+                if (this.Utilizatori[i].hasError()) {
+                    toReturn.push("Cel putin unul dintre utilizatori contine erori!");
+                    break;
+                }
+            }
+        }
+        return toReturn.length > 0 ? toReturn : null;
+    }
+    populateFormularFromPolita(vehicul) {
+        if (vehicul == 'A') {
+            this.VehiculA.Zona6.Nume = this.VehiculA.Polita.DenumireAsiguratProprietar;
+            this.VehiculA.Zona6.Prenume = this.VehiculA.Polita.DenumireAsiguratProprietar;
+            this.VehiculA.Zona6.Adresa = this.VehiculA.Polita.AdresaAsigurat;
+            this.VehiculA.Zona6.Tara = this.VehiculA.Polita.TaraAsigurat;
+            this.VehiculA.Zona6.Telefon = this.VehiculA.Polita.TelefonAsigurat;
+            this.VehiculA.Zona6.Email = this.VehiculA.Polita.EmailAsigurat;
+            this.VehiculA.Zona7.Motor.Tip = this.VehiculA.Polita.TipAuto;
+            this.VehiculA.Zona7.Motor.NrInmatriculare = this.VehiculA.Polita.NrAuto;
+            this.VehiculA.Zona7.Motor.Marca = this.VehiculA.Polita.MarcaAuto;
+            this.VehiculA.Zona8.Denumire = this.VehiculA.Polita.DenumireAsigurator;
+            this.VehiculA.Zona8.PolitaNr = this.VehiculA.Polita.Numar;
+            this.VehiculA.Zona8.ValabilDeLa = this.VehiculA.Polita.ValabilDeLa;
+            this.VehiculA.Zona8.ValabilPanaLa = this.VehiculA.Polita.ValabilPanaLa;
+            this.VehiculA.Zona9.Nume = this.VehiculA.Polita.DenumireAsiguratUtilizator;
+            this.VehiculA.Zona9.Prenume = this.VehiculA.Polita.DenumireAsiguratUtilizator;
+        }
+        else {
+            this.VehiculB.Zona6.Nume = this.VehiculB.Polita.DenumireAsiguratProprietar;
+            this.VehiculB.Zona6.Prenume = this.VehiculB.Polita.DenumireAsiguratProprietar;
+            this.VehiculB.Zona6.Adresa = this.VehiculB.Polita.AdresaAsigurat;
+            this.VehiculB.Zona6.Tara = this.VehiculB.Polita.TaraAsigurat;
+            this.VehiculB.Zona6.Telefon = this.VehiculB.Polita.TelefonAsigurat;
+            this.VehiculA.Zona6.Email = this.VehiculB.Polita.EmailAsigurat;
+            this.VehiculB.Zona7.Motor.Tip = this.VehiculB.Polita.TipAuto;
+            this.VehiculB.Zona7.Motor.NrInmatriculare = this.VehiculB.Polita.NrAuto;
+            this.VehiculB.Zona7.Motor.Marca = this.VehiculB.Polita.MarcaAuto;
+            this.VehiculB.Zona8.Denumire = this.VehiculB.Polita.DenumireAsigurator;
+            this.VehiculB.Zona8.PolitaNr = this.VehiculB.Polita.Numar;
+            this.VehiculB.Zona8.ValabilDeLa = this.VehiculB.Polita.ValabilDeLa;
+            this.VehiculB.Zona8.ValabilPanaLa = this.VehiculB.Polita.ValabilPanaLa;
+            this.VehiculB.Zona9.Nume = this.VehiculB.Polita.DenumireAsiguratUtilizator;
+            this.VehiculB.Zona9.Prenume = this.VehiculB.Polita.DenumireAsiguratUtilizator;
+        }
+    }
+    getPrererquisites() {
+        try {
+            //console.log(this);
+            return this.Aditionale.Conditii && this.Aditionale.DocumenteNecesare && this.Aditionale.GDPR && this.Aditionale.TermeniSiConditii;
+            //return true;
+        }
+        catch (e) {
+            return false;
+        }
     }
     getPreviousZoneCompletedStatus(step) {
         if (CommonFunctions.DISABLE_BUTTONS_ON_VALIDATION_ERROR) {
+            /*
             var vehicul = null;
             var zona = null;
-            if (step > 0 && step < 6) {
-                vehicul = null;
-                zona = "Zona" + step;
-            }
-            if (step > 5 && step < 11) {
-                vehicul = "VehiculA";
-                zona = "Zona" + step;
-            }
-            if (step > 12 && step < 19) {
-                vehicul = "VehiculB";
-                zona = "Zona" + (step - 7);
-            }
-            if (step == 11 || step == 19) {
-                vehicul = "VehiculA";
-                zona = "Zona" + 14;
-            }
-            if (step == 12 || step == 20) {
-                vehicul = "VehiculB";
-                zona = "Zona" + 15;
-            }
-            if (step == 21) {
-                vehicul = null;
-                zona = "Zona" + 12;
-            }
-            if (step == 22) {
-                vehicul = null;
-                zona = "Zona" + 13;
-            }
+            if(step > 0 && step <= 5) {vehicul = null; zona = "Zona" + (step+1);}
+            if(step > 5 && step < 11) {vehicul = "VehiculA"; zona = "Zona" + step;}
+            if(step > 12 && step < 19) {vehicul = "VehiculB"; zona = "Zona" + (step-7);}
+            if(step == 11 || step == 19) {vehicul = "VehiculA"; zona = "Zona" + 14;}
+            if(step == 12 || step == 20) {vehicul = "VehiculB"; zona = "Zona" + 15;}
+            if(step == 21) {vehicul = null; zona = "Zona" + 12;}
+            if(step == 22) {vehicul = null; zona = "Zona" + 13;}
+            */
+            var vehicul = CommonFunctions.Steps[step].vehicul == null ? null : "Vehicul" + CommonFunctions.Steps[step].vehicul;
+            var zona = CommonFunctions.Steps[step].zona;
             if (vehicul != null && zona != null)
                 return this[vehicul][zona].StepCompleted;
             else if (zona != null)
@@ -565,6 +904,43 @@ export class ImprejurareProducereAccident {
         this.DenumireSelected = null;
         this.VehiculA = null;
         this.VehiculB = null;
+    }
+}
+export class PagubaAuto {
+    constructor() {
+        this.NrAuto = null;
+        this.Marca = null;
+        this.Model = null;
+    }
+    hasError() {
+        var toReturn = [];
+        if (CommonFunctions.isNullOrWhiteSpaces(this.NrAuto))
+            toReturn.push("Numarul vehicului este obligatoriu!");
+        if (CommonFunctions.isNullOrWhiteSpaces(this.Marca))
+            toReturn.push("Marca vehicului este obligatoriu!");
+        if (CommonFunctions.isNullOrWhiteSpaces(this.Model))
+            toReturn.push("Modelul vehicului este obligatoriu!");
+        return toReturn.length > 0 ? toReturn : null;
+    }
+}
+export class PagubaObiect {
+    constructor() {
+        this.DenumireObiect = null;
+        this.DescrierePaguba = null;
+    }
+    hasError() {
+        var toReturn = [];
+        if (CommonFunctions.isNullOrWhiteSpaces(this.DenumireObiect))
+            toReturn.push("Denumirea obiectului este obligatorie!");
+        if (CommonFunctions.isNullOrWhiteSpaces(this.DescrierePaguba))
+            toReturn.push("Descrierea pagubei este obligatorie!");
+        return toReturn.length > 0 ? toReturn : null;
+    }
+}
+export class Pagube {
+    constructor() {
+        this.PagubeAuto = [];
+        this.PagubeObiecte = [];
     }
 }
 export class ImprejurariProducereAccident {

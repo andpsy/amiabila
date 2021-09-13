@@ -16,27 +16,27 @@
 	  		<tr>
 	  			<td style="background-color: #1D3885; width: 50%;">
 						<mat-radio-group aria-label="Select an option" style="display: flex;flex-direction: column;">
-						  <mat-radio-button class="radioButtonTrimitere" value="Formular.VehiculA.Zona6.Email" [checked]=true><!-- {{Formular.VehiculA.Zona6.Email}} -->
+						  <mat-radio-button class="radioButtonTrimitere" value="Formular.Utilizatori[0].Email" [checked]=true><!-- {{Formular.VehiculA.Zona6.Email}} -->
 				    	  <mat-form-field fxFlex>
 									<mat-label>Email:</mat-label>
-						  		<input matInput [(ngModel)]="Formular.VehiculA.Zona6.Email" name="EmailA" #EmailA='ngModel'>
+						  		<input matInput [(ngModel)]="Formular.Utilizatori[0].Email" name="EmailA" #EmailA='ngModel'>
 						  	</mat-form-field>
 						  </mat-radio-button>
-						  <mat-radio-button class="radioButtonTrimitere" value="Formular.VehiculA.Zona6.Telefon" [disabled]=true>
-						  	{{Formular.VehiculA.Zona6.Telefon + ' (momentan indisponibil)'}}
+						  <mat-radio-button class="radioButtonTrimitere" value="Formular.Utilizatori[0].Telefon" [disabled]=true>
+						  	{{Formular.Utilizatori[0].Telefon + ' (momentan indisponibil)'}}
 						  </mat-radio-button>
 						</mat-radio-group>
 	  			</td>
 	  			<td style="background-color: #F8D32D; width: 50%;">
 						<mat-radio-group aria-label="Select an option" style="display: flex;flex-direction: column;">
-						  <mat-radio-button class="radioButtonTrimitere" value="Formular.VehiculB.Zona6.Email" [checked]=true><!-- {{Formular.VehiculB.Zona6.Email}} -->
+						  <mat-radio-button class="radioButtonTrimitere" value="Formular.Utilizatori[1].Email" [checked]=true><!-- {{Formular.VehiculB.Zona6.Email}} -->
 				    	  <mat-form-field fxFlex>
 							    <mat-label>Email:</mat-label>
-							  	<input matInput [(ngModel)]="Formular.VehiculB.Zona6.Email" name="EmailB" #EmailB='ngModel'>
+							  	<input matInput [(ngModel)]="Formular.Utilizatori[1].Email" name="EmailB" #EmailB='ngModel'>
 							  </mat-form-field>
 						  </mat-radio-button>
-						  <mat-radio-button class="radioButtonTrimitere" value="Formular.VehiculB.Zona6.Telefon" [disabled]=true>
-						  	{{Formular.VehiculB.Zona6.Telefon + ' (momentan indisponibil)'}}
+						  <mat-radio-button class="radioButtonTrimitere" value="Formular.Utilizatori[1].Telefon" [disabled]=true>
+						  	{{Formular.Utilizatori[1].Telefon + ' (momentan indisponibil)'}}
 						  </mat-radio-button>
 						</mat-radio-group>	  				
 	  			</td>
@@ -48,7 +48,7 @@
 				 	  	[style]="{'max-height': Formular.hasErrorFaraFormular() != null && childForm.touched ? '200px' : '0'}"
 				 	  	[errors]="Formular.hasErrorFaraFormular()">
 				  	</app-display-errors>		  				
-						<button id="BtnTrimite" mat-raised-button color="primary" [disabled]="Formular.hasErrorFaraFormular() != null">Trimite</button>
+						<button id="BtnTrimite" mat-raised-button color="primary" [disabled]="Formular.hasErrorFaraFormular() != null" (click)="Trimite()">Trimite</button>
 	  			</td>
 	  		</tr>
 	  	</table>

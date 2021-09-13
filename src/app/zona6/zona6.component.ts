@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewEncapsulation, AfterViewInit  } from '@angular/core';
-import { CommonFunctions, Zona6, Polita, TariCarteVerde, TaraCarteVerde, USE_FORM } from '../entities';
+import { Zona6, Polita, TariCarteVerde, TaraCarteVerde } from '../entities';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {PolitaComponent} from '../polita/polita.component';
+import { CommonFunctions, USE_FORM } from '../commonfunctions';
 
 @Component({
   selector: 'app-zona6',
@@ -14,6 +15,7 @@ export class Zona6Component implements OnInit, AfterViewInit {
   @ViewChild("Tara", {static: true}) Tara;
   @Input() Zona6: Zona6;  
   @Input() Polita: Polita;  
+  @Input() PolitaNr: string;  
   @Output() zoneCompleted = new EventEmitter();
   @Output() politaFound = new EventEmitter();
   @Input() step: number;  
@@ -42,7 +44,7 @@ export class Zona6Component implements OnInit, AfterViewInit {
   }
 
   checkPolita(){
-    return this.Polita == null || Object.keys(this.Polita).length == 0;
+    return (this.Polita == null || Object.keys(this.Polita).length == 0) && this.PolitaNr == null;
   }
 
   showDiv(step:number, visibility:boolean):void{

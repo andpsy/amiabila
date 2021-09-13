@@ -8,13 +8,20 @@ let Zona1Component = class Zona1Component {
         //this.Zona1 = new Zona1();
     }
     ngOnInit() {
-        this.Zona1.Data = new Date();
-        this.Zona1.Ora = CommonFunctions.addZero(this.Zona1.Data.getHours()) + ":" + CommonFunctions.addZero(this.Zona1.Data.getMinutes());
+        if (this.Zona1.Data == null && this.Zona1.Ora == null) {
+            this.Zona1.Data = new Date();
+            this.Zona1.Ora = CommonFunctions.addZero(this.Zona1.Data.getHours()) + ":" + CommonFunctions.addZero(this.Zona1.Data.getMinutes());
+        }
+    }
+    ngOnDestroy() {
+        this.zoneCompleted = null;
     }
     showDiv(step, visibility) {
         if (this.childForm.valid && this.Zona1.hasError() == null) {
             this.Zona1.StepCompleted = true;
-            this.zoneCompleted.emit(true);
+            //this.zoneCompleted.emit(true);
+            if (step === this.CommonFunctions.step)
+                this.zoneCompleted.emit(this.Zona1);
         }
         CommonFunctions.showDiv(step, visibility);
     }
